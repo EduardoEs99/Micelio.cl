@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+import juanZeta from '@/assets/illustrations/Juan-Zeta.png';
+
+interface Props {
+  class?: string;
+  width?: number;
+}
+
+const { class: className = '', width = 180 } = Astro.props;
+---
+
+<div
+  class:list={['mascot', className]}
+  data-mascot
+  style={`--mascot-width: ${width}px`}
+  aria-hidden="true"
+>
+  <Image
+    src={juanZeta}
+    alt=""
+    widths={[180, 280, 380]}
+    sizes={`${width}px`}
+    loading="lazy"
+    class="mascot__img"
+  />
+</div>
+
+<style>
+  .mascot {
+    position: relative;
+    width: var(--mascot-width, 11rem);
+    pointer-events: none;
+  }
+
+  .mascot__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 18px 24px rgb(8 20 15 / 22%));
+    transform-origin: bottom center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mascot__img {
+      filter: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mascots = document.querySelectorAll<HTMLElement>('[data-mascot]');
+
+  if (mascots.length > 0 && !reduced) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const image = entry.target.querySelector('.mascot__img');
+          if (image) {
+            gsap.fromTo(
+              image,
+              { y: 22, opacity: 0, rotate: -2 },
+              {
+                y: 0,
+                opacity: 1,
+                rotate: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                onComplete: () => {
+                  gsap.to(image, {
+                    y: -6,
+                    rotate: 1.2,
+                    duration: 3.6,
+                    ease: 'sine.inOut',
+                    yoyo: true,
+                    repeat: -1,
+                  });
+                },
+              },
+            );
+          }
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.35 },
+    );
+
+    mascots.forEach((mascot) => observer.observe(mascot));
+  }
+</script>

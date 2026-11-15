@@ -1,0 +1,174 @@
+---
+import EditionCard from '@/components/editorial/EditionCard.astro';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+import { featuredEditions } from '@/data/editions';
+---
+
+<section class="editions-home" aria-labelledby="editions-title">
+  <div class="container-editorial">
+    <div class="editions-head">
+      <div>
+        <SectionMarker index="02" label="Ediciones" />
+        <h2 id="editions-title" class="editions-title type-display" data-reveal>
+          Tres números.<br />
+          <span>Una misma red.</span>
+        </h2>
+      </div>
+      <div class="editions-head__aside" data-reveal>
+        <p>
+          Impresas para volver a ellas. Digitales para llevarlas contigo. Cada edición reúne
+          entrevistas, reportajes y fotografía en torno al reino Fungi.
+        </p>
+        <a href="/ediciones" class="btn btn--forest">
+          Ver catálogo completo
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="editions-grid" data-reveal-group>
+      {featuredEditions.map((edition, index) => (
+        <div class="editions-slot">
+          <EditionCard edition={edition} index={index} featured={index === 0} />
+        </div>
+      ))}
+    </div>
+
+    <div class="editions-foot">
+      <span>Edición 001 — 003</span>
+      <span class="editions-foot__line" aria-hidden="true"></span>
+      <span>Impreso & digital</span>
+      <a href="/#contacto">
+        Consultar disponibilidad
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .editions-home {
+    position: relative;
+    background:
+      radial-gradient(circle at 88% 12%, rgb(158 217 84 / 16%), transparent 36%),
+      var(--color-bone);
+    padding-block: clamp(4.5rem, 9vw, 8.5rem);
+    overflow: hidden;
+  }
+
+  .editions-head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  @media (min-width: 900px) {
+    .editions-head {
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+      gap: 4rem;
+    }
+  }
+
+  .editions-title {
+    margin-top: 1.3rem;
+    font-size: clamp(3rem, 6.5vw, 7rem);
+    color: var(--color-forest-800);
+  }
+
+  .editions-title span {
+    color: var(--color-forest-700);
+    font-style: italic;
+  }
+
+  .editions-head__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .editions-head__aside p {
+    max-width: 25rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .editions-head__aside svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .editions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.6rem;
+  }
+
+  @media (min-width: 700px) {
+    .editions-grid {
+      grid-template-columns: 1.16fr 0.92fr 0.92fr;
+      gap: clamp(1.2rem, 2.5vw, 2.4rem);
+      align-items: start;
+    }
+
+    .editions-slot:nth-child(2) {
+      margin-top: 4.5rem;
+    }
+
+    .editions-slot:nth-child(3) {
+      margin-top: 1.4rem;
+    }
+  }
+
+  .editions-slot {
+    min-width: 0;
+  }
+
+  .editions-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem 1.2rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    padding-top: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .editions-foot__line {
+    width: 2rem;
+    height: 1px;
+    background: color-mix(in srgb, var(--color-forest-800) 25%, transparent);
+  }
+
+  .editions-foot a {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-forest-800);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .editions-foot a:hover {
+    color: var(--color-purple);
+  }
+
+  @media (max-width: 699px) {
+    .editions-foot a {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

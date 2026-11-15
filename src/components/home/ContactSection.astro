@@ -1,0 +1,100 @@
+---
+import ContactForm from '@/components/contact/ContactForm';
+import Mascot from '@/components/editorial/Mascot.astro';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+---
+
+<section id="contacto" class="home-contact" aria-labelledby="home-contact-title">
+  <div class="container-editorial home-contact__grid">
+    <div class="home-contact__intro">
+      <SectionMarker index="08" label="Contacto" />
+      <h2 id="home-contact-title" class="home-contact__title type-display" data-reveal>
+        Hablemos de<br />
+        <span class="italic">lo que crece.</span>
+      </h2>
+      <p class="home-contact__copy" data-reveal>
+        Consultas editoriales, propuestas de historias, distribución, auspicios o simplemente una
+        pregunta sobre hongos. Escríbenos y te respondemos desde el correo editorial.
+      </p>
+      <p class="home-contact__mail" data-reveal>
+        <a href="mailto:editorial@revistamicelio.cl">editorial@revistamicelio.cl</a>
+      </p>
+      <div class="home-contact__mascot">
+        <Mascot width={150} />
+      </div>
+    </div>
+    <div class="home-contact__form" data-reveal>
+      <ContactForm client:load />
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-contact {
+    background: var(--color-paper);
+    padding-block: clamp(4rem, 8vw, 7rem);
+    scroll-margin-top: clamp(5rem, 9vh, 7rem);
+  }
+
+  .home-contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  @media (min-width: 980px) {
+    .home-contact__grid {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: clamp(3rem, 6vw, 6rem);
+    }
+  }
+
+  .home-contact__title {
+    margin-top: 1rem;
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+    color: var(--color-forest-800);
+  }
+
+  .home-contact__title .italic {
+    font-style: italic;
+    color: var(--color-purple);
+  }
+
+  .home-contact__copy {
+    max-width: 28rem;
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .home-contact__mail {
+    margin-top: 1.4rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  }
+
+  .home-contact__mail a {
+    color: var(--color-forest-800);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-forest-800) 30%, transparent);
+    text-underline-offset: 0.2em;
+  }
+
+  .home-contact__mail a:hover {
+    color: var(--color-purple);
+  }
+
+  .home-contact__mascot {
+    width: fit-content;
+    margin-top: 1.5rem;
+    margin-left: 0.25rem;
+  }
+
+  @media (max-width: 979px) {
+    .home-contact__mascot {
+      display: none;
+    }
+  }
+</style>

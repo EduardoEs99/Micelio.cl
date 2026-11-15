@@ -1,0 +1,158 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LegalPage from '@/components/editorial/LegalPage.astro';
+
+const toc = [
+  { id: 'alcance', label: 'Alcance de este sitio' },
+  { id: 'uso', label: 'Uso del sitio' },
+  { id: 'propiedad', label: 'Propiedad intelectual' },
+  { id: 'compras', label: 'Ediciones, precios y compras' },
+  { id: 'lista', label: 'Lista de interés' },
+  { id: 'enlaces', label: 'Enlaces y servicios externos' },
+  { id: 'formularios', label: 'Formularios y comunicaciones' },
+  { id: 'responsabilidad', label: 'Disponibilidad y responsabilidad' },
+  { id: 'cambios', label: 'Cambios en estos términos' },
+  { id: 'contacto', label: 'Contacto' },
+];
+---
+
+<BaseLayout
+  title="Términos y condiciones"
+  description="Condiciones de uso del sitio de Revista Micelio: contenido editorial, propiedad intelectual, enlaces externos, lista de interés y formularios de contacto."
+  noindex
+>
+  <LegalPage
+    index="—"
+    label="Términos y condiciones"
+    title="Reglas"
+    accent="del bosque."
+    description="Estas condiciones explican cómo funciona este sitio, qué puedes esperar de su contenido y cómo se coordinan las compras con el equipo editorial. Están escritas para leerse, no para esconderse."
+    running="Información legal · Sitio editorial"
+    updated="Noviembre de 2026"
+    toc={toc}
+  >
+    <p>
+      Este sitio es una vitrina editorial de <strong>Revista Micelio</strong>, publicación
+      independiente chilena dedicada al reino Fungi. Al navegar por él aceptas las condiciones
+      descritas a continuación. Si no estás de acuerdo, puedes simplemente dejar de usarlo.
+    </p>
+
+    <div class="legal-note">
+      <p>
+        <strong>Este sitio no procesa pagos.</strong> No hay pasarela de pago, checkout ni emisión
+        de boletas. Las compras se coordinan directamente con el equipo editorial a través del
+        <a href="/#contacto">formulario de contacto</a> o por correo.
+      </p>
+    </div>
+
+    <h2 id="alcance">01. Alcance de este sitio</h2>
+    <p>
+      Este sitio reúne información sobre la revista, sus ediciones, artículos, fotografías, guías
+      de funga y formas de contacto. Su objetivo es editorial e informativo: presentar el proyecto
+      y facilitar el acceso a los canales reales de compra, distribución y colaboración.
+    </p>
+    <p>
+      La información publicada proviene de las ediciones impresas y de materiales del equipo
+      editorial. Cuando un dato dependa de stock, precio o plazo de despacho, el canal válido para
+      confirmarlo es el correo editorial.
+    </p>
+
+    <h2 id="uso">02. Uso del sitio</h2>
+    <p>Te pedimos usar este sitio de buena fe. En particular, no está permitido:</p>
+    <ul>
+      <li>Intentar interferir con el funcionamiento, la seguridad o la disponibilidad del sitio.</li>
+      <li>Extraer contenido de forma masiva o automatizada sin autorización escrita.</li>
+      <li>Suplantar a Revista Micelio o a terceros en formularios y comunicaciones.</li>
+      <li>Usar el contenido con fines comerciales sin permiso previo.</li>
+    </ul>
+
+    <h2 id="propiedad">03. Propiedad intelectual</h2>
+    <p>
+      Los textos, fotografías, ilustraciones, portadas, logotipos, guías y demás materiales de
+      Revista Micelio están protegidos por la legislación chilena e internacional sobre propiedad
+      intelectual. Su presencia en este sitio no transfiere derechos sobre ellos.
+    </p>
+    <p>
+      Puedes citar fragmentos breves con atribución y enlace a la fuente. Para reproducir,
+      republicar, adaptar o usar comercialmente material completo —incluidas imágenes— necesitas
+      autorización previa del equipo editorial. Las marcas y materiales de terceros pertenecen a
+      sus respectivos titulares.
+    </p>
+
+    <h2 id="compras">04. Ediciones, precios y compras</h2>
+    <p>
+      Los precios que aparecen en este sitio son referenciales y se expresan en pesos chilenos
+      (CLP). La disponibilidad, el valor final, el costo de despacho y las condiciones de cada
+      compra se confirman por correo con el equipo editorial.
+    </p>
+    <p>
+      Revista Micelio no recibe ni almacena datos de tarjetas en este sitio. Si detectas una
+      diferencia entre un precio publicado aquí y el valor confirmado por el equipo editorial,
+      prevalece este último.
+    </p>
+
+    <h2 id="lista">05. Lista de interés</h2>
+    <p>
+      La “lista de interés” es una función local: guarda títulos en el almacenamiento de tu propio
+      navegador para que puedas revisarlos después. No crea una reserva, no bloquea stock y no
+      constituye una compra.
+    </p>
+    <p>
+      Al enviar la lista por correo se abre tu cliente de email con un mensaje preparado. Nada se
+      envía automáticamente: tú revisas y decides enviarlo. Puedes vaciar la lista en cualquier
+      momento desde la propia página o desde el panel del carrito.
+    </p>
+
+    <h2 id="enlaces">06. Enlaces y servicios externos</h2>
+    <p>
+      El sitio enlaza a Instagram, YouTube, correo electrónico y publicaciones externas. Esos
+      servicios tienen sus propias condiciones y políticas de privacidad, que no controlamos.
+      Revisarlas antes de usarlos es responsabilidad de cada persona.
+    </p>
+    <p>
+      Los artículos de New Fungi enlazan a las publicaciones originales en revistamicelio.cl. El
+      contenido y la vigencia de esos enlaces dependen de sus sitios de origen.
+    </p>
+
+    <h2 id="formularios">07. Formularios y comunicaciones</h2>
+    <p>
+      Los formularios de contacto y suscripción piden solo los datos necesarios para responderte o
+      enviarte novedades. Al enviarlos declaras que la información es tuya o que cuentas con
+      autorización para entregarla. El tratamiento de esos datos se describe en la
+      <a href="/privacidad">política de privacidad</a>.
+    </p>
+    <p>
+      Si el envío automático no está configurado, el sitio te lo dirá explícitamente y ofrecerá el
+      correo directo como alternativa. Nunca simulamos un envío exitoso.
+    </p>
+
+    <h2 id="responsabilidad">08. Disponibilidad y responsabilidad</h2>
+    <p>
+      Procuramos que la información sea correcta y esté actualizada, pero puede contener errores,
+      omisiones o quedar desfasada respecto de la información confirmada por el equipo editorial.
+      El sitio se ofrece “tal como está”, sin garantía de disponibilidad ininterrumpida.
+    </p>
+    <p>
+      En la medida permitida por la ley, Revista Micelio no responde por daños derivados del uso
+      del sitio, de la imposibilidad de usarlo o de decisiones tomadas a partir de información
+      desactualizada. Nada de esto limita los derechos que la legislación chilena de consumo
+      reconoce a las personas compradoras en sus relaciones con el equipo editorial.
+    </p>
+
+    <h2 id="cambios">09. Cambios en estos términos</h2>
+    <p>
+      Podemos actualizar estos términos para reflejar cambios en el sitio, en el catálogo o en la
+      normativa aplicable. La versión vigente es la publicada en esta página, con su fecha de
+      actualización. El uso continuado del sitio después de un cambio implica aceptar la nueva
+      versión.
+    </p>
+
+    <h2 id="contacto">10. Contacto</h2>
+    <p>
+      Para consultas sobre estos términos, permisos de reproducción o cualquier tema relacionado
+      con el sitio, escríbenos a
+      <a href="mailto:editorial@revistamicelio.cl">editorial@revistamicelio.cl</a> o usa el
+      <a href="/#contacto">formulario de contacto</a>.
+    </p>
+  </LegalPage>
+</BaseLayout>

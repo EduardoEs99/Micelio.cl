@@ -1,0 +1,530 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/editorial/PageHeader.astro';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+import { Image } from 'astro:assets';
+import dinelly from '@/assets/editorial/dinelly.jpg';
+import { articles } from '@/data/articles';
+
+const [featured, ...rest] = articles;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'New Fungi — Revista Micelio',
+  description:
+    'Entrevistas, reportajes y artículos sobre el reino Fungi publicados por Revista Micelio.',
+  url: 'https://revistamicelio.cl/new-fungi',
+  blogPost: articles.map((article) => ({
+    '@type': 'BlogPosting',
+    headline: article.title,
+    datePublished: article.date,
+    description: article.excerpt,
+    url: article.url,
+    author: { '@type': 'Organization', name: 'Revista Micelio' },
+  })),
+};
+---
+
+<BaseLayout
+  title="New Fungi — Revista Micelio"
+  description="Entrevistas y reportajes sobre el reino Fungi: ciencia, bosque, cultura y territorio. Cada historia abre la nota original publicada por Revista Micelio."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <PageHeader
+    index="03"
+    label="New Fungi"
+    title="New Fungi,"
+    accent="el sotobosque."
+    description="Entrevistas, reportajes y encuentros para leer el reino Fungi desde distintas orillas: la ciencia, el bosque, la cocina y la memoria."
+    running="Historias publicadas · 2025 — 2026"
+    tone="paper"
+    image={dinelly}
+    imageAlt="Dinelly Soto en un bosque nativo, rodeada de hongos"
+    imagePosition="center 30%"
+    imageCaption="New Fungi · Entrevista a Dinelly Soto"
+  />
+
+  <section class="fungi-archive" aria-labelledby="archive-title">
+    <div class="container-editorial">
+      <div class="fungi-source-note">
+        <p>
+          New Fungi reúne las historias publicadas en revistamicelio.cl. Cada título abre la nota
+          original en una pestaña nueva.
+        </p>
+        <span class="fungi-source-note__mark">↗</span>
+      </div>
+
+      <article class="fungi-lead" data-reveal-group>
+        <a
+          href={featured.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="fungi-lead__image"
+          data-reveal-item
+          aria-label={`Leer ${featured.title} en revistamicelio.cl`}
+        >
+          <Image
+            src={featured.image}
+            alt={featured.imageAlt}
+            widths={[480, 760, 1080]}
+            sizes="(max-width: 899px) 92vw, 46vw"
+            loading="eager"
+            class="fungi-lead__img"
+          />
+          <span class="fungi-lead__tag">Entrevista destacada</span>
+        </a>
+
+        <div class="fungi-lead__body" data-reveal-item>
+          <p class="fungi-lead__meta">
+            <span>{featured.displayDate}</span>
+            <span>New Fungi</span>
+          </p>
+          <h2 class="fungi-lead__title">
+            <a href={featured.url} target="_blank" rel="noopener noreferrer">{featured.title}</a>
+          </h2>
+          <p class="fungi-lead__excerpt">{featured.excerpt}</p>
+          <a href={featured.url} target="_blank" rel="noopener noreferrer" class="fungi-lead__link">
+            Leer la nota original
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.3" />
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      <div class="fungi-index">
+        <div class="fungi-index__head">
+          <SectionMarker index="01" label="Archivo" />
+          <h2 id="archive-title" class="fungi-index__title type-display" data-reveal>
+            Historias<br /><span class="italic">anteriores.</span>
+          </h2>
+          <span class="fungi-index__count">{String(rest.length + 1).padStart(2, '0')} notas</span>
+        </div>
+
+        <div class="fungi-index__list" data-reveal-group>
+          {rest.map((article, index) => (
+            <a
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="fungi-index__row"
+              data-reveal-item
+            >
+              <span class="fungi-index__number">{String(index + 2).padStart(2, '0')}</span>
+              <span class="fungi-index__thumb">
+                <Image
+                  src={article.image}
+                  alt=""
+                  widths={[160, 260]}
+                  sizes="120px"
+                  loading="lazy"
+                />
+              </span>
+              <span class="fungi-index__copy">
+                <span class="fungi-index__meta">{article.displayDate} · New Fungi</span>
+                <span class="fungi-index__name">{article.title}</span>
+                <span class="fungi-index__excerpt">{article.excerpt}</span>
+              </span>
+              <span class="fungi-index__arrow" aria-hidden="true">
+                <svg viewBox="0 0 16 16">
+                  <path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.2" />
+                </svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fungi-callout on-dark surface-grain" aria-labelledby="fungi-callout-title">
+    <div class="container-editorial fungi-callout__inner">
+      <div>
+        <p class="eyebrow">¿Tienes una historia?</p>
+        <h2 id="fungi-callout-title" class="type-display">
+          El bosque<br /><span class="italic">tiene más voces.</span>
+        </h2>
+      </div>
+      <div class="fungi-callout__copy">
+        <p>
+          Si investigas, fotografías o trabajas con hongos en Chile y quieres proponer una
+          entrevista o reportaje, escríbenos. Revisamos las propuestas desde el correo editorial.
+        </p>
+        <div class="fungi-callout__actions">
+          <a href="/#contacto" class="btn btn--apple">Proponer una historia</a>
+          <a href="/la-revista" class="btn btn--outline">Conocer la revista</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .fungi-archive {
+    background: var(--color-paper);
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+  }
+
+  .fungi-source-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 18%, transparent);
+    padding-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+
+  .fungi-source-note p {
+    max-width: 58rem;
+  }
+
+  .fungi-source-note__mark {
+    font-size: 0.9rem;
+    color: var(--color-purple);
+  }
+
+  .fungi-lead {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 900px) {
+    .fungi-lead {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+  }
+
+  .fungi-lead__image {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3.4;
+    background: #050807;
+    border: 1px solid var(--color-line);
+  }
+
+  .fungi-lead__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: saturate(0.92) brightness(0.94);
+    transition:
+      transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.6s ease;
+  }
+
+  .fungi-lead__image:hover .fungi-lead__img {
+    transform: scale(1.035);
+    filter: saturate(1) brightness(1);
+  }
+
+  .fungi-lead__tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    border: 1px solid rgb(243 240 230 / 30%);
+    border-radius: 999px;
+    background: rgb(8 20 15 / 48%);
+    padding: 0.35rem 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .fungi-lead__meta {
+    display: flex;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .fungi-lead__meta span + span {
+    color: var(--color-muted-foreground);
+  }
+
+  .fungi-lead__title {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.6vw, 3.7rem);
+    font-weight: 350;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--color-forest-800);
+  }
+
+  .fungi-lead__title a:hover {
+    color: var(--color-forest-700);
+  }
+
+  .fungi-lead__excerpt {
+    max-width: 34rem;
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .fungi-lead__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-700) 45%, transparent);
+    padding-bottom: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .fungi-lead__link svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+
+  .fungi-lead__link:hover svg {
+    transform: translate(0.2rem, -0.2rem);
+  }
+
+  .fungi-index {
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .fungi-index__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
+    padding-top: 1.4rem;
+  }
+
+  .fungi-index__title {
+    flex: 1;
+    margin-top: 0.8rem;
+    font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+    color: var(--color-forest-800);
+  }
+
+  .fungi-index__title .italic {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .fungi-index__count {
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+    padding-bottom: 0.4rem;
+  }
+
+  .fungi-index__list {
+    margin-top: 1.4rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 16%, transparent);
+  }
+
+  .fungi-index__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: start;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 14%, transparent);
+    padding-block: 1.2rem;
+    transition: background-color 0.3s ease;
+  }
+
+  @media (min-width: 760px) {
+    .fungi-index__row {
+      grid-template-columns: 2.5rem 7.5rem minmax(0, 1fr) 2rem;
+      gap: 1.4rem;
+      padding-block: 1.1rem;
+    }
+  }
+
+  .fungi-index__row:hover {
+    background: color-mix(in srgb, var(--color-bone) 45%, transparent);
+  }
+
+  .fungi-index__number {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    color: var(--color-purple);
+    padding-top: 0.25rem;
+  }
+
+  @media (min-width: 760px) {
+    .fungi-index__number {
+      display: block;
+    }
+  }
+
+  .fungi-index__thumb {
+    display: none;
+    width: 7.5rem;
+    height: 5.2rem;
+    overflow: hidden;
+    background: var(--color-bone);
+  }
+
+  @media (min-width: 760px) {
+    .fungi-index__thumb {
+      display: block;
+    }
+  }
+
+  .fungi-index__thumb :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: saturate(0.85);
+    transition: filter 0.4s ease;
+  }
+
+  .fungi-index__row:hover .fungi-index__thumb :global(img) {
+    filter: saturate(1);
+  }
+
+  .fungi-index__meta {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .fungi-index__name {
+    display: block;
+    margin-top: 0.35rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+    font-weight: 350;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-forest-800);
+    transition: color 0.3s ease;
+  }
+
+  .fungi-index__row:hover .fungi-index__name {
+    color: var(--color-forest-700);
+  }
+
+  .fungi-index__excerpt {
+    display: none;
+    max-width: 44rem;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--color-muted-foreground);
+  }
+
+  @media (min-width: 900px) {
+    .fungi-index__excerpt {
+      display: block;
+    }
+  }
+
+  .fungi-index__arrow {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    border-radius: 50%;
+    color: var(--color-forest-700);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .fungi-index__row:hover .fungi-index__arrow {
+    background: var(--color-forest-800);
+    border-color: var(--color-forest-800);
+    color: var(--color-apple);
+  }
+
+  .fungi-index__arrow svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .fungi-callout {
+    background:
+      radial-gradient(ellipse 50% 50% at 86% 12%, rgb(31 74 56 / 45%), transparent 66%),
+      var(--color-forest-900);
+    color: var(--color-cream);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .fungi-callout__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    align-items: end;
+  }
+
+  @media (min-width: 900px) {
+    .fungi-callout__inner {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 4rem;
+    }
+  }
+
+  .fungi-callout .eyebrow {
+    color: var(--color-apple);
+  }
+
+  .fungi-callout h2 {
+    margin-top: 0.9rem;
+    font-size: clamp(2.4rem, 4.8vw, 4.6rem);
+    color: var(--color-cream);
+  }
+
+  .fungi-callout h2 .italic {
+    font-style: italic;
+    color: var(--color-apple);
+  }
+
+  .fungi-callout__copy p {
+    max-width: 31rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgb(243 240 230 / 60%);
+  }
+
+  .fungi-callout__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.4rem;
+  }
+</style>

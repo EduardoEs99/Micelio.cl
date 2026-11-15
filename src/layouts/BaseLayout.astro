@@ -1,0 +1,208 @@
+---
+import '@/styles/global.css';
+import BackToTop from '@/components/ui/BackToTop.astro';
+import Footer from '@/components/layout/Footer.astro';
+import Header from '@/components/layout/Header.astro';
+import { site } from '@/data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  transparentHeader?: boolean;
+  headerTheme?: 'light' | 'dark';
+  bodyClass?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  image = '/og-micelio.jpg',
+  noindex = false,
+  transparentHeader = false,
+  headerTheme = 'light',
+  bodyClass = '',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://revistamicelio.cl');
+const ogImage = new URL(image, Astro.site ?? 'https://revistamicelio.cl');
+const fullTitle = title.includes('Revista Micelio') ? title : `${title} — Revista Micelio`;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Revista Micelio',
+  alternateName: 'Micelio',
+  url: 'https://revistamicelio.cl',
+  logo: 'https://revistamicelio.cl/favicon.svg',
+  email: 'editorial@revistamicelio.cl',
+  sameAs: [site.instagram, site.youtube],
+};
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#153226" />
+    <meta name="color-scheme" content="light" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" hreflang="es-CL" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Revista Micelio" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Revista Micelio — el universo invisible" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    <slot name="head" />
+  </head>
+  <body class:list={[bodyClass, transparentHeader && 'has-transparent-header']}>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-full focus:bg-apple focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-forest-900"
+    >
+      Saltar al contenido
+    </a>
+    <Header transparent={transparentHeader} theme={headerTheme} />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <BackToTop />
+
+    <div id="motion-fallback" hidden></div>
+
+    <script>
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const reveals = gsap.utils.toArray<HTMLElement>('[data-reveal]');
+        reveals.forEach((element) => {
+          const delay = Number(element.dataset.revealDelay ?? 0);
+          gsap.fromTo(
+            element,
+            { y: 32, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 1.05,
+              delay,
+              ease: 'power3.out',
+              scrollTrigger: { trigger: element, start: 'top 90%', once: true },
+            },
+          );
+        });
+
+        gsap.utils.toArray<HTMLElement>('[data-reveal-group]').forEach((group) => {
+          const items = group.querySelectorAll<HTMLElement>('[data-reveal-item]');
+          if (!items.length) return;
+          gsap.fromTo(
+            items,
+            { y: 38, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.95,
+              stagger: 0.1,
+              ease: 'power3.out',
+              scrollTrigger: { trigger: group, start: 'top 84%', once: true },
+            },
+          );
+        });
+
+        gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((element) => {
+          const speed = Number(element.dataset.parallax ?? 0.12);
+          const scope = element.closest<HTMLElement>('[data-parallax-scope]') ?? element;
+          gsap.fromTo(
+            element,
+            { yPercent: -speed * 100 },
+            {
+              yPercent: speed * 100,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: scope,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+              },
+            },
+          );
+        });
+
+        gsap.utils.toArray<HTMLElement>('[data-image-reveal]').forEach((figure) => {
+          const image = figure.querySelector('img');
+          if (!image) return;
+          gsap.fromTo(
+            image,
+            { scale: 1.12 },
+            {
+              scale: 1,
+              duration: 1.5,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: figure, start: 'top 90%', once: true },
+            },
+          );
+        });
+
+        if (window.matchMedia('(pointer: fine)').matches) {
+          gsap.utils.toArray<HTMLElement>('[data-cover-tilt]').forEach((card) => {
+            gsap.set(card, { transformPerspective: 1100, transformStyle: 'preserve-3d' });
+            const rotateX = gsap.quickTo(card, 'rotationX', { duration: 0.7, ease: 'power2.out' });
+            const rotateY = gsap.quickTo(card, 'rotationY', { duration: 0.7, ease: 'power2.out' });
+            const scale = gsap.quickTo(card, 'scale', { duration: 0.5, ease: 'power2.out' });
+
+            card.addEventListener('pointermove', (event) => {
+              const rect = card.getBoundingClientRect();
+              const x = (event.clientX - rect.left) / rect.width - 0.5;
+              const y = (event.clientY - rect.top) / rect.height - 0.5;
+              rotateY(x * 7);
+              rotateX(y * -7);
+            });
+            card.addEventListener('pointerenter', () => scale(1.012));
+            card.addEventListener('pointerleave', () => {
+              rotateX(0);
+              rotateY(0);
+              scale(1);
+            });
+          });
+        }
+      } else {
+        document.documentElement.classList.remove('js');
+      }
+
+      // Safety net: editorial content must never stay hidden if motion setup fails.
+      window.setTimeout(() => {
+        document.querySelectorAll<HTMLElement>('[data-reveal], [data-reveal-item]').forEach((element) => {
+          if (getComputedStyle(element).opacity === '0') {
+            element.style.opacity = '1';
+            element.style.visibility = 'visible';
+            element.style.transform = 'none';
+          }
+        });
+      }, 3200);
+    </script>
+  </body>
+</html>

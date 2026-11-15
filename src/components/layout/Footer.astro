@@ -1,0 +1,207 @@
+---
+import { Image } from 'astro:assets';
+import logoCrema from '@/assets/brand/logo-crema.png';
+import { site } from '@/data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-dark surface-grain">
+  <div class="container-editorial">
+    <div class="footer-top">
+      <div class="footer-intro">
+        <Image
+          src={logoCrema}
+          alt="Revista Micelio"
+          class="footer-logo"
+          widths={[160, 240]}
+          sizes="180px"
+          loading="lazy"
+        />
+        <p class="eyebrow text-apple footer-eyebrow">Revista Micelio · Chile</p>
+        <p class="footer-statement">
+          Bajo el bosque,<br />
+          <em>todo está conectado.</em>
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <p class="eyebrow">Contacto</p>
+        <a href={`mailto:${site.email}`} class="footer-email">{site.email}</a>
+        <span class="footer-pending" aria-disabled="true">
+          WhatsApp · próximamente
+        </span>
+      </div>
+
+      <div class="footer-column">
+        <p class="eyebrow">Seguir</p>
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="footer-social">
+          Instagram
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a href={site.youtube} target="_blank" rel="noopener noreferrer" class="footer-social">
+          YouTube
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} Revista Micelio. Todos los derechos reservados.</p>
+      <div class="footer-legal">
+        <a href="/terminos">Términos</a>
+        <a href="/privacidad">Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-forest-950);
+    color: var(--color-cream);
+    padding-top: clamp(2.25rem, 4vw, 3.25rem);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-top {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.8fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+  }
+
+  .footer-logo {
+    width: 8.5rem;
+    height: auto;
+  }
+
+  .footer-eyebrow {
+    margin-top: 1rem;
+  }
+
+  .footer-statement {
+    margin-top: 0.9rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 330;
+    font-variation-settings: 'opsz' 120, 'SOFT' 50, 'WONK' 1;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .footer-statement em {
+    font-style: italic;
+    color: var(--color-apple);
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+  }
+
+  .footer-column .eyebrow {
+    margin-bottom: 0.35rem;
+    color: rgb(243 240 230 / 48%);
+  }
+
+  .footer-email {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    line-height: 1.2;
+    color: var(--color-cream);
+    text-decoration: underline;
+    text-decoration-color: rgb(243 240 230 / 30%);
+    text-underline-offset: 0.25em;
+    transition: color 0.25s ease;
+  }
+
+  .footer-email:hover {
+    color: var(--color-apple);
+  }
+
+  .footer-pending {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(243 240 230 / 32%);
+    cursor: not-allowed;
+  }
+
+  .footer-pending::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: currentColor;
+  }
+
+  .footer-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: rgb(243 240 230 / 76%);
+    transition: color 0.25s ease;
+  }
+
+  .footer-social span {
+    transition: transform 0.3s ease;
+  }
+
+  .footer-social:hover {
+    color: var(--color-apple);
+  }
+
+  .footer-social:hover span {
+    transform: translate(0.15rem, -0.15rem);
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    border-top: 1px solid rgb(243 240 230 / 12%);
+    padding-block: 1.35rem 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    color: rgb(243 240 230 / 38%);
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-legal a {
+    color: inherit;
+    transition: color 0.25s ease;
+  }
+
+  .footer-legal a:hover {
+    color: var(--color-apple);
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      padding-right: 4.5rem;
+    }
+  }
+</style>

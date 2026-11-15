@@ -1,0 +1,49 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  dark?: boolean;
+  class?: string;
+}
+
+const { index, label, dark = false, class: className = '' } = Astro.props;
+---
+
+<div class:list={['section-marker', dark && 'section-marker--dark', className]}>
+  <span class="section-marker__index">{index}</span>
+  <span class="section-marker__rule" aria-hidden="true"></span>
+  <span class="section-marker__label">{label}</span>
+</div>
+
+<style>
+  .section-marker {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .section-marker--dark {
+    color: rgb(243 240 230 / 55%);
+  }
+
+  .section-marker__index {
+    color: var(--color-purple);
+  }
+
+  .section-marker--dark .section-marker__index {
+    color: var(--color-apple);
+  }
+
+  .section-marker__rule {
+    height: 1px;
+    width: 2.25rem;
+    flex-shrink: 0;
+    background: currentColor;
+    opacity: 0.35;
+  }
+</style>

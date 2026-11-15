@@ -1,0 +1,421 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/editorial/PageHeader.astro';
+import EditionCard from '@/components/editorial/EditionCard.astro';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+import { Image } from 'astro:assets';
+import ed003Impreso from '@/assets/covers/ed003-impresa.png';
+import ed003Online from '@/assets/covers/ed003-online.png';
+import { editions } from '@/data/editions';
+
+const numbers = ['003', '002', '001'];
+const groups = numbers
+  .map((number) => ({
+    number,
+    items: editions.filter((edition) => edition.number === number),
+  }))
+  .filter((group) => group.items.length > 0);
+
+const listSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Ediciones de Revista Micelio',
+  itemListElement: editions.map((edition, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: edition.title,
+      description: edition.summary,
+      url: `https://revistamicelio.cl/ediciones/${edition.slug}`,
+      offers: {
+        '@type': 'Offer',
+        price: edition.price,
+        priceCurrency: 'CLP',
+        availability:
+          edition.status === 'Agotada'
+            ? 'https://schema.org/OutOfStock'
+            : edition.status === 'Preventa'
+              ? 'https://schema.org/PreOrder'
+              : 'https://schema.org/InStock',
+      },
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Ediciones — Revista Micelio"
+  description="Ediciones impresas y digitales de Revista Micelio: números 001, 002 y 003, con precios, disponibilidad y enlaces de consulta."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(listSchema)} slot="head" />
+
+  <PageHeader
+    index="02"
+    label="Ediciones"
+    title="Tres números."
+    accent="Una misma red."
+    description="Impresas para volver a ellas. Digitales para llevarlas contigo. Cada edición reúne entrevistas, reportajes y fotografía en torno al reino Fungi chileno."
+    running="Catálogo · 001 — 003"
+    tone="bone"
+    watermark="003"
+  >
+    <div slot="aside" class="editions-stack">
+      <figure class="editions-stack__item editions-stack__item--back">
+        <Image
+          src={ed003Online}
+          alt="Edición 003 de Revista Micelio en formato digital"
+          widths={[360, 560]}
+          sizes="(max-width: 899px) 44vw, 17vw"
+          loading="eager"
+        />
+      </figure>
+      <figure class="editions-stack__item editions-stack__item--front">
+        <Image
+          src={ed003Impreso}
+          alt="Portada de la edición 003 impresa de Revista Micelio"
+          widths={[420, 680]}
+          sizes="(max-width: 899px) 58vw, 23vw"
+          loading="eager"
+        />
+        <figcaption>N.º 003 · Impreso</figcaption>
+      </figure>
+    </div>
+  </PageHeader>
+
+  <section class="editions-note" aria-label="Información de compra">
+    <div class="container-editorial editions-note__inner">
+      <p class="eyebrow">Cómo comprar</p>
+      <p>
+        Las ediciones se solicitan directamente al equipo editorial. Este sitio no procesa
+        pagos: puedes revisar cada ficha, guardarla en tu lista de interés y consultar
+        disponibilidad por correo.
+      </p>
+      <a href="/#contacto">
+        Consultar disponibilidad
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="editions-body">
+    {groups.map((group, groupIndex) => {
+      const lead = group.items[0];
+      return (
+        <section
+          class:list={['number-group', groupIndex % 2 === 1 && 'number-group--tint']}
+          aria-labelledby={`group-${group.number}`}
+        >
+          <div class="container-editorial">
+            <div class="number-group__head" data-reveal>
+              <span class="number-group__big" aria-hidden="true">{group.number}</span>
+              <div class="number-group__intro">
+                <SectionMarker
+                  index={String(groupIndex + 1).padStart(2, '0')}
+                  label={`Edición ${group.number}`}
+                />
+                <h2 id={`group-${group.number}`} class="number-group__title">
+                  {group.number === '003'
+                    ? 'El número más reciente.'
+                    : group.number === '002'
+                      ? 'Bosque templado lluvioso.'
+                      : 'Donde comenzó todo.'}
+                </h2>
+                <p>{lead.summary}</p>
+              </div>
+              <div class="number-group__formats">
+                {group.items.map((edition) => (
+                  <span>{edition.format}</span>
+                ))}
+                <span class="number-group__count">{group.items.length} formatos</span>
+              </div>
+            </div>
+
+            <div class="number-group__grid" data-reveal-group>
+              {group.items.map((edition, index) => (
+                <div class="number-group__slot">
+                  <EditionCard edition={edition} index={index} featured={group.number === '003'} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    })}
+  </div>
+
+  <section class="editions-packs" aria-labelledby="packs-title">
+    <div class="container-editorial editions-packs__inner">
+      <div>
+        <p class="eyebrow">Packs y guías</p>
+        <h2 id="packs-title" class="type-display">Varios números, <span class="italic">un solo envío.</span></h2>
+      </div>
+      <div class="editions-packs__copy">
+        <p>
+          También existen packs con descuento que reúnen ediciones y guías de funga. Los precios y
+          la disponibilidad se confirman con el equipo editorial.
+        </p>
+        <div class="editions-packs__actions">
+          <a href="/actividades" class="btn btn--forest">Ver packs</a>
+          <a href="/red-micelio" class="btn btn--outline">Ver guías de funga</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .editions-stack {
+    position: relative;
+    min-height: 22rem;
+    padding: 1rem 0 0;
+  }
+
+  .editions-stack__item {
+    position: absolute;
+    background: #eeece7;
+    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    box-shadow: 0 30px 50px -35px rgb(8 20 15 / 65%);
+  }
+
+  .editions-stack__item :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .editions-stack__item--back {
+    top: 0;
+    right: 0;
+    width: 62%;
+    transform: rotate(5deg);
+    opacity: 0.72;
+  }
+
+  .editions-stack__item--front {
+    left: 0;
+    bottom: 0;
+    width: 66%;
+    transform: rotate(-4deg);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .editions-stack__item--front:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+
+  .editions-stack__item figcaption {
+    position: absolute;
+    left: 0;
+    bottom: -1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+
+  @media (max-width: 899px) {
+    .editions-stack {
+      min-height: 20rem;
+      max-width: 24rem;
+      margin-inline: auto;
+    }
+  }
+
+  .editions-note {
+    background: var(--color-forest-900);
+    color: var(--color-cream);
+  }
+
+  .editions-note__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding-block: 1.2rem;
+  }
+
+  @media (min-width: 900px) {
+    .editions-note__inner {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+
+  .editions-note .eyebrow {
+    color: var(--color-apple);
+  }
+
+  .editions-note p:not(.eyebrow) {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: rgb(243 240 230 / 62%);
+  }
+
+  .editions-note a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-apple);
+    white-space: nowrap;
+  }
+
+  .editions-note a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  .editions-body {
+    background: var(--color-paper);
+  }
+
+  .number-group {
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
+  }
+
+  .number-group--tint {
+    background:
+      radial-gradient(ellipse 45% 50% at 92% 8%, rgb(158 217 84 / 14%), transparent 65%),
+      var(--color-bone);
+  }
+
+  .number-group__head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    align-items: end;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
+    padding-top: 1.3rem;
+  }
+
+  @media (min-width: 900px) {
+    .number-group__head {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+  }
+
+  .number-group__big {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 11rem);
+    font-weight: 300;
+    line-height: 0.72;
+    letter-spacing: -0.06em;
+    color: color-mix(in srgb, var(--color-forest-800) 14%, transparent);
+    user-select: none;
+  }
+
+  .number-group__intro h2 {
+    margin-top: 0.7rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.4vw, 3.2rem);
+    font-weight: 350;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--color-forest-800);
+  }
+
+  .number-group__intro p {
+    max-width: 38rem;
+    margin-top: 0.85rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .number-group__formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 0.25rem;
+  }
+
+  .number-group__formats span {
+    border: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
+    border-radius: 999px;
+    padding: 0.25rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .number-group__formats .number-group__count {
+    border: 0;
+    padding-inline: 0;
+    color: var(--color-muted-foreground);
+  }
+
+  .number-group__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.6rem;
+    margin-top: clamp(2rem, 4vw, 3.2rem);
+  }
+
+  @media (min-width: 760px) {
+    .number-group__grid {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: start;
+    }
+
+    .number-group__slot:nth-child(2) {
+      margin-top: 3.2rem;
+    }
+  }
+
+  .editions-packs {
+    background: var(--color-bone);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .editions-packs__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    align-items: end;
+  }
+
+  @media (min-width: 900px) {
+    .editions-packs__inner {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 4rem;
+    }
+  }
+
+  .editions-packs h2 {
+    margin-top: 1rem;
+    font-size: clamp(2.4rem, 4.8vw, 4.6rem);
+    color: var(--color-forest-800);
+  }
+
+  .editions-packs h2 .italic {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .editions-packs__copy p {
+    max-width: 30rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .editions-packs__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.4rem;
+  }
+</style>

@@ -1,0 +1,369 @@
+---
+import { Image } from 'astro:assets';
+import niscalo from '@/assets/illustrations/niscalo.png';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+
+const pillars = [
+  {
+    title: 'Ciencia',
+    copy: 'Investigación y divulgación para entender el reino Fungi más allá de lo evidente.',
+  },
+  {
+    title: 'Territorio',
+    copy: 'Bosque nativo, funga chilena y las voces que recorren el paisaje con los pies en la tierra.',
+  },
+  {
+    title: 'Cultura',
+    copy: 'Fotografía, oficios y formas de mirar lo vivo. La naturaleza también se lee como lenguaje.',
+  },
+];
+---
+
+<section id="manifiesto" class="manifesto" aria-labelledby="manifesto-title">
+  <div class="manifesto-orbit" aria-hidden="true"></div>
+  <div class="container-editorial">
+    <div class="manifesto-head">
+      <SectionMarker index="01" label="La Revista" />
+      <p class="manifesto-running">Publicación independiente · Chile</p>
+    </div>
+
+    <div class="manifesto-grid">
+      <div class="manifesto-art" data-reveal>
+        <span class="manifesto-art__index" aria-hidden="true">F/01</span>
+        <div class="manifesto-art__frame">
+          <Image
+            src={niscalo}
+            alt="Ilustración editorial de un hongo anaranjado"
+            widths={[320, 520, 760]}
+            sizes="(max-width: 767px) 60vw, 24vw"
+            loading="lazy"
+            class="manifesto-art__img"
+          />
+        </div>
+        <p class="manifesto-art__caption">Funga · bosque · materia</p>
+      </div>
+
+      <div class="manifesto-copy">
+        <h2 id="manifesto-title" class="type-display" data-reveal>
+          Hay un mundo<br />
+          <span class="manifesto-em">bajo tus pies.</span>
+        </h2>
+        <p class="manifesto-lead" data-reveal>
+          Una red de hifas conecta árboles, agua, memoria y materia. Micelio es una invitación a
+          mirar ese universo de cerca: la ciencia que lo estudia, el territorio que lo resguarda y
+          la cultura que se nutre de él.
+        </p>
+        <p class="manifesto-body" data-reveal>
+          Entrevistas, reportajes, fotografía y guías de funga chilena. Un proyecto editorial para
+          quienes se detienen a observar lo que ocurre entre la hojarasca.
+        </p>
+        <a href="/la-revista" class="manifesto-link link-line" data-reveal>
+          Conoce la revista
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <div class="manifesto-pillars" data-reveal-group>
+        {pillars.map((pillar, index) => (
+          <div class="pillar" data-reveal-item>
+            <span class="pillar__number">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="pillar__title">{pillar.title}</h3>
+              <p class="pillar__copy">{pillar.copy}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <blockquote class="manifesto-quote" data-reveal>
+      <span class="manifesto-quote__star" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M20 2v36M2 20h36M7.3 7.3l25.4 25.4M32.7 7.3 7.3 32.7" />
+        </svg>
+      </span>
+      <p class="manifesto-quote__text">
+        La primera revista del <em>reino Fungi</em>.
+      </p>
+      <span class="manifesto-quote__source">Revista Micelio · Chile</span>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-paper);
+    padding-block: clamp(4.5rem, 9vw, 8.5rem);
+  }
+
+  .manifesto-orbit {
+    position: absolute;
+    top: 8%;
+    right: -12rem;
+    width: 34rem;
+    height: 34rem;
+    border: 1px solid color-mix(in srgb, var(--color-forest-700) 18%, transparent);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .manifesto-orbit::before {
+    content: '';
+    position: absolute;
+    inset: 2.5rem;
+    border: 1px dashed color-mix(in srgb, var(--color-forest-700) 13%, transparent);
+    border-radius: 50%;
+  }
+
+  .manifesto-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .manifesto-running {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .manifesto-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr);
+      gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1180px) {
+    .manifesto-grid {
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.5fr) minmax(0, 0.86fr);
+      gap: clamp(2rem, 4.5vw, 4.5rem);
+    }
+  }
+
+  .manifesto-art {
+    position: relative;
+    max-width: 24rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .manifesto-art__index {
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: var(--color-forest-700);
+  }
+
+  .manifesto-art__frame {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    aspect-ratio: 4 / 4.6;
+    overflow: hidden;
+    border-radius: 50% 50% 4rem 4rem / 38% 38% 3rem 3rem;
+    background:
+      radial-gradient(circle at 50% 40%, #f7f2e4, #e9e3d3 75%);
+    padding: 2.8rem 1.5rem 0;
+  }
+
+  .manifesto-art__frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid color-mix(in srgb, var(--color-forest-700) 20%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .manifesto-art :global(img) {
+    width: 86%;
+    height: auto;
+    filter: drop-shadow(0 25px 30px rgb(60 45 20 / 22%));
+    transform: rotate(-4deg);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .manifesto-art:hover :global(img) {
+    transform: rotate(0deg) scale(1.025);
+  }
+
+  .manifesto-art__caption {
+    margin-top: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+    text-align: center;
+  }
+
+  .manifesto-copy h2 {
+    font-size: clamp(2.9rem, 5.7vw, 5.6rem);
+    color: var(--color-forest-800);
+  }
+
+  .manifesto-em {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .manifesto-lead {
+    margin-top: 1.8rem;
+    max-width: 35rem;
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.58;
+    color: var(--color-forest-800);
+  }
+
+  .manifesto-body {
+    margin-top: 1rem;
+    max-width: 33rem;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .manifesto-link {
+    margin-top: 1.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-forest-800);
+  }
+
+  .manifesto-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 0.9rem;
+    padding-block: 1.2rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 16%, transparent);
+  }
+
+  .pillar:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 16%, transparent);
+  }
+
+  .pillar__number {
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+    color: var(--color-purple);
+    padding-top: 0.2rem;
+  }
+
+  .pillar__title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-forest-800);
+  }
+
+  .pillar__copy {
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--color-muted-foreground);
+  }
+
+  .manifesto-quote {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.4rem;
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .manifesto-quote__star {
+    display: flex;
+    width: 2.2rem;
+    height: 2.2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    color: var(--color-purple);
+  }
+
+  .manifesto-quote__star svg {
+    width: 1rem;
+    height: 1rem;
+    animation: slow-spin 30s linear infinite;
+  }
+
+  .manifesto-quote__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.4vw, 3.2rem);
+    font-weight: 340;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-forest-800);
+  }
+
+  .manifesto-quote__text em {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .manifesto-quote__source {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+
+  @media (min-width: 900px) {
+    .manifesto-quote__source { display: block; }
+  }
+
+  @keyframes slow-spin {
+    to { rotate: 360deg; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .manifesto-quote__star svg { animation: none; }
+  }
+
+  @media (max-width: 767px) {
+    .manifesto-art {
+      max-width: 19rem;
+    }
+
+    .manifesto-pillars {
+      margin-top: 0.5rem;
+    }
+
+    .manifesto-quote {
+      grid-template-columns: auto 1fr;
+    }
+  }
+</style>

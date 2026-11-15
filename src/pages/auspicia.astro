@@ -1,0 +1,570 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/editorial/PageHeader.astro';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+import { contactEmail } from '@/lib/contact';
+import { site } from '@/data/site';
+
+
+const formats = [
+  {
+    title: 'Página impresa',
+    copy: 'Presencia en una edición de Revista Micelio, impresa y distribuida en la red de puntos de venta.',
+  },
+  {
+    title: 'Contenido digital',
+    copy: 'Colaboración editorial o pieza de marca en el sitio y en los canales digitales de la revista.',
+  },
+  {
+    title: 'Redes y comunidad',
+    copy: 'Publicaciones y conversaciones con la comunidad que sigue el reino Fungi en Instagram y YouTube.',
+  },
+  {
+    title: 'Packs y actividades',
+    copy: 'Presencia en packs, ferias o encuentros cuando la revista participa con una mesa o una edición especial.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Escríbenos',
+    copy: 'Cuéntanos quién eres, qué proyecto quieres comunicar y en qué formato estás pensando.',
+  },
+  {
+    title: 'Conversamos',
+    copy: 'Revisamos objetivos, tono y tiempos. Si hay afinidad editorial, proponemos un formato concreto.',
+  },
+  {
+    title: 'Coordinamos',
+    copy: 'Acordamos piezas, plazos y entrega. Todo se confirma por correo antes de producir.',
+  },
+];
+
+const mediaKitMail = `mailto:${contactEmail}?subject=${encodeURIComponent('Solicitud de media kit — Revista Micelio')}&body=${encodeURIComponent('Hola Revista Micelio,\n\nQuiero recibir la información disponible para auspiciar o colaborar con la revista.\n\nMarca / proyecto:\nTipo de colaboración:\nCiudad:\n\nGracias.')}`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Auspicia — Revista Micelio',
+  description:
+    'Información para marcas y proyectos que quieren auspiciar o colaborar con Revista Micelio.',
+};
+---
+
+<BaseLayout
+  title="Auspicia — Revista Micelio"
+  description="Auspicia o colabora con Revista Micelio: ediciones impresas y digitales, contenido sobre el reino Fungi, red de distribución y canales en Instagram y YouTube."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+
+  <PageHeader
+    index="07"
+    label="Auspicia"
+    title="Auspicia"
+    accent="la red."
+    description="Marcas y proyectos que quieren conversar con una comunidad interesada en el bosque, la ciencia y la cultura. Sin cifras inventadas: conversemos qué necesitas comunicar."
+    running="Auspicios · Colaboraciones"
+    tone="bone"
+    watermark="✳"
+  >
+    <div slot="aside" class="media-card">
+      <p class="eyebrow">Ficha de medios</p>
+      <dl>
+        <div>
+          <dt>Publicación</dt>
+          <dd>Revista independiente chilena</dd>
+        </div>
+        <div>
+          <dt>Tema</dt>
+          <dd>Reino Fungi · bosque nativo · cultura</dd>
+        </div>
+        <div>
+          <dt>Formatos</dt>
+          <dd>Impreso y digital</dd>
+        </div>
+        <div>
+          <dt>Canales</dt>
+          <dd>Sitio web · Instagram · YouTube</dd>
+        </div>
+      </dl>
+      <a href={mediaKitMail}>
+        Solicitar media kit
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </PageHeader>
+
+  <section class="sponsor-why" aria-labelledby="why-title">
+    <div class="container-editorial">
+      <div class="sponsor-why__grid">
+        <div>
+          <SectionMarker index="01" label="Por qué" />
+          <h2 id="why-title" class="sponsor-why__title type-display" data-reveal>
+            Una audiencia<br /><span class="italic">que mira el bosque.</span>
+          </h2>
+        </div>
+        <div class="sponsor-why__copy" data-reveal>
+          <p class="sponsor-why__lead">
+            Revista Micelio reúne a personas interesadas en la naturaleza, la ciencia, la
+            fotografía y la cultura del reino Fungi. Una comunidad curiosa, con interés por el
+            territorio chileno y por las publicaciones independientes.
+          </p>
+          <p>
+            No publicamos cifras de audiencia que no podamos respaldar. Si necesitas datos
+            concretos para evaluar una colaboración, escríbenos y revisamos juntos la información
+            disponible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sponsor-formats" aria-labelledby="formats-title">
+    <div class="container-editorial">
+      <div class="sponsor-formats__head">
+        <div>
+          <SectionMarker index="02" label="Formatos" />
+          <h2 id="formats-title" class="sponsor-formats__title type-display" data-reveal>
+            Formas de<br /><span class="italic">estar presentes.</span>
+          </h2>
+        </div>
+        <p data-reveal>
+          Los formatos, tarifas y plazos se acuerdan por proyecto. Estas son las vías habituales de
+          colaboración; si tienes otra idea, también podemos conversarla.
+        </p>
+      </div>
+
+      <div class="sponsor-formats__grid" data-reveal-group>
+        {formats.map((format, index) => (
+          <article class="sponsor-format" data-reveal-item>
+            <span class="sponsor-format__index">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{format.title}</h3>
+            <p>{format.copy}</p>
+            <span class="sponsor-format__note">A convenir</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sponsor-steps on-dark surface-grain" aria-labelledby="steps-title">
+    <div class="container-editorial">
+      <div class="sponsor-steps__head">
+        <SectionMarker index="03" label="Cómo funciona" dark />
+        <h2 id="steps-title" class="type-display" data-reveal>
+          Tres pasos,<br /><span class="italic">sin letra chica.</span>
+        </h2>
+      </div>
+
+      <ol class="sponsor-steps__list">
+        {steps.map((step, index) => (
+          <li>
+            <span class="sponsor-steps__index">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.copy}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="sponsor-steps__cta">
+        <p>
+          Escríbenos con el motivo «Auspicio y publicidad» y te contamos qué información tenemos
+          disponible. No hay un PDF público: la ficha se comparte por correo.
+        </p>
+        <div>
+          <a href="/#contacto" class="btn btn--apple">
+            Hablar de una colaboración
+          </a>
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="btn btn--outline">
+            Ver Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .media-card {
+    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    background: var(--color-paper);
+    padding: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .media-card .eyebrow {
+    color: var(--color-forest-700);
+  }
+
+  .media-card dl {
+    margin-top: 1rem;
+  }
+
+  .media-card dl > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 14%, transparent);
+    padding-block: 0.6rem;
+  }
+
+  .media-card dt {
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+
+  .media-card dd {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--color-forest-800);
+  }
+
+  .media-card a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    padding-top: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-forest-800);
+  }
+
+  .sponsor-why {
+    background: var(--color-paper);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .sponsor-why__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  @media (min-width: 900px) {
+    .sponsor-why__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: start;
+    }
+  }
+
+  .sponsor-why__title {
+    margin-top: 1rem;
+    font-size: clamp(2.8rem, 5.6vw, 5.4rem);
+    color: var(--color-forest-800);
+  }
+
+  .sponsor-why__title .italic {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .sponsor-why__copy p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--color-muted-foreground);
+  }
+
+  .sponsor-why__copy p + p {
+    margin-top: 1rem;
+  }
+
+  .sponsor-why__lead {
+    font-size: clamp(1rem, 1.25vw, 1.12rem) !important;
+    line-height: 1.68 !important;
+    color: var(--color-forest-800) !important;
+  }
+
+  .sponsor-formats {
+    background: var(--color-bone);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .sponsor-formats__head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: end;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 900px) {
+    .sponsor-formats__head {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.55fr);
+      gap: 4rem;
+    }
+  }
+
+  .sponsor-formats__title {
+    margin-top: 1rem;
+    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
+    color: var(--color-forest-800);
+  }
+
+  .sponsor-formats__title .italic {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .sponsor-formats__head > p {
+    max-width: 25rem;
+    padding-bottom: 0.4rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .sponsor-formats__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
+  }
+
+  @media (min-width: 760px) {
+    .sponsor-formats__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2rem, 5vw, 5rem);
+    }
+  }
+
+  .sponsor-format {
+    position: relative;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 15%, transparent);
+    padding-block: 1.4rem;
+  }
+
+  .sponsor-format__index {
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+    color: var(--color-purple);
+  }
+
+  .sponsor-format h3 {
+    margin-top: 0.4rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    font-weight: 380;
+    line-height: 1.1;
+    color: var(--color-forest-800);
+  }
+
+  .sponsor-format p {
+    max-width: 32rem;
+    margin-top: 0.5rem;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--color-muted-foreground);
+  }
+
+  .sponsor-format__note {
+    display: inline-block;
+    margin-top: 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-forest-700);
+  }
+
+  .sponsor-steps {
+    background:
+      radial-gradient(ellipse 50% 50% at 84% 8%, rgb(31 74 56 / 48%), transparent 66%),
+      var(--color-forest-900);
+    color: var(--color-cream);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .sponsor-steps__head h2 {
+    margin-top: 1rem;
+    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
+    color: var(--color-cream);
+  }
+
+  .sponsor-steps__head .italic {
+    font-style: italic;
+    color: var(--color-apple);
+  }
+
+  .sponsor-steps__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid rgb(243 240 230 / 16%);
+    padding-top: 1.4rem;
+  }
+
+  @media (min-width: 760px) {
+    .sponsor-steps__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.5rem, 3vw, 3rem);
+    }
+  }
+
+  .sponsor-steps__list li {
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .sponsor-steps__index {
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+    color: var(--color-apple);
+    padding-top: 0.25rem;
+  }
+
+  .sponsor-steps__list h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 380;
+    line-height: 1.15;
+    color: var(--color-cream);
+  }
+
+  .sponsor-steps__list p {
+    margin-top: 0.35rem;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: rgb(243 240 230 / 55%);
+  }
+
+  .sponsor-steps__cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid rgb(243 240 230 / 16%);
+    padding-top: 1.2rem;
+  }
+
+  @media (min-width: 900px) {
+    .sponsor-steps__cta {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 3rem;
+    }
+  }
+
+  .sponsor-steps__cta > p {
+    max-width: 38rem;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: rgb(243 240 230 / 50%);
+  }
+
+  .sponsor-steps__cta > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .sponsor-network {
+    background: var(--color-paper);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .sponsor-network__head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: end;
+    margin-bottom: clamp(1.8rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 900px) {
+    .sponsor-network__head {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.55fr);
+      gap: 4rem;
+    }
+  }
+
+  .sponsor-network__head h2 {
+    margin-top: 1rem;
+    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
+    color: var(--color-forest-800);
+  }
+
+  .sponsor-network__head .italic {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .sponsor-network__head > p {
+    max-width: 24rem;
+    padding-bottom: 0.4rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+  }
+
+  .sponsor-network__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: clamp(2rem, 5vw, 5rem);
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
+  }
+
+  @media (min-width: 760px) {
+    .sponsor-network__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .sponsor-network__list > li {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 14%, transparent);
+  }
+
+  .sponsor-network__list a,
+  .sponsor-network__static {
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8rem;
+    padding-block: 0.85rem;
+  }
+
+  .sponsor-network__list a:hover {
+    background: color-mix(in srgb, var(--color-bone) 45%, transparent);
+  }
+
+  .sponsor-network__number {
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.06em;
+    color: var(--color-purple);
+  }
+
+  .sponsor-network__list a > span:nth-child(2),
+  .sponsor-network__static > span:nth-child(2) {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    color: var(--color-forest-800);
+  }
+
+  .sponsor-network__list a > span:last-child {
+    color: var(--color-forest-700);
+    font-size: 0.9rem;
+  }
+
+  .sponsor-network__note {
+    margin-top: 1.2rem;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: var(--color-muted-foreground);
+  }
+</style>

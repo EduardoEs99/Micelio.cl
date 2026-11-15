@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/home/Hero.astro';
+import Manifesto from '@/components/home/Manifesto.astro';
+import EditionsShowcase from '@/components/home/EditionsShowcase.astro';
+import NewFungiSection from '@/components/home/NewFungiSection.astro';
+import GalleryStrip from '@/components/home/GalleryStrip.astro';
+import RedMicelioSection from '@/components/home/RedMicelioSection.astro';
+import AuspiciaSection from '@/components/home/AuspiciaSection.astro';
+import ContactSection from '@/components/home/ContactSection.astro';
+import ClosingCta from '@/components/home/ClosingCta.astro';
+import { site } from '@/data/site';
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Revista Micelio',
+  url: 'https://revistamicelio.cl',
+  inLanguage: 'es-CL',
+  description: site.description,
+};
+---
+
+<BaseLayout title="Revista Micelio — El universo invisible" transparentHeader>
+  <script type="application/ld+json" set:html={JSON.stringify(website)} slot="head" />
+  <Hero />
+  <Manifesto />
+  <EditionsShowcase />
+  <NewFungiSection />
+  <GalleryStrip />
+  <RedMicelioSection />
+  <AuspiciaSection />
+  <ContactSection />
+  <ClosingCta />
+</BaseLayout>

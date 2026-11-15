@@ -1,0 +1,286 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/editorial/PageHeader.astro';
+import SubscribeForm from '@/components/contact/SubscribeForm';
+import SectionMarker from '@/components/editorial/SectionMarker.astro';
+import { Image } from 'astro:assets';
+import ilu9 from '@/assets/illustrations/ilu9.png';
+import { site } from '@/data/site';
+
+const receive = [
+  {
+    title: 'Nuevas ediciones',
+    copy: 'Avisos cuando un número impreso o digital esté disponible, en preventa o de vuelta en catálogo.',
+  },
+  {
+    title: 'New Fungi',
+    copy: 'Entrevistas y reportajes recién publicados, con enlace a la nota original.',
+  },
+  {
+    title: 'Convocatorias y encuentros',
+    copy: 'Actividades, ferias y llamados de la red Micelio que valga la pena mirar de cerca.',
+  },
+];
+---
+
+<BaseLayout
+  title="Suscripción — Revista Micelio"
+  description="Recibe novedades de Revista Micelio: nuevas ediciones, entrevistas, reportajes y convocatorias. Registro de correo sin pagos automáticos."
+>
+  <PageHeader
+    index="08"
+    label="Suscripción"
+    title="Sigue"
+    accent="la red."
+    description="Un correo cuando hay algo que contar: nuevas ediciones, historias recién publicadas, actividades y llamados de la red Micelio."
+    running="Novedades editoriales"
+    tone="bone"
+    watermark="⌁"
+  >
+    <div slot="aside" class="subscribe-art">
+      <Image
+        src={ilu9}
+        alt="Ilustración editorial de hongos del bosque chileno"
+        widths={[360, 560, 760]}
+        sizes="(max-width: 899px) 70vw, 28vw"
+        loading="eager"
+        class="subscribe-art__img"
+      />
+      <p>Archivo gráfico · Revista Micelio</p>
+    </div>
+  </PageHeader>
+
+  <section class="subscribe-body" aria-labelledby="subscribe-title">
+    <div class="container-editorial">
+      <div class="subscribe-grid">
+        <div class="subscribe-form-col">
+          <SectionMarker index="01" label="Registro de correo" />
+          <h2 id="subscribe-title" class="subscribe-title type-display" data-reveal>
+            Recibe lo<br /><span class="italic">que crece.</span>
+          </h2>
+          <p class="subscribe-intro" data-reveal>
+            Este formulario registra tu correo para recibir novedades editoriales. No es una
+            suscripción pagada a la revista ni procesa pagos: para comprar una edición, usa la
+            Contacto.
+          </p>
+          <div class="subscribe-form-wrap" data-reveal>
+            <SubscribeForm client:load context="novedades editoriales" />
+          </div>
+        </div>
+
+        <aside class="subscribe-aside" aria-label="Qué recibirás">
+          <div class="subscribe-aside__card on-dark surface-grain">
+            <p class="eyebrow">Qué llega al correo</p>
+            <ul>
+              {receive.map((item, index) => (
+                <li>
+                  <span class="subscribe-aside__number">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p class="subscribe-aside__note">
+              Puedes pedir la baja de la lista escribiendo a{' '}
+              <a href={`mailto:${site.email}`}>{site.email}</a>.
+            </p>
+          </div>
+
+          <div class="subscribe-aside__shop">
+            <p class="eyebrow">¿Buscas una edición?</p>
+            <p>
+              Las ediciones impresas y digitales están disponibles para consulta. También puedes
+              revisarlas y guardarlas en tu lista de interés.
+            </p>
+            <div class="subscribe-aside__links">
+              <a href="/ediciones">Ver ediciones <span aria-hidden="true">→</span></a>
+              <a href="/#contacto">
+                Contacto <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .subscribe-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .subscribe-art__img {
+    width: min(100%, 21rem);
+    height: auto;
+    filter: drop-shadow(0 26px 34px rgb(60 45 20 / 22%));
+    transform: rotate(-3deg);
+  }
+
+  .subscribe-art p {
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+  }
+
+  .subscribe-body {
+    background: var(--color-paper);
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .subscribe-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 960px) {
+    .subscribe-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: start;
+    }
+  }
+
+  .subscribe-title {
+    margin-top: 1.2rem;
+    font-size: clamp(2.8rem, 5.6vw, 5.4rem);
+    color: var(--color-forest-800);
+  }
+
+  .subscribe-title .italic {
+    font-style: italic;
+    color: var(--color-forest-700);
+  }
+
+  .subscribe-intro {
+    max-width: 34rem;
+    margin-top: 1.2rem;
+    font-size: 0.96rem;
+    line-height: 1.72;
+    color: var(--color-muted-foreground);
+  }
+
+  .subscribe-form-wrap {
+    max-width: 30rem;
+    margin-top: clamp(2rem, 4vw, 2.8rem);
+    border: 1px solid var(--color-line);
+    background: color-mix(in srgb, var(--color-bone) 40%, var(--color-paper));
+    padding: clamp(1.3rem, 3vw, 2.2rem);
+  }
+
+  .subscribe-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .subscribe-aside__card {
+    background:
+      radial-gradient(ellipse 60% 45% at 84% 8%, rgb(31 74 56 / 45%), transparent 65%),
+      var(--color-forest-900);
+    color: var(--color-cream);
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+  }
+
+  .subscribe-aside__card .eyebrow {
+    color: var(--color-apple);
+  }
+
+  .subscribe-aside__card ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.1rem;
+  }
+
+  .subscribe-aside__card li {
+    display: flex;
+    gap: 0.9rem;
+    border-top: 1px solid rgb(243 240 230 / 14%);
+    padding-block: 1rem;
+  }
+
+  .subscribe-aside__number {
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+    color: var(--color-apple);
+    padding-top: 0.2rem;
+  }
+
+  .subscribe-aside__card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 380;
+    line-height: 1.15;
+  }
+
+  .subscribe-aside__card li p {
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: rgb(243 240 230 / 56%);
+  }
+
+  .subscribe-aside__note {
+    margin-top: 1rem;
+    border-top: 1px solid rgb(243 240 230 / 14%);
+    padding-top: 0.9rem;
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: rgb(243 240 230 / 42%);
+  }
+
+  .subscribe-aside__note a {
+    color: var(--color-apple);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .subscribe-aside__shop {
+    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
+    padding-top: 1.1rem;
+  }
+
+  .subscribe-aside__shop .eyebrow {
+    color: var(--color-forest-700);
+  }
+
+  .subscribe-aside__shop p {
+    margin-top: 0.8rem;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--color-muted-foreground);
+  }
+
+  .subscribe-aside__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .subscribe-aside__links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 14%, transparent);
+    padding-block: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-forest-800);
+  }
+
+  .subscribe-aside__links a:hover {
+    color: var(--color-purple);
+  }
+</style>
