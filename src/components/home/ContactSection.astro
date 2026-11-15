@@ -1,6 +1,5 @@
 ---
 import ContactForm from '@/components/contact/ContactForm';
-import Mascot from '@/components/editorial/Mascot.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 ---
 
@@ -16,12 +15,6 @@ import SectionMarker from '@/components/editorial/SectionMarker.astro';
         Consultas editoriales, propuestas de historias, distribución, auspicios o simplemente una
         pregunta sobre hongos. Escríbenos y te respondemos desde el correo editorial.
       </p>
-      <p class="home-contact__mail" data-reveal>
-        <a href="mailto:editorial@revistamicelio.cl">editorial@revistamicelio.cl</a>
-      </p>
-      <div class="home-contact__mascot">
-        <Mascot width={150} />
-      </div>
     </div>
     <div class="home-contact__form" data-reveal>
       <ContactForm client:load />
@@ -67,34 +60,5 @@ import SectionMarker from '@/components/editorial/SectionMarker.astro';
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--color-muted-foreground);
-  }
-
-  .home-contact__mail {
-    margin-top: 1.4rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
-  }
-
-  .home-contact__mail a {
-    color: var(--color-forest-800);
-    text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--color-forest-800) 30%, transparent);
-    text-underline-offset: 0.2em;
-  }
-
-  .home-contact__mail a:hover {
-    color: var(--color-purple);
-  }
-
-  .home-contact__mascot {
-    width: fit-content;
-    margin-top: 1.5rem;
-    margin-left: 0.25rem;
-  }
-
-  @media (max-width: 979px) {
-    .home-contact__mascot {
-      display: none;
-    }
   }
 </style>

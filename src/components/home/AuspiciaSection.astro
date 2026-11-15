@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { sponsors } from '@/data/sponsors';
 ---
 
 <section class="auspicia-home on-dark" aria-labelledby="auspicia-title">
@@ -29,44 +27,6 @@ import { sponsors } from '@/data/sponsors';
           <a href="/red-micelio" class="auspicia-link link-line">Red de distribución</a>
         </div>
       </div>
-    </div>
-
-    <div class="auspicia-partners">
-      <p class="auspicia-partners__label">Auspiciadores</p>
-      <ul class="auspicia-partners__grid">
-        {sponsors.map((sponsor) => (
-          <li class="auspicia-partners__cell">
-            {sponsor.href ? (
-              <a
-                href={sponsor.href}
-                class="auspicia-partners__card"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={sponsor.logo}
-                  alt={sponsor.name}
-                  widths={[120, 180]}
-                  sizes="(max-width: 640px) 30vw, 140px"
-                  loading="lazy"
-                  class="auspicia-partners__logo"
-                />
-              </a>
-            ) : (
-              <div class="auspicia-partners__card auspicia-partners__card--static">
-                <Image
-                  src={sponsor.logo}
-                  alt={sponsor.name}
-                  widths={[120, 180]}
-                  sizes="(max-width: 640px) 30vw, 140px"
-                  loading="lazy"
-                  class="auspicia-partners__logo"
-                />
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
     </div>
   </div>
 </section>
@@ -135,99 +95,5 @@ import { sponsors } from '@/data/sponsors';
 
   .auspicia-link:hover {
     color: var(--color-apple);
-  }
-
-  .auspicia-partners {
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    border-top: 1px solid rgb(243 240 230 / 12%);
-    padding-top: clamp(1.5rem, 3vw, 2.25rem);
-  }
-
-  .auspicia-partners__label {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgb(243 240 230 / 42%);
-  }
-
-  .auspicia-partners__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-    padding: 0;
-    list-style: none;
-  }
-
-  @media (min-width: 560px) {
-    .auspicia-partners__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 900px) {
-    .auspicia-partners__grid {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1rem;
-    }
-  }
-
-  .auspicia-partners__cell {
-    display: flex;
-  }
-
-  .auspicia-partners__card {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 3 / 2;
-    border: 1px solid color-mix(in srgb, var(--color-forest-950) 12%, transparent);
-    background: var(--color-cream);
-    padding: clamp(0.85rem, 2vw, 1.35rem);
-    transition:
-      border-color 0.3s ease,
-      background-color 0.3s ease;
-  }
-
-  a.auspicia-partners__card:hover {
-    border-color: var(--color-apple);
-    background: color-mix(in srgb, var(--color-cream) 88%, var(--color-apple));
-  }
-
-  .auspicia-partners__card--static {
-    cursor: default;
-  }
-
-  .auspicia-partners__logo {
-    width: 100%;
-    height: auto;
-    max-width: 7rem;
-    object-fit: contain;
-    filter: grayscale(100%);
-    mix-blend-mode: multiply;
-    opacity: 0.78;
-    transition:
-      filter 0.3s ease,
-      opacity 0.3s ease;
-  }
-
-  @media (max-width: 559px) {
-    .auspicia-partners__logo {
-      max-width: 5rem;
-    }
-  }
-
-  a.auspicia-partners__card:hover .auspicia-partners__logo {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .auspicia-partners__card,
-    .auspicia-partners__logo {
-      transition: none;
-    }
   }
 </style>

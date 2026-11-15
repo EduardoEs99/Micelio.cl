@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
+import SponsorsGrid from '@/components/sponsors/SponsorsGrid.astro';
 import { contactEmail } from '@/lib/contact';
 import { site } from '@/data/site';
 
@@ -118,6 +119,8 @@ const schema = {
       </div>
     </div>
   </section>
+
+  <SponsorsGrid />
 
   <section class="sponsor-formats" aria-labelledby="formats-title">
     <div class="container-editorial">

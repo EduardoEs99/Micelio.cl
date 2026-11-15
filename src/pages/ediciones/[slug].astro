@@ -118,13 +118,13 @@ const cartItem = {
             </div>
 
             <div class="edition-detail__actions" data-reveal>
-              <a href="/#contacto" class="btn btn--forest">
+              <a href="/#contacto" class="btn btn--forest btn--compact">
                 Consultar disponibilidad
-                <svg viewBox="0 0 16 16" aria-hidden="true">
+                <svg viewBox="0 0 16 16" aria-hidden="true" class="h-3.5 w-3.5">
                   <path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.3" />
                 </svg>
               </a>
-              <AddToList client:load item={cartItem} />
+              <AddToList client:load item={cartItem} className="btn--compact" />
             </div>
 
             <p class="edition-detail__note">

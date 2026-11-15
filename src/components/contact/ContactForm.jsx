@@ -3,7 +3,6 @@ import {
   AlertTriangle,
   ArrowUpRight,
   Check,
-  ChevronDown,
   Loader2,
   Mail,
   Send,
@@ -11,6 +10,13 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { contactEmail, contactReasons, mailtoFor } from "@/lib/contact";
@@ -283,28 +289,25 @@ export default function ContactForm() {
             Motivo <span aria-hidden="true">*</span>
           </Label>
           <div className="relative">
-            <select
-              id="contact-motivo"
-              name="motivo"
-              className={cn(
-                fieldClass,
-                "w-full appearance-none border py-0 pr-10",
-              )}
+            <Select
               value={values.motivo}
-              onChange={(event) => setField("motivo", event.target.value)}
-              required
+              onValueChange={(value) => setField("motivo", value)}
             >
-              {contactReasons.map((reason) => (
-                <option key={reason} value={reason}>
-                  {reason}
-                </option>
-              ))}
-            </select>
-            <ChevronDown
-              className="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 text-muted-foreground"
-              strokeWidth={1.6}
-              aria-hidden="true"
-            />
+              <SelectTrigger
+                id="contact-motivo"
+                aria-label="Motivo"
+                className={cn(fieldClass, "w-full justify-between data-[size=default]:h-12")}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {contactReasons.map((reason) => (
+                  <SelectItem key={reason} value={reason}>
+                    {reason}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

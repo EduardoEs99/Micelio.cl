@@ -1,17 +1,17 @@
+import reinofungi from '@/assets/promotion/reinofungi.png';
+import guiadecampo from '@/assets/promotion/guiadecampo.png';
+
 export const promotions = [
   {
-    label: "Nueva edición",
-    title: "Edición 003 — Preventa",
-    href: "/ediciones/edicion-003-impresa",
+    id: 'reino-fungi',
+    image: reinofungi,
+    alt: 'Promoción de la tercera edición de Revista Micelio',
+    duration: 6000,
   },
   {
-    label: "Edición 002",
-    title: "Bosque templado lluvioso",
-    href: "/ediciones/edicion-002-impresa",
-  },
-  {
-    label: "Guías de funga",
-    title: "Costa, bosque y desierto",
-    href: "/red-micelio",
+    id: 'guias-de-campo',
+    image: guiadecampo,
+    alt: 'Promoción de guías de campo',
+    duration: 6000,
   },
 ];
