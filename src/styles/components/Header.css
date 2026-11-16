@@ -1,0 +1,33 @@
+.site-header {
+  transition:
+    background-color 0.45s ease,
+    border-color 0.45s ease,
+    color 0.35s ease,
+    backdrop-filter 0.45s ease;
+}
+
+.site-header[data-transparent='false'],
+.site-header[data-scrolled='true'] {
+  background: color-mix(in srgb, var(--color-paper) 91%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+  border-bottom-color: color-mix(in srgb, var(--color-forest-800) 12%, transparent);
+}
+
+.site-header[data-transparent='true'][data-scrolled='false'] {
+  background: linear-gradient(to bottom, rgb(8 20 15 / 62%), transparent);
+  color: var(--color-cream);
+}
+
+.site-header[data-transparent='true'][data-scrolled='false'] .brand-logo-dark {
+  display: none;
+}
+
+.site-header[data-transparent='true'][data-scrolled='false'] .brand-logo-light {
+  display: block;
+}
+
+.site-header[data-transparent='true'][data-scrolled='false'] .header-cta {
+  background: var(--color-apple);
+  color: var(--color-forest-900);
+}

@@ -264,7 +264,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="contact-form">
+    <form ref={formRef} onSubmit={onSubmit} noValidate>
       <div aria-live="polite" className="sr-only">
         {status.state === "submitting" ? "Enviando mensaje." : ""}
       </div>
@@ -313,8 +313,8 @@ export default function ContactForm() {
       )}
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <div className="field">
-          <Label htmlFor="contact-nombre" className="field-label">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="contact-nombre" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
             Nombre <span aria-hidden="true">*</span>
           </Label>
           <Input
@@ -329,14 +329,14 @@ export default function ContactForm() {
             required
           />
           {errors.nombre && (
-            <p id="error-nombre" className="field-error">
+            <p id="error-nombre" className="text-tiny leading-relaxed text-destructive">
               {errors.nombre}
             </p>
           )}
         </div>
 
-        <div className="field">
-          <Label htmlFor="contact-email" className="field-label">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="contact-email" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
             Correo <span aria-hidden="true">*</span>
           </Label>
           <Input
@@ -353,14 +353,14 @@ export default function ContactForm() {
             required
           />
           {errors.email && (
-            <p id="error-email" className="field-error">
+            <p id="error-email" className="text-tiny leading-relaxed text-destructive">
               {errors.email}
             </p>
           )}
         </div>
 
-        <div className="field">
-          <Label htmlFor="contact-motivo" className="field-label">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="contact-motivo" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
             Motivo <span aria-hidden="true">*</span>
           </Label>
           <PopoverPrimitive.Root
@@ -457,10 +457,10 @@ export default function ContactForm() {
           </PopoverPrimitive.Root>
         </div>
 
-        <div className="field">
-          <Label htmlFor="contact-organizacion" className="field-label">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="contact-organizacion" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
             Institución o proyecto{" "}
-            <span className="field-optional">(opcional)</span>
+            <span className="font-normal tracking-normal normal-case text-muted-foreground">(opcional)</span>
           </Label>
           <Input
             id="contact-organizacion"
@@ -473,8 +473,8 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div className="field mt-5">
-        <Label htmlFor="contact-mensaje" className="field-label">
+      <div className="mt-5 flex flex-col gap-1.5">
+        <Label htmlFor="contact-mensaje" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
           Mensaje <span aria-hidden="true">*</span>
         </Label>
         <Textarea
@@ -489,18 +489,18 @@ export default function ContactForm() {
           required
         />
         {errors.mensaje ? (
-          <p id="error-mensaje" className="field-error">
+          <p id="error-mensaje" className="text-tiny leading-relaxed text-destructive">
             {errors.mensaje}
           </p>
         ) : (
-          <p id="hint-mensaje" className="field-hint">
+          <p id="hint-mensaje" className="text-tiny leading-relaxed text-muted-foreground">
             Si escribes por distribución o auspicio, cuéntanos tu territorio o
             marca.
           </p>
         )}
       </div>
 
-      <div className="field mt-5">
+      <div className="mt-5 flex flex-col gap-1.5">
         <label className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
           <input
             type="checkbox"
@@ -522,7 +522,7 @@ export default function ContactForm() {
           </span>
         </label>
         {errors.consentimiento && (
-          <p id="error-consentimiento" className="field-error">
+          <p id="error-consentimiento" className="text-tiny leading-relaxed text-destructive">
             {errors.consentimiento}
           </p>
         )}

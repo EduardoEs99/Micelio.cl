@@ -1,296 +1,70 @@
 ---
 import { Picture } from 'astro:assets';
 import { formatCLP } from '@/lib/format';
+import '@/styles/components/EditionCard.css';
 
 interface Props {
   edition: any;
   index?: number;
   featured?: boolean;
+  compact?: boolean;
 }
 
-const { edition, index = 0, featured = false } = Astro.props;
+const { edition, index = 0, featured = false, compact = false } = Astro.props;
 const detailHref = `/ediciones/${edition.slug}`;
 ---
 
-<article class:list={['edition-card', featured && 'edition-card--featured']} data-reveal-item>
-  <a href={detailHref} class="edition-card__cover cover-tilt" data-cover-tilt aria-label={`Ver ${edition.title}`}>
-    <span class="edition-card__corner edition-card__corner--tl" aria-hidden="true"></span>
-    <span class="edition-card__corner edition-card__corner--tr" aria-hidden="true"></span>
-    <span class="edition-card__corner edition-card__corner--bl" aria-hidden="true"></span>
-    <span class="edition-card__corner edition-card__corner--br" aria-hidden="true"></span>
-    <span class="edition-card__status" data-status={edition.status}>{edition.status}</span>
-    <div class="edition-card__image">
+<article class="flex min-w-0 flex-col" data-reveal-item>
+  <a
+    href={detailHref}
+    class="edition-cover group relative block overflow-hidden border border-forest-800/18 bg-[#e8e6e1] transition duration-500 will-change-transform hover:border-forest-700/55"
+    data-cover-tilt
+    aria-label={`Ver ${edition.title}`}
+  >
+    <span class="pointer-events-none absolute top-2 left-2 z-2 size-3.5 border-t border-l border-forest-800/32" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute top-2 right-2 z-2 size-3.5 border-t border-r border-forest-800/32" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute bottom-2 left-2 z-2 size-3.5 border-b border-l border-forest-800/32" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute right-2 bottom-2 z-2 size-3.5 border-r border-b border-forest-800/32" aria-hidden="true"></span>
+    <span
+      class="absolute top-3 right-5.5 z-3 rounded-full border border-forest-800/18 bg-[#faf9f5]/92 px-2.5 py-1 font-mono text-nano tracking-widest uppercase text-forest-800 backdrop-blur-sm data-[status=Agotada]:text-purple data-[status=Preventa]:border-apple data-[status=Preventa]:bg-apple data-[status=Preventa]:text-forest-900"
+      data-status={edition.status}
+    >
+      {edition.status}
+    </span>
+    <div class:list={['relative transform-3d translate-z-7 overflow-hidden', compact ? 'aspect-4/3' : 'aspect-4/5']}>
       <Picture fallbackFormat="jpg"
         src={edition.cover}
         alt={edition.coverAlt}
         widths={[420, 620, 860]}
         sizes={featured ? '(max-width: 767px) 88vw, 34vw' : '(max-width: 767px) 80vw, 26vw'}
         loading={index < 2 ? 'eager' : 'lazy'}
-        class="edition-card__img"
+        class="edition-image block size-full object-cover object-center"
       />
     </div>
-    <span class="edition-card__view">
+    <span class="absolute inset-x-4.5 bottom-4 z-3 flex translate-y-1.5 items-center justify-between border-t border-cream/32 pt-2.5 font-mono text-nano tracking-editorial uppercase text-cream opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
       Ver edición
-      <svg viewBox="0 0 16 16" aria-hidden="true">
+      <svg viewBox="0 0 16 16" aria-hidden="true" class="size-3">
         <path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.2" />
       </svg>
     </span>
   </a>
 
-  <div class="edition-card__body">
-    <div class="edition-card__meta">
+  <div class="flex flex-col pt-4.5">
+    <div class="flex items-center gap-3">
       <span class="tag">{edition.format}</span>
-      <span class="edition-card__number">N.º {edition.number}</span>
-      <span class="edition-card__price">{formatCLP(edition.price)}</span>
+      <span class="font-mono text-nano tracking-widest uppercase text-muted-foreground">N.º {edition.number}</span>
+      <span class="ml-auto font-mono text-sm text-forest-800">{formatCLP(edition.price)}</span>
     </div>
-    <h3 class="edition-card__title">
-      <a href={detailHref}>{edition.title}</a>
+    <h3 class:list={['mt-2.5 font-display font-normal leading-none tracking-tight text-forest-800', featured ? 'text-card-feature' : 'text-card']}>
+      <a href={detailHref} class="transition-colors hover:text-forest-700">{edition.title}</a>
     </h3>
-    {featured && <p class="edition-card__summary">{edition.summary}</p>}
-    <a href={detailHref} class="edition-card__link">
+    {featured && <p class="mt-2.5 text-sm leading-relaxed text-muted-foreground">{edition.summary}</p>}
+    <a
+      href={detailHref}
+      class="group/link mt-3 inline-flex items-center gap-1.5 self-start font-mono text-nano tracking-editorial uppercase text-forest-700"
+    >
       Ver ficha
-      <span aria-hidden="true">→</span>
+      <span class="transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true">→</span>
     </a>
   </div>
 </article>
-
-<style>
-  .edition-card {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
-
-  .edition-card__cover {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--color-forest-800) 18%, transparent);
-    background: #e8e6e1;
-    transform-style: preserve-3d;
-    transition:
-      box-shadow 0.5s ease,
-      border-color 0.4s ease;
-    will-change: transform;
-  }
-
-  .edition-card__cover:hover {
-    border-color: color-mix(in srgb, var(--color-forest-700) 55%, transparent);
-    box-shadow: 0 34px 60px -34px rgb(8 20 15 / 42%);
-  }
-
-  .edition-card__image {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    transform: translateZ(28px);
-  }
-
-  .edition-card__img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: saturate(0.96) contrast(1.02);
-    transition:
-      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 0.5s ease;
-  }
-
-  .edition-card__cover:hover .edition-card__img {
-    transform: scale(1.035);
-    filter: saturate(1) contrast(1.04);
-  }
-
-  .edition-card__cover::after {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 32%;
-    background: linear-gradient(to top, rgb(8 20 15 / 62%), transparent);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-
-  .edition-card__cover:hover::after {
-    opacity: 1;
-  }
-
-  .edition-card__corner {
-    position: absolute;
-    z-index: 2;
-    width: 0.85rem;
-    height: 0.85rem;
-    border-color: color-mix(in srgb, var(--color-forest-800) 32%, transparent);
-    border-style: solid;
-    border-width: 0;
-    pointer-events: none;
-  }
-
-  .edition-card__corner--tl {
-    top: 0.55rem;
-    left: 0.55rem;
-    border-top-width: 1px;
-    border-left-width: 1px;
-  }
-
-  .edition-card__corner--tr {
-    top: 0.55rem;
-    right: 0.55rem;
-    border-top-width: 1px;
-    border-right-width: 1px;
-  }
-
-  .edition-card__corner--bl {
-    bottom: 0.55rem;
-    left: 0.55rem;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-  }
-
-  .edition-card__corner--br {
-    bottom: 0.55rem;
-    right: 0.55rem;
-    border-bottom-width: 1px;
-    border-right-width: 1px;
-  }
-
-  .edition-card__status {
-    position: absolute;
-    top: 0.7rem;
-    right: 1.4rem;
-    z-index: 3;
-    border-radius: 999px;
-    padding: 0.3rem 0.65rem;
-    background: rgb(250 249 245 / 92%);
-    border: 1px solid color-mix(in srgb, var(--color-forest-800) 18%, transparent);
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-800);
-    backdrop-filter: blur(6px);
-  }
-
-  .edition-card__status[data-status='Agotada'] {
-    color: var(--color-purple);
-  }
-
-  .edition-card__status[data-status='Preventa'] {
-    background: var(--color-apple);
-    border-color: var(--color-apple);
-    color: var(--color-forest-900);
-  }
-
-  .edition-card__view {
-    position: absolute;
-    inset-inline: 1.1rem;
-    bottom: 1rem;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgb(243 240 230 / 32%);
-    padding-top: 0.6rem;
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-cream);
-    opacity: 0;
-    transform: translateY(0.4rem);
-    transition:
-      opacity 0.35s ease,
-      transform 0.35s ease;
-  }
-
-  .edition-card__cover:hover .edition-card__view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .edition-card__view svg {
-    width: 0.8rem;
-    height: 0.8rem;
-  }
-
-  .edition-card__body {
-    display: flex;
-    flex-direction: column;
-    padding-top: 1.15rem;
-  }
-
-  .edition-card__meta {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .edition-card__number {
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-muted-foreground);
-  }
-
-  .edition-card__price {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.02em;
-    color: var(--color-forest-800);
-  }
-
-  .edition-card__title {
-    margin-top: 0.65rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2vw, 1.95rem);
-    font-weight: 380;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-  }
-
-  .edition-card__title a {
-    transition: color 0.25s ease;
-  }
-
-  .edition-card__title a:hover {
-    color: var(--color-forest-700);
-  }
-
-  .edition-card__summary {
-    margin-top: 0.65rem;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: var(--color-muted-foreground);
-  }
-
-  .edition-card__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    align-self: flex-start;
-    margin-top: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-forest-700);
-  }
-
-  .edition-card__link span {
-    transition: transform 0.3s ease;
-  }
-
-  .edition-card__link:hover span {
-    transform: translateX(0.25rem);
-  }
-
-  .edition-card--featured .edition-card__title {
-    font-size: clamp(1.7rem, 2.4vw, 2.3rem);
-  }
-</style>

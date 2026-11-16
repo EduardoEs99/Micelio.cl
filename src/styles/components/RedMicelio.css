@@ -1,0 +1,37 @@
+.network-guides__item {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgb(243 240 230 / 20%);
+  background: #f4f1e8;
+  box-shadow: 0 30px 50px -35px rgb(0 0 0 / 80%);
+}
+
+.network-guides__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.network-guides__item--back {
+  top: 0;
+  right: 0;
+  width: 48%;
+  aspect-ratio: 4 / 5;
+  transform: rotate(6deg);
+  opacity: 0.7;
+}
+
+.network-guides__item--front {
+  left: 8%;
+  bottom: 0;
+  width: 56%;
+  aspect-ratio: 4 / 5.4;
+  transform: rotate(-4deg);
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.network-guides__item--front:hover {
+  transform: rotate(0deg) translateY(-4px);
+}

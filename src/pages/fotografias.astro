@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
@@ -6,6 +6,7 @@ import SectionMarker from '@/components/editorial/SectionMarker.astro';
 import { Picture, getImage } from 'astro:assets';
 import { gallery } from '@/data/gallery';
 import { site } from '@/data/site';
+import '@/styles/components/Fotografias.css';
 
 const previews = [gallery[2], gallery[6], gallery[11]];
 
@@ -46,11 +47,11 @@ const items = await Promise.all(
     tone="forest"
     watermark="✳"
   >
-    <div slot="aside" class="photo-preview">
-      <p class="eyebrow">Selección · 14 registros</p>
-      <div class="photo-preview__stack">
+    <div slot="aside" class="flex flex-col gap-4">
+      <p class="eyebrow text-apple">Selección · 14 registros</p>
+      <div class="relative h-76">
         {previews.map((image, index) => (
-          <figure class:list={['photo-preview__item', `photo-preview__item--${index + 1}`]}>
+          <figure class:list={['photo-preview__item absolute overflow-hidden border border-cream/24 bg-forest-950', `photo-preview__item--${index + 1}`]}>
             <Picture fallbackFormat="jpg"
               src={image.thumb}
               alt=""
@@ -61,37 +62,37 @@ const items = await Promise.all(
           </figure>
         ))}
       </div>
-      <p class="photo-preview__caption">Registros de campo · sin escala</p>
+      <p class="font-mono text-nano uppercase tracking-editorial text-cream/42">Registros de campo · sin escala</p>
     </div>
   </PageHeader>
 
-  <section class="photo-gallery" aria-labelledby="gallery-title">
+  <section class="photo-gallery py-14 text-cream lg:py-24" aria-labelledby="gallery-title">
     <div class="container-editorial">
-      <div class="photo-gallery__head">
-        <div>
+      <div class="mb-8 grid grid-cols-1 items-end gap-6 split:mb-14 split:grid-cols-12 split:gap-16">
+        <div class="split:col-span-8">
           <SectionMarker index="01" label="Galería" dark />
-          <h2 id="gallery-title" class="photo-gallery__title type-display" data-reveal>
-            Catorce<br /><span class="italic">apariciones.</span>
+          <h2 id="gallery-title" class="type-display mt-4.5 text-photo-title text-cream" data-reveal>
+            Catorce<br /><span class="italic text-apple">apariciones.</span>
           </h2>
         </div>
-        <div class="photo-gallery__aside" data-reveal>
-          <p>
+        <div class="flex flex-col gap-4 pb-1.5 split:col-span-4" data-reveal>
+          <p class="max-w-92 text-copy-xs leading-relaxed text-cream/54">
             Toca una imagen para ampliarla. Puedes recorrer la serie con las flechas del teclado y
             cerrar con Esc.
           </p>
-          <span class="photo-gallery__count">01 – 14</span>
+          <span class="font-mono text-nano tracking-editorial-wide text-apple">01 – 14</span>
         </div>
       </div>
 
       <GalleryGrid client:visible items={items} />
 
-      <div class="photo-gallery__foot">
-        <p>
+      <div class="mt-8 flex flex-wrap items-start justify-between gap-6 border-t border-cream/14 pt-5 split:mt-12">
+        <p class="max-w-184 text-tiny leading-relaxed text-cream/40">
           Las imágenes son registros editoriales y no deben usarse para identificar hongos
           comestibles o medicinales. Para determinar una especie, consulta a una persona
           especialista y usa guías locales.
         </p>
-        <a href="/#contacto" class="photo-gallery__link">
+        <a href="/#contacto" class="inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-nano uppercase tracking-widest text-apple hover:underline hover:underline-offset-4">
           Enviar material fotográfico
           <span aria-hidden="true">↗</span>
         </a>
@@ -99,20 +100,20 @@ const items = await Promise.all(
     </div>
   </section>
 
-  <section class="photo-cta" aria-labelledby="photo-cta-title">
-    <div class="container-editorial photo-cta__inner">
-      <div>
+  <section class="bg-bone py-14 lg:py-24" aria-labelledby="photo-cta-title">
+    <div class="container-editorial grid grid-cols-1 items-end gap-6 split:grid-cols-12 split:gap-16">
+      <div class="split:col-span-7">
         <p class="eyebrow">Archivo abierto</p>
-        <h2 id="photo-cta-title" class="type-display">
-          La funga también<br /><span class="italic">se documenta.</span>
+        <h2 id="photo-cta-title" class="type-display mt-3.5 text-section-contact text-forest-800">
+          La funga también<br /><span class="italic text-forest-700">se documenta.</span>
         </h2>
       </div>
-      <div class="photo-cta__copy">
-        <p>
+      <div class="split:col-span-5">
+        <p class="max-w-124 text-copy-sm leading-relaxed text-muted-foreground">
           Si fotografías hongos en tu territorio y quieres proponer un registro para la revista,
           escríbenos con el lugar, la fecha y los datos que tengas. Revisamos cada propuesta.
         </p>
-        <div class="photo-cta__actions">
+        <div class="mt-6 flex flex-wrap gap-3">
           <a href="/#contacto" class="btn btn--forest">Proponer un registro</a>
           <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="btn btn--outline">
             Ver Instagram
@@ -122,204 +123,3 @@ const items = await Promise.all(
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .photo-preview {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .photo-preview .eyebrow {
-    color: var(--color-apple);
-  }
-
-  .photo-preview__stack {
-    position: relative;
-    height: 19rem;
-  }
-
-  .photo-preview__item {
-    position: absolute;
-    overflow: hidden;
-    border: 1px solid rgb(247 244 235 / 24%);
-    background: var(--color-forest-950);
-    box-shadow: 0 30px 50px -30px rgb(0 0 0 / 80%);
-  }
-
-  .photo-preview__item :global(img) {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  .photo-preview__item--1 {
-    top: 0;
-    left: 0;
-    width: 62%;
-    aspect-ratio: 4 / 3;
-    transform: rotate(-4deg);
-  }
-
-  .photo-preview__item--2 {
-    top: 3.4rem;
-    right: 0;
-    width: 58%;
-    aspect-ratio: 4 / 3;
-    transform: rotate(4deg);
-    z-index: 2;
-  }
-
-  .photo-preview__item--3 {
-    bottom: 0;
-    left: 12%;
-    width: 52%;
-    aspect-ratio: 5 / 4;
-    transform: rotate(-2deg);
-    z-index: 3;
-  }
-
-  .photo-preview__caption {
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgb(247 244 235 / 42%);
-  }
-
-  .photo-gallery {
-    background:
-      radial-gradient(ellipse 45% 35% at 88% 4%, rgb(31 74 56 / 32%), transparent 65%),
-      var(--color-forest-950);
-    color: var(--color-cream);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .photo-gallery__head {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-    align-items: end;
-    margin-bottom: clamp(2rem, 4vw, 3.4rem);
-  }
-
-  @media (min-width: 900px) {
-    .photo-gallery__head {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.5fr);
-      gap: 4rem;
-    }
-  }
-
-  .photo-gallery__title {
-    margin-top: 1.1rem;
-    font-size: clamp(2.9rem, 6.4vw, 6.6rem);
-    color: var(--color-cream);
-  }
-
-  .photo-gallery__title .italic {
-    font-style: italic;
-    color: var(--color-apple);
-  }
-
-  .photo-gallery__aside {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-bottom: 0.4rem;
-  }
-
-  .photo-gallery__aside p {
-    max-width: 23rem;
-    font-size: 0.86rem;
-    line-height: 1.7;
-    color: rgb(247 244 235 / 54%);
-  }
-
-  .photo-gallery__count {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
-    color: var(--color-apple);
-  }
-
-  .photo-gallery__foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px solid rgb(247 244 235 / 14%);
-    padding-top: 1.2rem;
-  }
-
-  .photo-gallery__foot p {
-    max-width: 46rem;
-    font-size: 0.72rem;
-    line-height: 1.65;
-    color: rgb(247 244 235 / 40%);
-  }
-
-  .photo-gallery__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-apple);
-    white-space: nowrap;
-  }
-
-  .photo-gallery__link:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
-  }
-
-  .photo-cta {
-    background: var(--color-bone);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .photo-cta__inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-    align-items: end;
-  }
-
-  @media (min-width: 900px) {
-    .photo-cta__inner {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 4rem;
-    }
-  }
-
-  .photo-cta h2 {
-    margin-top: 0.9rem;
-    font-size: clamp(2.4rem, 4.8vw, 4.6rem);
-    color: var(--color-forest-800);
-  }
-
-  .photo-cta h2 .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .photo-cta__copy p {
-    max-width: 31rem;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--color-muted-foreground);
-  }
-
-  .photo-cta__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    margin-top: 1.4rem;
-  }
-</style>

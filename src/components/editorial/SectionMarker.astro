@@ -9,41 +9,14 @@ interface Props {
 const { index, label, dark = false, class: className = '' } = Astro.props;
 ---
 
-<div class:list={['section-marker', dark && 'section-marker--dark', className]}>
-  <span class="section-marker__index">{index}</span>
-  <span class="section-marker__rule" aria-hidden="true"></span>
-  <span class="section-marker__label">{label}</span>
+<div
+  class:list={[
+    'flex items-center gap-3.5 font-mono text-eyebrow tracking-editorial-wider uppercase',
+    dark ? 'text-cream/55' : 'text-forest-700',
+    className,
+  ]}
+>
+  <span class:list={[dark ? 'text-apple' : 'text-purple']}>{index}</span>
+  <span class="h-px w-9 shrink-0 bg-current opacity-35" aria-hidden="true"></span>
+  <span>{label}</span>
 </div>
-
-<style>
-  .section-marker {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-forest-700);
-  }
-
-  .section-marker--dark {
-    color: rgb(243 240 230 / 55%);
-  }
-
-  .section-marker__index {
-    color: var(--color-purple);
-  }
-
-  .section-marker--dark .section-marker__index {
-    color: var(--color-apple);
-  }
-
-  .section-marker__rule {
-    height: 1px;
-    width: 2.25rem;
-    flex-shrink: 0;
-    background: currentColor;
-    opacity: 0.35;
-  }
-</style>

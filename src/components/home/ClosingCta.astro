@@ -1,9 +1,10 @@
 ---
+import '@/styles/components/ClosingCta.css';
 ---
 
-<section class="closing" aria-labelledby="closing-title">
-  <div class="closing-pattern" aria-hidden="true">
-    <svg viewBox="0 0 600 600" fill="none">
+<section class="relative overflow-hidden bg-apple py-16 text-forest-900 wide:py-28" aria-labelledby="closing-title">
+  <div class="pointer-events-none absolute top-1/2 -right-56 size-176 -translate-y-1/2" aria-hidden="true">
+    <svg viewBox="0 0 600 600" fill="none" class="closing-pattern size-full">
       <g stroke="#153226" stroke-opacity="0.12" stroke-width="1">
         <circle cx="300" cy="300" r="70" />
         <circle cx="300" cy="300" r="140" />
@@ -13,21 +14,21 @@
       </g>
     </svg>
   </div>
-  <div class="container-editorial closing-inner">
-    <p class="eyebrow closing-eyebrow">Sigue la red</p>
-    <h2 id="closing-title" class="closing-title type-display" data-reveal>
+  <div class="container-editorial relative z-1">
+    <p class="eyebrow text-forest-900/62">Sigue la red</p>
+    <h2 id="closing-title" class="type-display mt-4.5 text-section-closing text-forest-900" data-reveal>
       Que el bosque<br />
-      <span class="italic">siga creciendo.</span>
+      <span class="italic text-forest-700">siga creciendo.</span>
     </h2>
-    <div class="closing-bottom">
-      <p class="closing-copy" data-reveal>
+    <div class="mt-8 grid grid-cols-1 items-end gap-6.5 border-t border-forest-900/22 pt-6.5 wide:flex wide:justify-between wide:gap-12">
+      <p class="max-w-xl text-copy-sm leading-relaxed text-forest-900/72" data-reveal>
         Novedades editoriales, nuevas ediciones y convocatorias. También puedes escribirnos para
         colaborar, distribuir o proponer una historia.
       </p>
-      <div class="closing-actions" data-reveal>
+      <div class="flex flex-wrap items-center justify-end gap-5 max-mobile:flex-col max-mobile:items-start max-mobile:justify-start" data-reveal>
         <a href="/suscripcion" class="btn btn--forest">
           Quiero suscribirme
-          <svg viewBox="0 0 16 16" aria-hidden="true">
+          <svg viewBox="0 0 16 16" aria-hidden="true" class="size-4">
             <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.3" />
           </svg>
         </a>
@@ -35,102 +36,3 @@
     </div>
   </div>
 </section>
-
-<style>
-  .closing {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-apple);
-    color: var(--color-forest-900);
-    padding-block: clamp(4rem, 8vw, 7rem);
-  }
-
-  .closing-pattern {
-    position: absolute;
-    right: -14rem;
-    top: 50%;
-    width: 44rem;
-    height: 44rem;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  .closing-pattern svg {
-    width: 100%;
-    height: 100%;
-    animation: closing-spin 120s linear infinite;
-  }
-
-  @keyframes closing-spin {
-    to { rotate: 360deg; }
-  }
-
-  .closing-inner {
-    position: relative;
-    z-index: 1;
-  }
-
-  .closing-eyebrow {
-    color: color-mix(in srgb, var(--color-forest-900) 62%, transparent);
-  }
-
-  .closing-title {
-    margin-top: 1.1rem;
-    font-size: clamp(3rem, 7.4vw, 8.5rem);
-    color: var(--color-forest-900);
-  }
-
-  .closing-title .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .closing-bottom {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-    align-items: end;
-    margin-top: 2rem;
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-900) 22%, transparent);
-    padding-top: 1.6rem;
-  }
-
-  @media (min-width: 900px) {
-    .closing-bottom {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 3rem;
-    }
-  }
-
-  .closing-copy {
-    max-width: 33rem;
-    font-size: 0.92rem;
-    line-height: 1.65;
-    color: color-mix(in srgb, var(--color-forest-900) 72%, transparent);
-  }
-
-  .closing-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.3rem;
-    justify-content: flex-end;
-  }
-
-  .closing-actions svg {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .closing-pattern svg { animation: none; }
-  }
-
-  @media (max-width: 480px) {
-    .closing-actions {
-      align-items: flex-start;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-  }
-</style>

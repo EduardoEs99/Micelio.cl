@@ -28,9 +28,22 @@
   --color-paper: #fbf9f2;
   --color-bone: #ede8da;
   --color-ink: #171a17;
+  --color-ink-soft: #3f453d;
   --color-line: #d9d3c4;
 
+  --breakpoint-mobile: 30rem;
+  --breakpoint-compact: 35rem;
+  --breakpoint-grid: 43.75rem;
+  --breakpoint-row: 47.5rem;
+  --breakpoint-wide: 56.25rem;
+  --breakpoint-split: 61.25rem;
+  --breakpoint-editorial: 73.75rem;
+  --breakpoint-shell: 100rem;
+
   --container-hero-description: 32rem;
+  --container-page-title: 16ch;
+  --container-page-copy: 34rem;
+  --spacing-floating: clamp(1rem, 3vw, 2rem);
   --spacing-hero-word: 0.12em;
   --spacing-hero-meta: clamp(1.4rem, 3vh, 2.4rem);
   --spacing-hero-lede: clamp(1.2rem, 3vh, 2rem);
@@ -41,14 +54,71 @@
   --spacing-hero-buttons: 0.7rem;
   --spacing-hero-period: 0.04em;
   --spacing-hero-icon: 0.9rem;
+  --color-cream-apple: color-mix(in srgb, var(--color-cream) 88%, var(--color-apple));
+
   --text-nano: 0.55rem;
   --text-eyebrow: 0.6rem;
   --text-micro: 0.62rem;
   --text-tiny: 0.68rem;
+  --text-copy: 0.95rem;
+  --text-copy-sm: 0.92rem;
+  --text-copy-xs: 0.85rem;
+  --text-pillar: 1.4rem;
   --text-hero-description: clamp(1rem, 1.2vw, 1.15rem);
   --text-hero-title: clamp(3.4rem, 8.8vw, 8.6rem);
   --text-footer-lead: clamp(1.35rem, 2.2vw, 2rem);
   --text-mobile-nav: clamp(2rem, 8vw, 3.2rem);
+  --text-page-title: clamp(3.1rem, 8.6vw, 9rem);
+  --text-page-description: clamp(1rem, 1.2vw, 1.16rem);
+  --text-watermark: clamp(9rem, 26vw, 26rem);
+  --text-error-code: clamp(12rem, 34vw, 30rem);
+  --text-error-title: clamp(3rem, 8vw, 7rem);
+  --text-section-card: clamp(2.6rem, 5.2vw, 5rem);
+  --text-section-auspicia: clamp(2.9rem, 5.7vw, 6rem);
+  --text-subscribe: clamp(2.8rem, 5.6vw, 5.4rem);
+  --text-section-closing: clamp(3rem, 7.4vw, 8.5rem);
+  --text-section-contact: clamp(2.4rem, 5vw, 4.6rem);
+  --text-section-editions: clamp(3rem, 6.5vw, 7rem);
+  --text-section-gallery: clamp(3rem, 7vw, 7.5rem);
+  --text-section-manifesto: clamp(2.9rem, 5.7vw, 5.6rem);
+  --text-section-network: clamp(2.9rem, 5.8vw, 6rem);
+  --text-activities-events: clamp(2.6rem, 5.2vw, 5rem);
+  --text-section-fungi: clamp(3rem, 6.4vw, 7rem);
+  --text-photo-title: clamp(2.9rem, 6.4vw, 6.6rem);
+  --text-fungi-lead: clamp(2rem, 3.6vw, 3.7rem);
+  --text-fungi-index: clamp(2.2rem, 4.4vw, 4.2rem);
+  --text-fungi-row: clamp(1.3rem, 2.2vw, 1.9rem);
+  --text-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+  --text-lead-sm: clamp(1rem, 1.3vw, 1.15rem);
+  --text-feature: clamp(1.9rem, 3.2vw, 3.4rem);
+  --text-row: clamp(1.2rem, 2vw, 1.85rem);
+  --text-card: clamp(1.5rem, 2vw, 1.95rem);
+  --text-card-feature: clamp(1.7rem, 2.4vw, 2.3rem);
+  --text-product: clamp(1.3rem, 1.9vw, 1.7rem);
+  --text-legal-heading: clamp(1.5rem, 2.6vw, 2.1rem);
+  --text-account-step: clamp(1.15rem, 1.8vw, 1.45rem);
+  --text-distributor: clamp(1.1rem, 1.8vw, 1.4rem);
+  --text-section-medium: clamp(2.7rem, 5.4vw, 5.2rem);
+  --text-sponsor-format: clamp(1.4rem, 2.2vw, 1.85rem);
+  --text-about-title: clamp(2.9rem, 5.8vw, 5.8rem);
+  --text-about-pillars: clamp(2.8rem, 5.4vw, 5.2rem);
+  --text-about-pillar: clamp(1.4rem, 2vw, 1.75rem);
+  --text-about-archive: clamp(2.5rem, 5vw, 4.8rem);
+  --text-about-section: clamp(1.4rem, 2.3vw, 2rem);
+  --text-about-where: clamp(2.4rem, 4.6vw, 4.4rem);
+  --text-about-quote: clamp(1.5rem, 3vw, 2.8rem);
+  --text-edition-number: clamp(5rem, 12vw, 11rem);
+  --text-edition-heading: clamp(1.9rem, 3.4vw, 3.2rem);
+  --text-edition-price: clamp(1.5rem, 2.4vw, 2.1rem);
+  --text-editions-packs: clamp(2.4rem, 4.8vw, 4.6rem);
+  --text-related: clamp(1.15rem, 2vw, 1.55rem);
+  --text-quote: clamp(1.6rem, 3.4vw, 3.2rem);
+  --text-cart-count: clamp(2.2rem, 4vw, 3.6rem);
+  --text-cart-item: clamp(1.35rem, 2.4vw, 1.9rem);
+  --text-cart-price: clamp(1.2rem, 2vw, 1.5rem);
+  --text-cart-summary: clamp(2rem, 3.4vw, 2.8rem);
+  --text-cart-total: clamp(1.5rem, 2.4vw, 1.9rem);
+  --text-cart-empty: clamp(2.4rem, 5vw, 4rem);
   --tracking-editorial: 0.12em;
   --tracking-editorial-wide: 0.14em;
   --tracking-editorial-wider: 0.16em;
@@ -189,10 +259,6 @@
     padding-inline: clamp(1.25rem, 4vw, 4.5rem);
   }
 
-  .font-display {
-    font-family: var(--font-display);
-  }
-
   .type-display {
     font-family: var(--font-display);
     font-weight: 340;
@@ -237,39 +303,6 @@
 
   .rule {
     border-color: color-mix(in srgb, currentColor 18%, transparent);
-  }
-
-  .link-line {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-bottom: 0.2rem;
-  }
-
-  .link-line::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(1);
-    transform-origin: left;
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .link-line:hover::after {
-    transform: scaleX(0);
-  }
-
-  .link-arrow {
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .group:hover .link-arrow,
-  a:hover > .link-arrow {
-    transform: translate(0.25rem, -0.15rem);
   }
 
   .btn {
@@ -411,76 +444,4 @@
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-@layer components {
-  .icon-btn {
-    display: inline-flex;
-    min-height: 2.5rem;
-    min-width: 2.5rem;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    border-radius: 999px;
-    padding: 0.5rem;
-    color: inherit;
-    opacity: 0.82;
-    transition:
-      opacity 0.3s ease,
-      background-color 0.3s ease;
-  }
-
-  .icon-btn:hover {
-    opacity: 1;
-    background: color-mix(in srgb, currentColor 8%, transparent);
-  }
-
-  @media (min-width: 1280px) {
-    .header-search-trigger {
-      padding-inline: 0.8rem;
-    }
-  }
-
-  
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
-  .field-label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-forest-800);
-  }
-
-  .field-optional {
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    text-transform: none;
-    color: var(--color-muted-foreground);
-  }
-
-  .field-error {
-    font-size: 0.73rem;
-    line-height: 1.45;
-    color: var(--destructive);
-  }
-
-  .field-hint {
-    font-size: 0.72rem;
-    line-height: 1.5;
-    color: var(--color-muted-foreground);
-  }
-
-  .contact-form select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23415d43' stroke-width='1.2'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 0.75rem;
-    cursor: pointer;
-  }
 }

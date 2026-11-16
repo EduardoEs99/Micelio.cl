@@ -166,9 +166,9 @@ export default function SubscribeForm({ context = "novedades" }) {
         </div>
       )}
 
-      <div className="field">
-        <Label htmlFor="subscribe-nombre" className="field-label">
-          Nombre <span className="field-optional">(opcional)</span>
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="subscribe-nombre" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
+          Nombre <span className="font-normal tracking-normal normal-case text-muted-foreground">(opcional)</span>
         </Label>
         <Input
           id="subscribe-nombre"
@@ -179,8 +179,8 @@ export default function SubscribeForm({ context = "novedades" }) {
         />
       </div>
 
-      <div className="field">
-        <Label htmlFor="subscribe-email" className="field-label">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="subscribe-email" className="font-mono text-eyebrow font-medium uppercase tracking-editorial text-forest-800">
           Correo <span aria-hidden="true">*</span>
         </Label>
         <Input
@@ -199,7 +199,7 @@ export default function SubscribeForm({ context = "novedades" }) {
           required
         />
         {fieldError && (
-          <p id="subscribe-error" className="field-error">
+          <p id="subscribe-error" className="text-tiny leading-relaxed text-destructive">
             {fieldError}
           </p>
         )}

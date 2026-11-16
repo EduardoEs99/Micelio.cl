@@ -1,0 +1,43 @@
+.photo-preview__item {
+  box-shadow: 0 30px 50px -30px rgb(0 0 0 / 80%);
+}
+
+.photo-preview__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.photo-preview__item--1 {
+  top: 0;
+  left: 0;
+  width: 62%;
+  aspect-ratio: 4 / 3;
+  transform: rotate(-4deg);
+}
+
+.photo-preview__item--2 {
+  top: 3.4rem;
+  right: 0;
+  width: 58%;
+  aspect-ratio: 4 / 3;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+
+.photo-preview__item--3 {
+  bottom: 0;
+  left: 12%;
+  width: 52%;
+  aspect-ratio: 5 / 4;
+  transform: rotate(-2deg);
+  z-index: 3;
+}
+
+.photo-gallery {
+  background:
+    radial-gradient(ellipse 45% 35% at 88% 4%, rgb(31 74 56 / 32%), transparent 65%),
+    var(--color-forest-950);
+}

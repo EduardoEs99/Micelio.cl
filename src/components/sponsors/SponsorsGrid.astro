@@ -3,23 +3,23 @@ import { Picture } from 'astro:assets';
 import { sponsors } from '@/data/sponsors';
 ---
 
-<section class="sponsors-grid-section" aria-labelledby="sponsors-grid-title">
+<section class="bg-paper py-16 wide:py-24" aria-labelledby="sponsors-grid-title">
   <div class="container-editorial">
-    <div class="sponsors-grid__head">
+    <div class="mb-8 wide:mb-12">
       <p class="eyebrow">Auspiciadores</p>
-      <h2 id="sponsors-grid-title" class="sponsors-grid__title type-display">
+      <h2 id="sponsors-grid-title" class="type-display mt-4 text-section-card text-forest-800">
         Marcas que<br />
-        <span class="italic">acompañan.</span>
+        <span class="italic text-forest-700">acompañan.</span>
       </h2>
     </div>
 
-    <ul class="sponsors-grid">
+    <ul class="grid list-none grid-cols-2 gap-3 p-0 compact:grid-cols-3 wide:grid-cols-5 wide:gap-4">
       {sponsors.map((sponsor) => (
-        <li class="sponsors-grid__cell">
+        <li class="flex">
           {sponsor.href ? (
             <a
               href={sponsor.href}
-              class="sponsors-grid__card"
+              class="group flex aspect-3/2 w-full items-center justify-center border border-forest-950/12 bg-cream p-3 transition-colors duration-300 compact:p-4 wide:p-5 hover:border-apple hover:bg-cream-apple"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={sponsor.name}
@@ -30,18 +30,21 @@ import { sponsors } from '@/data/sponsors';
                 widths={[120, 180]}
                 sizes="(max-width: 640px) 30vw, 140px"
                 loading="lazy"
-                class="sponsors-grid__logo"
+                class="h-auto w-full max-w-28 object-contain opacity-78 grayscale mix-blend-multiply transition duration-300 max-compact:max-w-20 group-hover:opacity-100 group-hover:grayscale-0"
               />
             </a>
           ) : (
-            <div class="sponsors-grid__card sponsors-grid__card--static" aria-label={sponsor.name}>
+            <div
+              class="flex aspect-3/2 w-full cursor-default items-center justify-center border border-forest-950/12 bg-cream p-3 transition-colors duration-300 compact:p-4 wide:p-5"
+              aria-label={sponsor.name}
+            >
               <Picture fallbackFormat="jpg"
                 src={sponsor.logo}
                 alt={sponsor.name}
                 widths={[120, 180]}
                 sizes="(max-width: 640px) 30vw, 140px"
                 loading="lazy"
-                class="sponsors-grid__logo"
+                class="h-auto w-full max-w-28 object-contain opacity-78 grayscale mix-blend-multiply max-compact:max-w-20"
               />
             </div>
           )}
@@ -50,104 +53,3 @@ import { sponsors } from '@/data/sponsors';
     </ul>
   </div>
 </section>
-
-<style>
-  .sponsors-grid-section {
-    background: var(--color-paper);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .sponsors-grid__head {
-    margin-bottom: clamp(1.8rem, 4vw, 3rem);
-  }
-
-  .sponsors-grid__title {
-    margin-top: 1rem;
-    font-size: clamp(2.6rem, 5.2vw, 5rem);
-    color: var(--color-forest-800);
-  }
-
-  .sponsors-grid__title .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .sponsors-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    padding: 0;
-    list-style: none;
-  }
-
-  @media (min-width: 560px) {
-    .sponsors-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 900px) {
-    .sponsors-grid {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 1rem;
-    }
-  }
-
-  .sponsors-grid__cell {
-    display: flex;
-  }
-
-  .sponsors-grid__card {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 3 / 2;
-    border: 1px solid color-mix(in srgb, var(--color-forest-950) 12%, transparent);
-    background: var(--color-cream);
-    padding: clamp(0.85rem, 2vw, 1.35rem);
-    transition:
-      border-color 0.3s ease,
-      background-color 0.3s ease;
-  }
-
-  a.sponsors-grid__card:hover {
-    border-color: var(--color-apple);
-    background: color-mix(in srgb, var(--color-cream) 88%, var(--color-apple));
-  }
-
-  .sponsors-grid__card--static {
-    cursor: default;
-  }
-
-  .sponsors-grid__logo {
-    width: 100%;
-    height: auto;
-    max-width: 7rem;
-    object-fit: contain;
-    filter: grayscale(100%);
-    mix-blend-mode: multiply;
-    opacity: 0.78;
-    transition:
-      filter 0.3s ease,
-      opacity 0.3s ease;
-  }
-
-  @media (max-width: 559px) {
-    .sponsors-grid__logo {
-      max-width: 5rem;
-    }
-  }
-
-  a.sponsors-grid__card:hover .sponsors-grid__logo {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sponsors-grid__card,
-    .sponsors-grid__logo {
-      transition: none;
-    }
-  }
-</style>

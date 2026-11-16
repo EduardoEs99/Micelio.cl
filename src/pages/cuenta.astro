@@ -1,8 +1,9 @@
----
+﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 import { site } from '@/data/site';
+import '@/styles/components/PageDecor.css';
 
 const steps = [
   {
@@ -37,7 +38,7 @@ const steps = [
     running="Estado real del servicio · Sin autenticación"
     tone="paper"
   >
-    <div slot="actions" class="account-head-actions">
+    <div slot="actions" class="mt-7 flex flex-wrap gap-3">
       <a
         href="/#contacto"
         class="btn btn--forest"
@@ -51,88 +52,88 @@ const steps = [
     </div>
   </PageHeader>
 
-  <section class="account" aria-labelledby="account-status-title">
-    <div class="container-editorial account__grid">
-      <div class="account__main">
+  <section class="bg-paper py-10 lg:py-20" aria-labelledby="account-status-title">
+    <div class="container-editorial grid grid-cols-1 items-start gap-10 split:grid-cols-12 split:gap-24">
+      <div class="split:col-span-8">
         <SectionMarker index="01" label="Qué puedes hacer aquí" />
-        <h2 id="account-status-title" class="account__title type-display" data-reveal>
+        <h2 id="account-status-title" class="type-display mt-4.5 text-section-contact text-forest-800" data-reveal>
           La revista se lee aquí.<br />
-          <span class="italic">La compra se coordina por correo.</span>
+          <span class="italic font-light text-forest-700">La compra se coordina por correo.</span>
         </h2>
-        <p class="account__intro" data-reveal>
+        <p class="mt-5 max-w-page-copy text-copy leading-relaxed text-muted-foreground" data-reveal>
           Este sitio es la vitrina editorial: presenta las ediciones, los artículos y la red de
           Revista Micelio. La disponibilidad, el pago y el despacho se coordinan directamente con
           el equipo editorial.
         </p>
 
-        <ol class="account__steps" data-reveal-group>
+        <ol class="mt-8 flex flex-col border-t border-line lg:mt-12" data-reveal-group>
           {steps.map((step) => (
-            <li class="account-step" data-reveal-item>
-              <span class="account-step__n" aria-hidden="true">{step.n}</span>
-              <div>
-                <h3 class="account-step__title">{step.title}</h3>
-                <p class="account-step__body">{step.body}</p>
+            <li class="flex gap-3 border-b border-line py-5 grid:gap-5 grid:py-7" data-reveal-item>
+              <span class="w-10 shrink-0 pt-1 font-mono text-eyebrow tracking-editorial text-forest-700 grid:w-16" aria-hidden="true">{step.n}</span>
+              <div class="min-w-0 flex-1">
+                <h3 class="font-display text-account-step font-medium leading-tight text-forest-800">{step.title}</h3>
+                <p class="mt-1.5 max-w-144 text-copy-xs leading-relaxed text-muted-foreground">{step.body}</p>
               </div>
             </li>
           ))}
         </ol>
 
-        <div class="account__links">
-          <a href="/ediciones" class="account__link">
+        <div class="mt-7 flex flex-col">
+          <a href="/ediciones" class="group flex items-center justify-between gap-4 border-b border-forest-800/12 py-3.5 font-mono text-micro uppercase tracking-widest text-forest-800 transition-colors hover:text-purple">
             Ver catálogo de ediciones
-            <span aria-hidden="true">→</span>
+            <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
           </a>
-          <a href="/carrito" class="account__link">
+          <a href="/carrito" class="group flex items-center justify-between gap-4 border-b border-forest-800/12 py-3.5 font-mono text-micro uppercase tracking-widest text-forest-800 transition-colors hover:text-purple">
             Revisar mi lista de interés
-            <span aria-hidden="true">→</span>
+            <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
           </a>
-          <a href="/#contacto" class="account__link">
+          <a href="/#contacto" class="group flex items-center justify-between gap-4 border-b border-forest-800/12 py-3.5 font-mono text-micro uppercase tracking-widest text-forest-800 transition-colors hover:text-purple">
             Formulario de contacto
-            <span aria-hidden="true">→</span>
+            <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
 
-      <aside class="account__panel" aria-labelledby="account-panel-title">
-        <span class="account__mark" aria-hidden="true">✦</span>
+      <aside class="account__panel relative overflow-hidden p-7 text-cream split:sticky split:top-26 split:col-span-4 lg:p-10" aria-labelledby="account-panel-title">
+        <span class="pointer-events-none absolute top-1.5 right-4.5 font-display text-8xl leading-none text-cream/5" aria-hidden="true">✦</span>
         <p class="eyebrow text-apple">Estado de la integración</p>
-        <h2 id="account-panel-title" class="account__panel-title">
+        <h2 id="account-panel-title" class="mt-4 font-display text-cart-summary font-light leading-none tracking-tight text-cream">
           Inicio de sesión<br />
-          <em>no implementado.</em>
+          <em class="italic font-light text-apple">no implementado.</em>
         </h2>
-        <p class="account__panel-text">
+        <p class="mt-4 text-copy-xs leading-relaxed text-cream/58">
           Este sitio no recibe contraseñas ni crea usuarios. No hay autenticación, recuperación de
           clave ni historial de pedidos propio. Cualquier formulario de acceso que veas aquí sería
           una simulación, y no la vamos a publicar.
         </p>
 
-        <dl class="account__facts">
-          <div>
-            <dt>Cuentas y pedidos</dt>
-            <dd>Coordinación por correo</dd>
+        <dl class="mt-6 flex flex-col border-y border-cream/16 py-2.5">
+          <div class="flex items-baseline justify-between gap-4 py-2">
+            <dt class="font-mono text-nano uppercase tracking-widest text-cream/46">Cuentas y pedidos</dt>
+            <dd class="text-right text-copy-xs text-cream">Coordinación por correo</dd>
           </div>
-          <div>
-            <dt>Pagos y boletas</dt>
-            <dd>Coordinación por correo</dd>
+          <div class="flex items-baseline justify-between gap-4 py-2">
+            <dt class="font-mono text-nano uppercase tracking-widest text-cream/46">Pagos y boletas</dt>
+            <dd class="text-right text-copy-xs text-cream">Coordinación por correo</dd>
           </div>
-          <div>
-            <dt>Lista de interés</dt>
-            <dd>Tu navegador</dd>
+          <div class="flex items-baseline justify-between gap-4 py-2">
+            <dt class="font-mono text-nano uppercase tracking-widest text-cream/46">Lista de interés</dt>
+            <dd class="text-right text-copy-xs text-cream">Tu navegador</dd>
           </div>
-          <div>
-            <dt>Consultas editoriales</dt>
-            <dd>Correo</dd>
+          <div class="flex items-baseline justify-between gap-4 py-2">
+            <dt class="font-mono text-nano uppercase tracking-widest text-cream/46">Consultas editoriales</dt>
+            <dd class="text-right text-copy-xs text-cream">Correo</dd>
           </div>
         </dl>
 
         <a
           href="/#contacto"
-          class="account__panel-cta"
+          class="mt-6 flex items-center justify-between gap-4 rounded-full bg-apple px-5 py-3.5 font-mono text-eyebrow uppercase tracking-widest text-forest-900 transition-colors hover:bg-apple-soft"
         >
           Ir al formulario de contacto
           <span aria-hidden="true">↗</span>
         </a>
-        <p class="account__panel-note">
+        <p class="mt-4 text-tiny leading-relaxed text-cream/40">
           Si llega a existir una cuenta propia en este sitio, se anunciará aquí con su
           funcionamiento real. Hasta entonces, este es el estado verificable.
         </p>
@@ -140,240 +141,3 @@ const steps = [
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .account-head-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    margin-top: 1.8rem;
-  }
-
-  .account {
-    background: var(--color-paper);
-    padding-block: clamp(2.5rem, 6vw, 5rem);
-  }
-
-  .account__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(2.5rem, 5vw, 4rem);
-    align-items: start;
-  }
-
-  @media (min-width: 980px) {
-    .account__grid {
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-      gap: clamp(3rem, 6vw, 6rem);
-    }
-  }
-
-  .account__title {
-    margin-top: 1.1rem;
-    font-size: clamp(2.4rem, 4.8vw, 4.4rem);
-    color: var(--color-forest-800);
-  }
-
-  .account__title .italic {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--color-forest-700);
-  }
-
-  .account__intro {
-    max-width: 34rem;
-    margin-top: 1.2rem;
-    font-size: 0.94rem;
-    line-height: 1.7;
-    color: var(--color-muted-foreground);
-  }
-
-  .account__steps {
-    display: flex;
-    flex-direction: column;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px solid var(--color-line);
-  }
-
-  .account-step {
-    display: grid;
-    grid-template-columns: 2.4rem minmax(0, 1fr);
-    gap: 0.8rem;
-    border-bottom: 1px solid var(--color-line);
-    padding-block: 1.4rem;
-  }
-
-  @media (min-width: 700px) {
-    .account-step {
-      grid-template-columns: 4rem minmax(0, 1fr);
-      gap: 1.4rem;
-      padding-block: 1.7rem;
-    }
-  }
-
-  .account-step__n {
-    padding-top: 0.2rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    color: var(--color-forest-700);
-  }
-
-  .account-step__title {
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-    font-weight: 500;
-    line-height: 1.25;
-    color: var(--color-forest-800);
-  }
-
-  .account-step__body {
-    max-width: 36rem;
-    margin-top: 0.35rem;
-    font-size: 0.85rem;
-    line-height: 1.65;
-    color: var(--color-muted-foreground);
-  }
-
-  .account__links {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1.8rem;
-  }
-
-  .account__link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 12%, transparent);
-    padding-block: 0.85rem;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-800);
-    transition: color 0.25s ease;
-  }
-
-  .account__link span {
-    transition: transform 0.3s ease;
-  }
-
-  .account__link:hover {
-    color: var(--color-purple);
-  }
-
-  .account__link:hover span {
-    transform: translateX(0.25rem);
-  }
-
-  .account__panel {
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse 70% 55% at 88% 6%, rgb(31 74 56 / 50%), transparent 68%),
-      var(--color-forest-900);
-    color: var(--color-cream);
-    padding: clamp(1.7rem, 3.5vw, 2.6rem);
-  }
-
-  @media (min-width: 980px) {
-    .account__panel {
-      position: sticky;
-      top: 6.5rem;
-    }
-  }
-
-  .account__mark {
-    position: absolute;
-    top: 0.4rem;
-    right: 1.1rem;
-    font-size: 6rem;
-    line-height: 1;
-    color: rgb(243 240 230 / 5%);
-    pointer-events: none;
-  }
-
-  .account__panel-title {
-    margin-top: 1rem;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 3.4vw, 2.7rem);
-    font-weight: 350;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-    color: var(--color-cream);
-  }
-
-  .account__panel-title em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--color-apple);
-  }
-
-  .account__panel-text {
-    margin-top: 1.1rem;
-    font-size: 0.82rem;
-    line-height: 1.68;
-    color: rgb(243 240 230 / 58%);
-  }
-
-  .account__facts {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1.6rem;
-    border-top: 1px solid rgb(243 240 230 / 16%);
-    border-bottom: 1px solid rgb(243 240 230 / 16%);
-    padding-block: 0.6rem;
-  }
-
-  .account__facts > div {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-block: 0.5rem;
-  }
-
-  .account__facts dt {
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgb(243 240 230 / 46%);
-  }
-
-  .account__facts dd {
-    font-size: 0.82rem;
-    text-align: right;
-    color: var(--color-cream);
-  }
-
-  .account__panel-cta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    border-radius: 999px;
-    background: var(--color-apple);
-    padding: 0.9rem 1.3rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-900);
-    transition: background-color 0.3s ease;
-  }
-
-  .account__panel-cta:hover {
-    background: #b8e66a;
-  }
-
-  .account__panel-note {
-    margin-top: 1rem;
-    font-size: 0.68rem;
-    line-height: 1.6;
-    color: rgb(243 240 230 / 40%);
-  }
-</style>

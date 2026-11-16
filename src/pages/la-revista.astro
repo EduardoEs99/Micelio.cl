@@ -8,6 +8,7 @@ import dinelly from '@/assets/webp/editorial/dinelly.webp';
 import kombuferia from '@/assets/webp/editorial/kombuferia.webp';
 import braun from '@/assets/webp/editorial/braun.webp';
 import { site } from '@/data/site';
+import '@/styles/components/PageDecor.css';
 
 const sections = [
   {
@@ -66,29 +67,29 @@ const gallery = [
     watermark="✳"
   />
 
-  <section class="about-intro" aria-labelledby="about-title">
+  <section class="bg-paper py-14 lg:py-24" aria-labelledby="about-title">
     <div class="container-editorial">
-      <div class="about-intro__grid">
-        <div class="about-intro__statement" data-reveal>
+      <div class="grid grid-cols-1 gap-8 wide:grid-cols-12 wide:items-start wide:gap-12 lg:gap-20">
+        <div class="wide:col-span-7" data-reveal>
           <SectionMarker index="01" label="El proyecto" />
-          <h2 id="about-title" class="type-display">
+          <h2 id="about-title" class="type-display mt-4.5 text-about-title text-forest-800">
             La primera revista<br />
-            del <span class="italic">reino Fungi.</span>
+            del <span class="italic text-forest-700">reino Fungi.</span>
           </h2>
         </div>
 
-        <div class="about-intro__copy" data-reveal>
-          <p class="about-intro__lead">
+        <div class="pt-1.5 wide:col-span-5" data-reveal>
+          <p class="text-lead-sm leading-relaxed text-forest-800">
             Una red de hifas conecta árboles, agua, memoria y materia. Micelio es una invitación a
             mirar ese universo de cerca: la ciencia que lo estudia, el territorio que lo resguarda y
             la cultura que se nutre de él.
           </p>
-          <p>
+          <p class="mt-4 text-copy-sm leading-relaxed text-muted-foreground">
             Publicamos ediciones impresas y digitales, entrevistas y reportajes, fotografía y guías
             de funga chilena. Un proyecto editorial para quienes se detienen a observar lo que
             ocurre entre la hojarasca.
           </p>
-          <p>
+          <p class="mt-4 text-copy-sm leading-relaxed text-muted-foreground">
             No somos un catálogo de especies ni una guía de recolección. Somos una revista: un
             espacio para entender el reino Fungi con contexto, rigor y sensibilidad por el bosque
             que lo alberga.
@@ -96,40 +97,40 @@ const gallery = [
         </div>
       </div>
 
-      <div class="about-quote" data-reveal>
-        <span class="about-quote__mark" aria-hidden="true">“</span>
-        <p>
+      <div class="mt-10 flex items-center gap-5 border-t border-forest-800/22 pt-6 wide:pt-8" data-reveal>
+        <span class="shrink-0 font-display text-6xl leading-none text-purple" aria-hidden="true">“</span>
+        <p class="flex-1 font-display text-about-quote tracking-tight text-forest-800">
           Bajo cada paso se extiende una red viva, compleja y silenciosa.
         </p>
-        <span class="about-quote__source">Revista Micelio · Chile</span>
+        <span class="hidden shrink-0 font-mono text-nano uppercase tracking-editorial-wide text-muted-foreground wide:block">Revista Micelio · Chile</span>
       </div>
     </div>
   </section>
 
-  <section class="about-sections" aria-labelledby="sections-title">
+  <section class="bg-bone py-14 lg:py-24" aria-labelledby="sections-title">
     <div class="container-editorial">
-      <div class="about-sections__head">
-        <div>
+      <div class="mb-8 grid grid-cols-1 items-end gap-6 wide:grid-cols-12 wide:gap-16">
+        <div class="wide:col-span-8">
           <SectionMarker index="02" label="Lo que encontrarás" />
-          <h2 id="sections-title" class="about-sections__title type-display" data-reveal>
-            Cuatro puertas<br /><span class="italic">al mismo bosque.</span>
+          <h2 id="sections-title" class="type-display mt-4 text-section-medium text-forest-800" data-reveal>
+            Cuatro puertas<br /><span class="italic text-forest-700">al mismo bosque.</span>
           </h2>
         </div>
-        <p data-reveal>
+        <p class="max-w-100 pb-1.5 text-copy-sm leading-relaxed text-muted-foreground wide:col-span-4" data-reveal>
           La revista se lee en papel, en pantalla y en terreno. Cada sección abre una forma distinta
           de acercarse al reino Fungi.
         </p>
       </div>
 
-      <div class="about-sections__list" data-reveal-group>
+      <div class="border-t border-forest-800/22" data-reveal-group>
         {sections.map((section) => (
-          <a href={section.href} class="about-section" data-reveal-item>
-            <span class="about-section__index">{section.index}</span>
-            <span class="about-section__body">
-              <span class="about-section__title">{section.title}</span>
-              <span class="about-section__copy">{section.copy}</span>
+          <a href={section.href} class="group grid grid-cols-1 gap-x-5 gap-y-2.5 border-b border-forest-800/15 py-5.5 transition-colors hover:bg-paper/55 wide:grid-cols-12 wide:items-center wide:gap-6 wide:py-6" data-reveal-item>
+            <span class="pt-1.5 font-mono text-nano tracking-wider text-purple wide:col-span-1">{section.index}</span>
+            <span class="block wide:col-span-9">
+              <span class="block font-display text-about-section tracking-tight text-forest-800">{section.title}</span>
+              <span class="mt-1.5 block max-w-176 text-copy-xs leading-relaxed text-muted-foreground">{section.copy}</span>
             </span>
-            <span class="about-section__link">
+            <span class="hidden items-center gap-1.5 font-mono text-micro uppercase tracking-widest text-forest-700 transition-colors group-hover:text-forest-800 wide:col-span-2 wide:inline-flex wide:justify-end">
               {section.link}
               <span aria-hidden="true">→</span>
             </span>
@@ -139,45 +140,45 @@ const gallery = [
     </div>
   </section>
 
-  <section class="about-pillars on-dark surface-grain" aria-labelledby="pillars-title">
-    <div class="about-pillars__veins" aria-hidden="true">
-      <svg viewBox="0 0 1200 700" fill="none" preserveAspectRatio="none">
+  <section class="about-pillars on-dark surface-grain relative overflow-hidden py-14 text-cream lg:py-24" aria-labelledby="pillars-title">
+    <div class="pointer-events-none absolute inset-0 opacity-80" aria-hidden="true">
+      <svg class="size-full" viewBox="0 0 1200 700" fill="none" preserveAspectRatio="none">
         <g stroke="#9ed954" stroke-opacity="0.14" stroke-width="1">
           <path d="M-20 560c160-20 250-90 360-170s210-60 300 20 170 110 280 60 180-140 300-150" />
           <path d="M900 700c-30-130 20-210 110-270s110-130 60-200-30-130 40-170" />
         </g>
       </svg>
     </div>
-    <div class="container-editorial about-pillars__inner">
-      <div class="about-pillars__head">
+    <div class="container-editorial relative z-1">
+      <div>
         <SectionMarker index="03" label="Nuestra mirada" dark />
-        <h2 id="pillars-title" class="type-display" data-reveal>
+        <h2 id="pillars-title" class="type-display mt-4.5 text-about-pillars text-cream" data-reveal>
           Ciencia, territorio<br />
-          <span class="italic">y cultura.</span>
+          <span class="italic text-apple">y cultura.</span>
         </h2>
       </div>
 
-      <div class="about-pillars__grid" data-reveal-group>
+      <div class="mt-8 grid grid-cols-1 gap-6.5 grid:grid-cols-3 grid:gap-12 lg:mt-13" data-reveal-group>
         <div data-reveal-item>
-          <span class="about-pillars__number">01</span>
-          <h3>Ciencia con contexto</h3>
-          <p>
+          <span class="block border-t border-apple/35 pt-3 font-mono text-nano tracking-widest text-apple">01</span>
+          <h3 class="mt-3.5 font-display text-about-pillar font-normal leading-tight text-cream">Ciencia con contexto</h3>
+          <p class="mt-2.5 text-copy-xs leading-relaxed text-cream/55">
             Divulgación que no simplifica de más: investigación, nombres científicos y preguntas
             abiertas, explicadas para quienes quieren entender sin perder profundidad.
           </p>
         </div>
         <div data-reveal-item>
-          <span class="about-pillars__number">02</span>
-          <h3>Territorio</h3>
-          <p>
+          <span class="block border-t border-apple/35 pt-3 font-mono text-nano tracking-widest text-apple">02</span>
+          <h3 class="mt-3.5 font-display text-about-pillar font-normal leading-tight text-cream">Territorio</h3>
+          <p class="mt-2.5 text-copy-xs leading-relaxed text-cream/55">
             Bosque nativo, funga chilena y las voces que recorren el paisaje con los pies en la
             tierra. La escala local importa: cada bosque tiene su propia memoria.
           </p>
         </div>
         <div data-reveal-item>
-          <span class="about-pillars__number">03</span>
-          <h3>Cultura</h3>
-          <p>
+          <span class="block border-t border-apple/35 pt-3 font-mono text-nano tracking-widest text-apple">03</span>
+          <h3 class="mt-3.5 font-display text-about-pillar font-normal leading-tight text-cream">Cultura</h3>
+          <p class="mt-2.5 text-copy-xs leading-relaxed text-cream/55">
             Fotografía, oficios y formas de mirar lo vivo. La naturaleza también se lee como
             lenguaje, y el reino Fungi atraviesa la cocina, el arte y la vida cotidiana.
           </p>
@@ -186,508 +187,67 @@ const gallery = [
     </div>
   </section>
 
-  <section class="about-archive" aria-labelledby="archive-title">
+  <section class="bg-paper py-14 lg:py-24" aria-labelledby="archive-title">
     <div class="container-editorial">
-      <div class="about-archive__head">
-        <SectionMarker index="04" label="Archivo" />
-        <h2 id="archive-title" class="type-display" data-reveal>
-          Un archivo<br /><span class="italic">que sigue creciendo.</span>
-        </h2>
-        <a href="/new-fungi" class="about-archive__link">
+      <div class="mb-8 flex flex-wrap items-end gap-x-8 gap-y-4 lg:mb-12">
+        <div class="flex-1">
+          <SectionMarker index="04" label="Archivo" />
+          <h2 id="archive-title" class="type-display mt-3.5 text-about-archive text-forest-800" data-reveal>
+            Un archivo<br /><span class="italic text-forest-700">que sigue creciendo.</span>
+          </h2>
+        </div>
+        <a href="/new-fungi" class="inline-flex items-center gap-1.5 pb-2 font-mono text-micro uppercase tracking-widest text-forest-800 transition-colors hover:text-purple">
           Ver todas las historias
           <span aria-hidden="true">→</span>
         </a>
       </div>
 
-      <div class="about-archive__grid" data-reveal-group>
+      <div class="grid grid-cols-1 items-start gap-5.5 grid:grid-cols-3 grid:gap-6 lg:gap-8" data-reveal-group>
         {gallery.map((item, index) => (
-          <figure class:list={['about-archive__item', `about-archive__item--${index + 1}`]} data-reveal-item>
-            <div class="about-archive__image">
+          <figure class:list={['about-archive-item', index === 1 && 'grid:mt-10']} data-reveal-item>
+            <div class:list={['about-archive-image overflow-hidden bg-bone', index === 1 ? 'aspect-4/5' : 'aspect-10/11']}>
               <Picture fallbackFormat="jpg"
                 src={item.image}
                 alt={item.alt}
                 widths={[360, 560, 760]}
                 sizes="(max-width: 767px) 80vw, 30vw"
                 loading="lazy"
+                class="block size-full object-cover"
               />
             </div>
-            <figcaption>{item.caption}</figcaption>
+            <figcaption class="mt-2.5 font-mono text-nano uppercase tracking-widest text-muted-foreground">{item.caption}</figcaption>
           </figure>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="about-where" aria-labelledby="where-title">
-    <div class="container-editorial about-where__inner">
-      <div>
+  <section class="bg-bone py-13 lg:py-22" aria-labelledby="where-title">
+    <div class="container-editorial grid grid-cols-1 items-end gap-6 wide:grid-cols-12 wide:gap-16">
+      <div class="wide:col-span-7">
         <p class="eyebrow">Dónde encontrarnos</p>
-        <h2 id="where-title" class="type-display">
-          La revista<br /><span class="italic">está en circulación.</span>
+        <h2 id="where-title" class="type-display mt-3.5 text-about-where text-forest-800">
+          La revista<br /><span class="italic text-forest-700">está en circulación.</span>
         </h2>
       </div>
-      <div class="about-where__links">
-        <a href="/#contacto">
+      <div class="flex flex-col wide:col-span-5">
+        <a href="/#contacto" class="flex items-center justify-between gap-4 border-t border-forest-800/20 py-3.5 font-display text-distributor text-forest-800 transition-colors last:border-b hover:text-purple">
           <span>Contacto</span>
-          <span aria-hidden="true">↗</span>
+          <span class="text-copy-sm text-forest-700" aria-hidden="true">↗</span>
         </a>
-        <a href={site.instagram} target="_blank" rel="noopener noreferrer">
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="flex items-center justify-between gap-4 border-t border-forest-800/20 py-3.5 font-display text-distributor text-forest-800 transition-colors last:border-b hover:text-purple">
           <span>Instagram</span>
-          <span aria-hidden="true">↗</span>
+          <span class="text-copy-sm text-forest-700" aria-hidden="true">↗</span>
         </a>
-        <a href={site.youtube} target="_blank" rel="noopener noreferrer">
+        <a href={site.youtube} target="_blank" rel="noopener noreferrer" class="flex items-center justify-between gap-4 border-t border-forest-800/20 py-3.5 font-display text-distributor text-forest-800 transition-colors last:border-b hover:text-purple">
           <span>YouTube</span>
-          <span aria-hidden="true">↗</span>
+          <span class="text-copy-sm text-forest-700" aria-hidden="true">↗</span>
         </a>
-        <a href="/red-micelio">
+        <a href="/red-micelio" class="flex items-center justify-between gap-4 border-t border-forest-800/20 py-3.5 font-display text-distributor text-forest-800 transition-colors last:border-b hover:text-purple">
           <span>Puntos de distribución</span>
-          <span aria-hidden="true">→</span>
+          <span class="text-copy-sm text-forest-700" aria-hidden="true">→</span>
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .about-intro {
-    background: var(--color-paper);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .about-intro__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  @media (min-width: 900px) {
-    .about-intro__grid {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-      gap: clamp(3rem, 6vw, 6rem);
-      align-items: start;
-    }
-  }
-
-  .about-intro__statement h2 {
-    margin-top: 1.1rem;
-    font-size: clamp(2.9rem, 5.8vw, 5.8rem);
-    color: var(--color-forest-800);
-  }
-
-  .about-intro__statement .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .about-intro__copy {
-    padding-top: 0.4rem;
-  }
-
-  .about-intro__copy p {
-    font-size: 0.92rem;
-    line-height: 1.75;
-    color: var(--color-muted-foreground);
-  }
-
-  .about-intro__copy p + p {
-    margin-top: 1rem;
-  }
-
-  .about-intro__lead {
-    font-size: clamp(1.02rem, 1.3vw, 1.16rem) !important;
-    line-height: 1.65 !important;
-    color: var(--color-forest-800) !important;
-  }
-
-  .about-quote {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 1.2rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
-    padding-top: clamp(1.4rem, 3vw, 2rem);
-  }
-
-  .about-quote__mark {
-    font-family: var(--font-display);
-    font-size: 4rem;
-    line-height: 0.7;
-    color: var(--color-purple);
-  }
-
-  .about-quote p {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3vw, 2.8rem);
-    font-weight: 340;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: var(--color-forest-800);
-  }
-
-  .about-quote__source {
-    display: none;
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-muted-foreground);
-  }
-
-  @media (min-width: 900px) {
-    .about-quote {
-      grid-template-columns: auto 1fr auto;
-    }
-
-    .about-quote__source {
-      display: block;
-    }
-  }
-
-  .about-sections {
-    background: var(--color-bone);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .about-sections__head {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    align-items: end;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-
-  @media (min-width: 900px) {
-    .about-sections__head {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.55fr);
-      gap: 4rem;
-    }
-  }
-
-  .about-sections__title {
-    margin-top: 1rem;
-    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
-    color: var(--color-forest-800);
-  }
-
-  .about-sections__title .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .about-sections__head > p {
-    max-width: 25rem;
-    padding-bottom: 0.4rem;
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: var(--color-muted-foreground);
-  }
-
-  .about-sections__list {
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
-  }
-
-  .about-section {
-    display: grid;
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    gap: 0.6rem 1.2rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 15%, transparent);
-    padding-block: 1.4rem;
-    transition: background-color 0.3s ease;
-  }
-
-  @media (min-width: 900px) {
-    .about-section {
-      grid-template-columns: 3rem minmax(0, 1fr) auto;
-      gap: 1.5rem;
-      align-items: center;
-      padding-block: 1.5rem;
-    }
-  }
-
-  .about-section:hover {
-    background: color-mix(in srgb, var(--color-paper) 55%, transparent);
-  }
-
-  .about-section__index {
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.08em;
-    color: var(--color-purple);
-    padding-top: 0.3rem;
-  }
-
-  .about-section__title {
-    display: block;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.3vw, 2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--color-forest-800);
-  }
-
-  .about-section__copy {
-    display: block;
-    max-width: 44rem;
-    margin-top: 0.35rem;
-    font-size: 0.84rem;
-    line-height: 1.65;
-    color: var(--color-muted-foreground);
-  }
-
-  .about-section__link {
-    display: none;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-700);
-    white-space: nowrap;
-  }
-
-  @media (min-width: 900px) {
-    .about-section__link {
-      display: inline-flex;
-    }
-  }
-
-  .about-section:hover .about-section__link {
-    color: var(--color-forest-800);
-  }
-
-  .about-pillars {
-    position: relative;
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse 50% 50% at 84% 10%, rgb(31 74 56 / 48%), transparent 65%),
-      var(--color-forest-900);
-    color: var(--color-cream);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .about-pillars__veins {
-    position: absolute;
-    inset: 0;
-    opacity: 0.8;
-    pointer-events: none;
-  }
-
-  .about-pillars__veins svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .about-pillars__inner {
-    position: relative;
-    z-index: 1;
-  }
-
-  .about-pillars__head h2 {
-    margin-top: 1.1rem;
-    font-size: clamp(2.8rem, 5.4vw, 5.2rem);
-    color: var(--color-cream);
-  }
-
-  .about-pillars__head .italic {
-    font-style: italic;
-    color: var(--color-apple);
-  }
-
-  .about-pillars__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-    margin-top: clamp(2rem, 4vw, 3.2rem);
-  }
-
-  @media (min-width: 760px) {
-    .about-pillars__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(1.5rem, 3vw, 3rem);
-    }
-  }
-
-  .about-pillars__number {
-    display: block;
-    border-top: 1px solid rgb(158 217 84 / 35%);
-    padding-top: 0.8rem;
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.1em;
-    color: var(--color-apple);
-  }
-
-  .about-pillars__grid h3 {
-    margin-top: 0.9rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2vw, 1.75rem);
-    font-weight: 380;
-    line-height: 1.15;
-    color: var(--color-cream);
-  }
-
-  .about-pillars__grid p {
-    margin-top: 0.6rem;
-    font-size: 0.82rem;
-    line-height: 1.7;
-    color: rgb(243 240 230 / 55%);
-  }
-
-  .about-archive {
-    background: var(--color-paper);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .about-archive__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 1rem 2rem;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-
-  .about-archive__head h2 {
-    flex: 1;
-    margin-top: 0.9rem;
-    font-size: clamp(2.5rem, 5vw, 4.8rem);
-    color: var(--color-forest-800);
-  }
-
-  .about-archive__head .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .about-archive__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding-bottom: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-800);
-  }
-
-  .about-archive__link:hover {
-    color: var(--color-purple);
-  }
-
-  .about-archive__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
-    align-items: start;
-  }
-
-  @media (min-width: 760px) {
-    .about-archive__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(1.2rem, 2.5vw, 2rem);
-    }
-
-    .about-archive__item--2 {
-      margin-top: 2.5rem;
-    }
-  }
-
-  .about-archive__image {
-    overflow: hidden;
-    background: var(--color-bone);
-    aspect-ratio: 4 / 5;
-  }
-
-  .about-archive__item--1 .about-archive__image,
-  .about-archive__item--3 .about-archive__image {
-    aspect-ratio: 4 / 4.4;
-  }
-
-  .about-archive__image :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    filter: saturate(0.92);
-    transition:
-      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 0.5s ease;
-  }
-
-  .about-archive__item:hover .about-archive__image :global(img) {
-    transform: scale(1.035);
-    filter: saturate(1);
-  }
-
-  .about-archive__item figcaption {
-    margin-top: 0.6rem;
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-muted-foreground);
-  }
-
-  .about-where {
-    background: var(--color-bone);
-    padding-block: clamp(3.2rem, 6vw, 5.5rem);
-  }
-
-  .about-where__inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-    align-items: end;
-  }
-
-  @media (min-width: 900px) {
-    .about-where__inner {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 4rem;
-    }
-  }
-
-  .about-where h2 {
-    margin-top: 0.9rem;
-    font-size: clamp(2.4rem, 4.6vw, 4.4rem);
-    color: var(--color-forest-800);
-  }
-
-  .about-where h2 .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .about-where__links {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .about-where__links a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
-    padding-block: 0.85rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
-    color: var(--color-forest-800);
-    transition: color 0.25s ease;
-  }
-
-  .about-where__links a:last-child {
-    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
-  }
-
-  .about-where__links a:hover {
-    color: var(--color-purple);
-  }
-
-  .about-where__links a span:last-child {
-    font-size: 0.9rem;
-    color: var(--color-forest-700);
-  }
-</style>

@@ -5,6 +5,7 @@ import SectionMarker from '@/components/editorial/SectionMarker.astro';
 import SponsorsGrid from '@/components/sponsors/SponsorsGrid.astro';
 import { contactEmail } from '@/lib/contact';
 import { site } from '@/data/site';
+import '@/styles/components/PageDecor.css';
 
 const formats = [
   {
@@ -59,49 +60,49 @@ const mediaKitMail = `mailto:${contactEmail}?subject=${encodeURIComponent('Solic
     tone="bone"
     watermark="✳"
   >
-    <div slot="aside" class="media-card">
-      <p class="eyebrow">Ficha de medios</p>
-      <dl>
-        <div>
-          <dt>Publicación</dt>
-          <dd>Revista independiente chilena</dd>
+    <div slot="aside" class="border border-forest-800/20 bg-paper p-6 wide:p-8">
+      <p class="eyebrow text-forest-700">Ficha de medios</p>
+      <dl class="mt-4">
+        <div class="flex gap-4 border-t border-forest-800/14 py-2.5">
+          <dt class="w-28 shrink-0 font-mono text-nano uppercase tracking-widest text-muted-foreground">Publicación</dt>
+          <dd class="text-copy-xs leading-relaxed text-forest-800">Revista independiente chilena</dd>
         </div>
-        <div>
-          <dt>Tema</dt>
-          <dd>Reino Fungi · bosque nativo · cultura</dd>
+        <div class="flex gap-4 border-t border-forest-800/14 py-2.5">
+          <dt class="w-28 shrink-0 font-mono text-nano uppercase tracking-widest text-muted-foreground">Tema</dt>
+          <dd class="text-copy-xs leading-relaxed text-forest-800">Reino Fungi · bosque nativo · cultura</dd>
         </div>
-        <div>
-          <dt>Formatos</dt>
-          <dd>Impreso y digital</dd>
+        <div class="flex gap-4 border-t border-forest-800/14 py-2.5">
+          <dt class="w-28 shrink-0 font-mono text-nano uppercase tracking-widest text-muted-foreground">Formatos</dt>
+          <dd class="text-copy-xs leading-relaxed text-forest-800">Impreso y digital</dd>
         </div>
-        <div>
-          <dt>Canales</dt>
-          <dd>Sitio web · Instagram · YouTube</dd>
+        <div class="flex gap-4 border-t border-forest-800/14 py-2.5">
+          <dt class="w-28 shrink-0 font-mono text-nano uppercase tracking-widest text-muted-foreground">Canales</dt>
+          <dd class="text-copy-xs leading-relaxed text-forest-800">Sitio web · Instagram · YouTube</dd>
         </div>
       </dl>
-      <a href={mediaKitMail}>
+      <a href={mediaKitMail} class="mt-4 flex items-center justify-between gap-3 border-t border-forest-800/20 pt-3.5 font-mono text-eyebrow uppercase tracking-widest text-forest-800">
         Solicitar media kit
         <span aria-hidden="true">↗</span>
       </a>
     </div>
   </PageHeader>
 
-  <section class="sponsor-why" aria-labelledby="why-title">
+  <section class="bg-paper py-14 lg:py-24" aria-labelledby="why-title">
     <div class="container-editorial">
-      <div class="sponsor-why__grid">
-        <div>
+      <div class="grid grid-cols-1 gap-7 wide:grid-cols-12 wide:items-start wide:gap-12 lg:gap-20">
+        <div class="wide:col-span-7">
           <SectionMarker index="01" label="Por qué" />
-          <h2 id="why-title" class="sponsor-why__title type-display" data-reveal>
-            Una audiencia<br /><span class="italic">que mira el bosque.</span>
+          <h2 id="why-title" class="type-display mt-4 text-subscribe text-forest-800" data-reveal>
+            Una audiencia<br /><span class="italic text-forest-700">que mira el bosque.</span>
           </h2>
         </div>
-        <div class="sponsor-why__copy" data-reveal>
-          <p class="sponsor-why__lead">
+        <div class="wide:col-span-5" data-reveal>
+          <p class="text-lead-sm leading-relaxed text-forest-800">
             Revista Micelio reúne a personas interesadas en la naturaleza, la ciencia, la
             fotografía y la cultura del reino Fungi. Una comunidad curiosa, con interés por el
             territorio chileno y por las publicaciones independientes.
           </p>
-          <p>
+          <p class="mt-4 text-copy-sm leading-relaxed text-muted-foreground">
             No publicamos cifras de audiencia que no podamos respaldar. Si necesitas datos
             concretos para evaluar una colaboración, escríbenos y revisamos juntos la información
             disponible.
@@ -113,61 +114,61 @@ const mediaKitMail = `mailto:${contactEmail}?subject=${encodeURIComponent('Solic
 
   <SponsorsGrid />
 
-  <section class="sponsor-formats" aria-labelledby="formats-title">
+  <section class="bg-bone py-14 lg:py-24" aria-labelledby="formats-title">
     <div class="container-editorial">
-      <div class="sponsor-formats__head">
-        <div>
+      <div class="mb-8 grid grid-cols-1 items-end gap-6 wide:grid-cols-12 wide:gap-16">
+        <div class="wide:col-span-8">
           <SectionMarker index="02" label="Formatos" />
-          <h2 id="formats-title" class="sponsor-formats__title type-display" data-reveal>
-            Formas de<br /><span class="italic">estar presentes.</span>
+          <h2 id="formats-title" class="type-display mt-4 text-section-medium text-forest-800" data-reveal>
+            Formas de<br /><span class="italic text-forest-700">estar presentes.</span>
           </h2>
         </div>
-        <p data-reveal>
+        <p class="max-w-100 pb-1.5 text-copy-sm leading-relaxed text-muted-foreground wide:col-span-4" data-reveal>
           Los formatos, tarifas y plazos se acuerdan por proyecto. Estas son las vías habituales de
           colaboración; si tienes otra idea, también podemos conversarla.
         </p>
       </div>
 
-      <div class="sponsor-formats__grid" data-reveal-group>
+      <div class="grid grid-cols-1 border-t border-forest-800/22 grid:grid-cols-2 grid:gap-x-18" data-reveal-group>
         {formats.map((format, index) => (
-          <article class="sponsor-format" data-reveal-item>
-            <span class="sponsor-format__index">{String(index + 1).padStart(2, '0')}</span>
-            <h3>{format.title}</h3>
-            <p>{format.copy}</p>
-            <span class="sponsor-format__note">A convenir</span>
+          <article class="relative border-b border-forest-800/15 py-5.5" data-reveal-item>
+            <span class="font-mono text-nano tracking-wider text-purple">{String(index + 1).padStart(2, '0')}</span>
+            <h3 class="mt-1.5 font-display text-sponsor-format font-normal leading-tight text-forest-800">{format.title}</h3>
+            <p class="mt-2 max-w-128 text-copy-xs leading-relaxed text-muted-foreground">{format.copy}</p>
+            <span class="mt-3 inline-block rounded-full border border-forest-800/20 px-2.5 py-1 font-mono text-nano uppercase tracking-widest text-forest-700">A convenir</span>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="sponsor-steps on-dark surface-grain" aria-labelledby="steps-title">
+  <section class="sponsor-steps on-dark surface-grain py-14 text-cream lg:py-24" aria-labelledby="steps-title">
     <div class="container-editorial">
-      <div class="sponsor-steps__head">
+      <div>
         <SectionMarker index="03" label="Cómo funciona" dark />
-        <h2 id="steps-title" class="type-display" data-reveal>
-          Tres pasos,<br /><span class="italic">sin letra chica.</span>
+        <h2 id="steps-title" class="type-display mt-4 text-section-medium text-cream" data-reveal>
+          Tres pasos,<br /><span class="italic text-apple">sin letra chica.</span>
         </h2>
       </div>
 
-      <ol class="sponsor-steps__list">
+      <ol class="mt-8 grid grid-cols-1 gap-6.5 border-t border-cream/16 pt-5.5 grid:grid-cols-3 grid:gap-12">
         {steps.map((step, index) => (
-          <li>
-            <span class="sponsor-steps__index">{String(index + 1).padStart(2, '0')}</span>
+          <li class="flex gap-3.5">
+            <span class="pt-1 font-mono text-nano tracking-wide text-apple">{String(index + 1).padStart(2, '0')}</span>
             <div>
-              <h3>{step.title}</h3>
-              <p>{step.copy}</p>
+              <h3 class="font-display text-pillar font-normal leading-tight text-cream">{step.title}</h3>
+              <p class="mt-1.5 text-copy-xs leading-relaxed text-cream/55">{step.copy}</p>
             </div>
           </li>
         ))}
       </ol>
 
-      <div class="sponsor-steps__cta">
-        <p>
+      <div class="mt-8 flex flex-col gap-5 border-t border-cream/16 pt-5 wide:flex-row wide:items-center wide:justify-between wide:gap-12">
+        <p class="max-w-152 text-copy-xs leading-relaxed text-cream/50">
           Escríbenos con el motivo «Auspicio y publicidad» y te contamos qué información tenemos
           disponible. No hay un PDF público: la ficha se comparte por correo.
         </p>
-        <div>
+        <div class="flex flex-wrap gap-3">
           <a href="/#contacto" class="btn btn--apple">
             Hablar de una colaboración
           </a>
@@ -180,385 +181,3 @@ const mediaKitMail = `mailto:${contactEmail}?subject=${encodeURIComponent('Solic
   </section>
 
 </BaseLayout>
-
-<style>
-  .media-card {
-    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
-    background: var(--color-paper);
-    padding: clamp(1.4rem, 3vw, 2rem);
-  }
-
-  .media-card .eyebrow {
-    color: var(--color-forest-700);
-  }
-
-  .media-card dl {
-    margin-top: 1rem;
-  }
-
-  .media-card dl > div {
-    display: grid;
-    grid-template-columns: 7rem minmax(0, 1fr);
-    gap: 1rem;
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 14%, transparent);
-    padding-block: 0.6rem;
-  }
-
-  .media-card dt {
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-muted-foreground);
-  }
-
-  .media-card dd {
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: var(--color-forest-800);
-  }
-
-  .media-card a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1rem;
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
-    padding-top: 0.9rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-800);
-  }
-
-  .sponsor-why {
-    background: var(--color-paper);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .sponsor-why__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.8rem;
-  }
-
-  @media (min-width: 900px) {
-    .sponsor-why__grid {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: clamp(3rem, 6vw, 6rem);
-      align-items: start;
-    }
-  }
-
-  .sponsor-why__title {
-    margin-top: 1rem;
-    font-size: clamp(2.8rem, 5.6vw, 5.4rem);
-    color: var(--color-forest-800);
-  }
-
-  .sponsor-why__title .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .sponsor-why__copy p {
-    font-size: 0.92rem;
-    line-height: 1.75;
-    color: var(--color-muted-foreground);
-  }
-
-  .sponsor-why__copy p + p {
-    margin-top: 1rem;
-  }
-
-  .sponsor-why__lead {
-    font-size: clamp(1rem, 1.25vw, 1.12rem) !important;
-    line-height: 1.68 !important;
-    color: var(--color-forest-800) !important;
-  }
-
-  .sponsor-formats {
-    background: var(--color-bone);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .sponsor-formats__head {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    align-items: end;
-    margin-bottom: clamp(2rem, 4vw, 3rem);
-  }
-
-  @media (min-width: 900px) {
-    .sponsor-formats__head {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.55fr);
-      gap: 4rem;
-    }
-  }
-
-  .sponsor-formats__title {
-    margin-top: 1rem;
-    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
-    color: var(--color-forest-800);
-  }
-
-  .sponsor-formats__title .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .sponsor-formats__head > p {
-    max-width: 25rem;
-    padding-bottom: 0.4rem;
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: var(--color-muted-foreground);
-  }
-
-  .sponsor-formats__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
-  }
-
-  @media (min-width: 760px) {
-    .sponsor-formats__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: clamp(2rem, 5vw, 5rem);
-    }
-  }
-
-  .sponsor-format {
-    position: relative;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 15%, transparent);
-    padding-block: 1.4rem;
-  }
-
-  .sponsor-format__index {
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.08em;
-    color: var(--color-purple);
-  }
-
-  .sponsor-format h3 {
-    margin-top: 0.4rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
-    font-weight: 380;
-    line-height: 1.1;
-    color: var(--color-forest-800);
-  }
-
-  .sponsor-format p {
-    max-width: 32rem;
-    margin-top: 0.5rem;
-    font-size: 0.84rem;
-    line-height: 1.65;
-    color: var(--color-muted-foreground);
-  }
-
-  .sponsor-format__note {
-    display: inline-block;
-    margin-top: 0.8rem;
-    border: 1px solid color-mix(in srgb, var(--color-forest-800) 20%, transparent);
-    border-radius: 999px;
-    padding: 0.2rem 0.55rem;
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-forest-700);
-  }
-
-  .sponsor-steps {
-    background:
-      radial-gradient(ellipse 50% 50% at 84% 8%, rgb(31 74 56 / 48%), transparent 66%),
-      var(--color-forest-900);
-    color: var(--color-cream);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .sponsor-steps__head h2 {
-    margin-top: 1rem;
-    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
-    color: var(--color-cream);
-  }
-
-  .sponsor-steps__head .italic {
-    font-style: italic;
-    color: var(--color-apple);
-  }
-
-  .sponsor-steps__list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px solid rgb(243 240 230 / 16%);
-    padding-top: 1.4rem;
-  }
-
-  @media (min-width: 760px) {
-    .sponsor-steps__list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(1.5rem, 3vw, 3rem);
-    }
-  }
-
-  .sponsor-steps__list li {
-    display: flex;
-    gap: 0.9rem;
-  }
-
-  .sponsor-steps__index {
-    font-family: var(--font-mono);
-    font-size: 0.56rem;
-    letter-spacing: 0.08em;
-    color: var(--color-apple);
-    padding-top: 0.25rem;
-  }
-
-  .sponsor-steps__list h3 {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 380;
-    line-height: 1.15;
-    color: var(--color-cream);
-  }
-
-  .sponsor-steps__list p {
-    margin-top: 0.35rem;
-    font-size: 0.82rem;
-    line-height: 1.65;
-    color: rgb(243 240 230 / 55%);
-  }
-
-  .sponsor-steps__cta {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px solid rgb(243 240 230 / 16%);
-    padding-top: 1.2rem;
-  }
-
-  @media (min-width: 900px) {
-    .sponsor-steps__cta {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 3rem;
-    }
-  }
-
-  .sponsor-steps__cta > p {
-    max-width: 38rem;
-    font-size: 0.8rem;
-    line-height: 1.65;
-    color: rgb(243 240 230 / 50%);
-  }
-
-  .sponsor-steps__cta > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-  }
-
-  .sponsor-network {
-    background: var(--color-paper);
-    padding-block: clamp(3.5rem, 7vw, 6rem);
-  }
-
-  .sponsor-network__head {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    align-items: end;
-    margin-bottom: clamp(1.8rem, 4vw, 3rem);
-  }
-
-  @media (min-width: 900px) {
-    .sponsor-network__head {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.55fr);
-      gap: 4rem;
-    }
-  }
-
-  .sponsor-network__head h2 {
-    margin-top: 1rem;
-    font-size: clamp(2.7rem, 5.4vw, 5.2rem);
-    color: var(--color-forest-800);
-  }
-
-  .sponsor-network__head .italic {
-    font-style: italic;
-    color: var(--color-forest-700);
-  }
-
-  .sponsor-network__head > p {
-    max-width: 24rem;
-    padding-bottom: 0.4rem;
-    font-size: 0.88rem;
-    line-height: 1.7;
-    color: var(--color-muted-foreground);
-  }
-
-  .sponsor-network__list {
-    display: grid;
-    grid-template-columns: 1fr;
-    column-gap: clamp(2rem, 5vw, 5rem);
-    border-top: 1px solid color-mix(in srgb, var(--color-forest-800) 22%, transparent);
-  }
-
-  @media (min-width: 760px) {
-    .sponsor-network__list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .sponsor-network__list > li {
-    border-bottom: 1px solid color-mix(in srgb, var(--color-forest-800) 14%, transparent);
-  }
-
-  .sponsor-network__list a,
-  .sponsor-network__static {
-    display: grid;
-    grid-template-columns: 2.2rem minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 0.8rem;
-    padding-block: 0.85rem;
-  }
-
-  .sponsor-network__list a:hover {
-    background: color-mix(in srgb, var(--color-bone) 45%, transparent);
-  }
-
-  .sponsor-network__number {
-    font-family: var(--font-mono);
-    font-size: 0.54rem;
-    letter-spacing: 0.06em;
-    color: var(--color-purple);
-  }
-
-  .sponsor-network__list a > span:nth-child(2),
-  .sponsor-network__static > span:nth-child(2) {
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-    color: var(--color-forest-800);
-  }
-
-  .sponsor-network__list a > span:last-child {
-    color: var(--color-forest-700);
-    font-size: 0.9rem;
-  }
-
-  .sponsor-network__note {
-    margin-top: 1.2rem;
-    font-size: 0.7rem;
-    line-height: 1.6;
-    color: var(--color-muted-foreground);
-  }
-</style>

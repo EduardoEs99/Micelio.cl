@@ -1,0 +1,15 @@
+.closing-pattern {
+  animation: closing-spin 120s linear infinite;
+}
+
+@keyframes closing-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .closing-pattern {
+    animation: none;
+  }
+}

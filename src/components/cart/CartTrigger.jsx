@@ -55,7 +55,7 @@ export default function CartTrigger() {
       <SheetTrigger asChild>
         <button
           type="button"
-          className="icon-btn relative"
+          className="relative inline-flex min-h-10 min-w-10 items-center justify-center gap-1.5 rounded-full p-2 opacity-82 transition duration-300 hover:bg-current/8 hover:opacity-100"
           aria-label="Abrir lista de interés"
         >
           <ShoppingBag

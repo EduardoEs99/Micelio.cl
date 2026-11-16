@@ -1,0 +1,90 @@
+.page-head {
+  background:
+    radial-gradient(ellipse 55% 50% at 88% 12%, rgb(158 217 84 / 22%), transparent 66%),
+    radial-gradient(ellipse 40% 40% at 6% 90%, rgb(90 50 115 / 10%), transparent 70%),
+    var(--color-paper);
+}
+
+.page-head-bone {
+  background:
+    radial-gradient(ellipse 55% 55% at 86% 14%, rgb(158 217 84 / 26%), transparent 64%),
+    var(--color-bone);
+}
+
+.page-head-forest {
+  background:
+    radial-gradient(ellipse 55% 55% at 84% 10%, rgb(31 74 56 / 55%), transparent 66%),
+    var(--color-forest-900);
+}
+
+.page-glow {
+  position: absolute;
+  top: -6rem;
+  right: 12%;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(158 217 84 / 12%), transparent 68%);
+  filter: blur(12px);
+}
+
+.page-watermark {
+  position: absolute;
+  right: clamp(-1rem, 3vw, 3rem);
+  bottom: -0.42em;
+  font-family: var(--font-display);
+  font-size: var(--text-watermark);
+  font-weight: 300;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: color-mix(in srgb, var(--color-forest-800) 5%, transparent);
+  user-select: none;
+}
+
+.page-head-forest .page-watermark {
+  color: rgb(243 240 230 / 5%);
+}
+
+.page-figure {
+  box-shadow:
+    0 40px 70px -50px rgb(8 20 15 / 70%),
+    0 0 0 0.5rem color-mix(in srgb, var(--color-paper) 60%, transparent);
+}
+
+.page-figure-portrait {
+  aspect-ratio: 4 / 4.7;
+  border-radius: 11rem 11rem 0.6rem 0.6rem;
+}
+
+.page-figure-landscape {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.6rem;
+}
+
+.page-figure-square {
+  aspect-ratio: 1;
+  border-radius: 50% 50% 0.6rem 0.6rem / 30% 30% 0.6rem 0.6rem;
+}
+
+.page-image {
+  filter: saturate(0.94) contrast(1.02);
+}
+
+.page-caption {
+  text-shadow: 0 1px 8px rgb(0 0 0 / 55%);
+}
+
+.page-figure::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(8 20 15 / 52%) 0%, transparent 34%);
+  pointer-events: none;
+}
+
+@media (max-width: 899px) {
+  .page-figure {
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+}

@@ -1,0 +1,35 @@
+.edition-cover {
+  transform-style: preserve-3d;
+}
+
+.edition-cover:hover {
+  box-shadow: 0 34px 60px -34px rgb(8 20 15 / 42%);
+}
+
+.edition-cover::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 32%;
+  background: linear-gradient(to top, rgb(8 20 15 / 62%), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.edition-cover:hover::after {
+  opacity: 1;
+}
+
+.edition-image {
+  filter: saturate(0.96) contrast(1.02);
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease;
+}
+
+.edition-cover:hover .edition-image {
+  transform: scale(1.035);
+  filter: saturate(1) contrast(1.04);
+}

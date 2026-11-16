@@ -9,6 +9,7 @@ import { articles } from '@/data/articles';
 import { editions } from '@/data/editions';
 import { products } from '@/data/products';
 import { mainNav, revistaNav, secondaryNav, site, socials } from '@/data/site';
+import '@/styles/components/Header.css';
 
 interface Props {
   transparent?: boolean;
@@ -123,16 +124,17 @@ const inRevistaSection = revistaNav.some(
 
 <header
   id="site-header"
-  class:list={['site-header', transparent && 'is-transparent']}
+  class="site-header group/header fixed inset-x-0 top-0 z-50 border-b border-transparent text-ink"
   data-transparent={transparent ? 'true' : 'false'}
+  data-scrolled="false"
   data-theme={theme}
 >
-  <div class="header-shell container-editorial">
-    <a href="/" class="brand" aria-label="Revista Micelio — ir al inicio">
+  <div class="container-editorial flex h-18 items-center justify-between gap-6 lg:h-20">
+    <a href="/" class="inline-flex shrink-0 items-center" aria-label="Revista Micelio — ir al inicio">
       <Picture fallbackFormat="jpg"
         src={logoNegro}
         alt=""
-        class="brand-logo brand-logo--dark"
+        class="brand-logo brand-logo-dark h-auto w-37 transition-opacity duration-300 lg:w-46"
         widths={[320, 480]}
         sizes="(max-width: 1023px) 150px, 190px"
         loading="eager"
@@ -141,7 +143,7 @@ const inRevistaSection = revistaNav.some(
       <Picture fallbackFormat="jpg"
         src={logoCrema}
         alt=""
-        class="brand-logo brand-logo--light"
+        class="brand-logo brand-logo-light hidden h-auto w-37 transition-opacity duration-300 lg:w-46"
         widths={[320, 480]}
         sizes="(max-width: 1023px) 150px, 190px"
         loading="eager"
@@ -149,32 +151,39 @@ const inRevistaSection = revistaNav.some(
       <span class="sr-only">Revista Micelio</span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Navegación principal">
-      <ul class="desktop-nav-list">
+    <nav class="hidden flex-1 justify-center lg:flex" aria-label="Navegación principal">
+      <ul class="flex items-center gap-4 xl:gap-7">
         {mainNav.map((link) =>
           link.label === 'La Revista' ? (
-            <li class="nav-group">
+            <li class="nav-group group/nav relative py-3.5" data-nav-group>
               <button
                 type="button"
-                class:list={['nav-link', 'nav-trigger', inRevistaSection && 'is-active']}
+                class="nav-link relative inline-flex items-center gap-1 border-0 bg-none px-0 py-1.5 font-mono text-eyebrow font-medium tracking-editorial whitespace-nowrap text-current opacity-78 transition-opacity duration-300 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:opacity-100 hover:after:scale-x-100 aria-expanded:opacity-100 aria-expanded:after:scale-x-100 data-[active=true]:opacity-100 data-[active=true]:after:scale-x-100"
                 aria-expanded="false"
                 aria-controls="revista-panel"
+                data-nav-trigger
+                data-active={inRevistaSection ? 'true' : 'false'}
               >
                 {link.label}
-                <svg class="nav-chevron" viewBox="0 0 12 12" aria-hidden="true">
+                <svg class="size-3 transition-transform duration-300 group-hover/nav:rotate-180 group-focus-within/nav:rotate-180 group-data-[open=true]/nav:rotate-180" viewBox="0 0 12 12" aria-hidden="true">
                   <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.2" />
                 </svg>
               </button>
-              <div class="nav-panel" id="revista-panel" aria-label="Secciones de La Revista">
-                <p class="nav-panel__label">La Revista</p>
-                <ul>
+              <div
+                class="invisible pointer-events-none absolute top-full left-1/2 w-94 -translate-x-1/2 translate-y-1.5 border border-line bg-paper text-ink opacity-0 shadow-2xl transition duration-300 before:absolute before:-top-2 before:left-1/2 before:size-3 before:-translate-x-1/2 before:rotate-45 before:border-t before:border-l before:border-line before:bg-paper group-hover/nav:visible group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100 group-data-[open=true]/nav:visible group-data-[open=true]/nav:pointer-events-auto group-data-[open=true]/nav:translate-y-0 group-data-[open=true]/nav:opacity-100"
+                id="revista-panel"
+                aria-label="Secciones de La Revista"
+                data-nav-panel
+              >
+                <p class="px-5 pt-4.5 pb-3 font-mono text-eyebrow tracking-editorial-wider uppercase text-forest-700">La Revista</p>
+                <ul class="px-2">
                   {revistaNav.map((item, index) => (
                     <li>
-                      <a href={item.href} class="nav-panel__link">
-                        <span class="nav-panel__number">{String(index + 1).padStart(2, '0')}</span>
+                      <a href={item.href} class="flex gap-3.5 p-3.5 transition-colors duration-250 hover:bg-bone/55">
+                        <span class="mt-1 font-mono text-nano tracking-widest text-forest-700">{String(index + 1).padStart(2, '0')}</span>
                         <span>
-                          <span class="nav-panel__title">{item.label}</span>
-                          <span class="nav-panel__desc">{item.description}</span>
+                          <span class="block font-display text-lg leading-tight">{item.label}</span>
+                          <span class="mt-1 block text-xs leading-snug text-muted-foreground">{item.description}</span>
                         </span>
                       </a>
                     </li>
@@ -186,7 +195,7 @@ const inRevistaSection = revistaNav.some(
             <li>
               <a
                 href={link.href}
-                class:list={['nav-link', isActive(link.href) && 'is-active']}
+                class="nav-link relative inline-flex items-center gap-1 py-1.5 font-mono text-eyebrow font-medium tracking-editorial whitespace-nowrap text-current opacity-78 transition-opacity duration-300 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:opacity-100 hover:after:scale-x-100 aria-[current=page]:opacity-100 aria-[current=page]:after:scale-x-100"
                 aria-current={isActive(link.href) ? 'page' : undefined}
               >
                 {link.label}
@@ -197,12 +206,15 @@ const inRevistaSection = revistaNav.some(
       </ul>
     </nav>
 
-    <div class="header-actions">
+    <div class="flex shrink-0 items-center gap-0.5">
       <SearchDialog items={searchItems} client:load />
       <CartTrigger client:load />
-      <a href="/ediciones" class="header-cta">
+      <a
+        href="/ediciones"
+        class="header-cta ml-3 hidden min-h-10 items-center gap-2 rounded-full bg-forest-800 px-4.5 py-2.5 font-mono text-eyebrow tracking-widest uppercase text-cream transition-colors duration-300 hover:bg-apple hover:text-forest-900 xl:inline-flex"
+      >
         Explorar ediciones
-        <svg viewBox="0 0 16 16" aria-hidden="true">
+        <svg viewBox="0 0 16 16" aria-hidden="true" class="size-3">
           <path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.2" />
         </svg>
       </a>
@@ -223,22 +235,22 @@ const inRevistaSection = revistaNav.some(
   const header = document.getElementById('site-header');
   if (header) {
     const update = () => {
-      header.classList.toggle('is-scrolled', window.scrollY > 28);
+      header.dataset.scrolled = String(window.scrollY > 28);
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
 
-    const group = header.querySelector<HTMLElement>('.nav-group');
-    const trigger = header.querySelector<HTMLButtonElement>('.nav-trigger');
-    const panel = group?.querySelector('.nav-panel');
+    const group = header.querySelector<HTMLElement>('[data-nav-group]');
+    const trigger = header.querySelector<HTMLButtonElement>('[data-nav-trigger]');
+    const panel = group?.querySelector('[data-nav-panel]');
 
     const setOpen = (open: boolean) => {
-      group?.classList.toggle('is-open', open);
+      if (group) group.dataset.open = String(open);
       trigger?.setAttribute('aria-expanded', open ? 'true' : 'false');
     };
 
     trigger?.addEventListener('click', () => {
-      setOpen(!group?.classList.contains('is-open'));
+      setOpen(group?.dataset.open !== 'true');
     });
 
     panel?.querySelectorAll('a').forEach((link) => {
@@ -251,301 +263,10 @@ const inRevistaSection = revistaNav.some(
     });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && group?.classList.contains('is-open')) {
+      if (event.key === 'Escape' && group?.dataset.open === 'true') {
         setOpen(false);
         trigger?.focus();
       }
     });
   }
 </script>
-
-<style>
-  .site-header {
-    position: fixed;
-    inset-inline: 0;
-    top: 0;
-    z-index: 50;
-    color: var(--color-ink);
-    transition:
-      background-color 0.45s ease,
-      border-color 0.45s ease,
-      color 0.35s ease,
-      backdrop-filter 0.45s ease;
-    border-bottom: 1px solid transparent;
-  }
-
-  .site-header:not(.is-transparent),
-  .site-header.is-scrolled {
-    background: color-mix(in srgb, var(--color-paper) 91%, transparent);
-    -webkit-backdrop-filter: blur(16px) saturate(120%);
-    backdrop-filter: blur(16px) saturate(120%);
-    border-bottom-color: color-mix(in srgb, var(--color-forest-800) 12%, transparent);
-  }
-
-  .site-header.is-transparent:not(.is-scrolled) {
-    background: linear-gradient(to bottom, rgb(8 20 15 / 62%), transparent);
-    color: var(--color-cream);
-  }
-
-  .header-shell {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    height: 4.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    .header-shell {
-      height: 5rem;
-    }
-  }
-
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .brand-logo {
-    width: 9.25rem;
-    height: auto;
-    transition: opacity 0.3s ease;
-  }
-
-  @media (min-width: 1024px) {
-    .brand-logo {
-      width: 11.5rem;
-    }
-  }
-
-  .brand-logo--light {
-    display: none;
-  }
-
-  .site-header.is-transparent:not(.is-scrolled) .brand-logo--dark {
-    display: none;
-  }
-
-  .site-header.is-transparent:not(.is-scrolled) .brand-logo--light {
-    display: block;
-  }
-
-  .desktop-nav {
-    display: none;
-    flex: 1;
-    justify-content: center;
-  }
-
-  @media (min-width: 1024px) {
-    .desktop-nav {
-      display: flex;
-    }
-  }
-
-  .desktop-nav-list {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.9rem, 1.6vw, 1.8rem);
-  }
-
-  .nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding-block: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 500;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: currentColor;
-    opacity: 0.78;
-    transition: opacity 0.3s ease;
-  }
-
-  .nav-link:hover,
-  .nav-link.is-active,
-  .nav-group.is-open .nav-link {
-    opacity: 1;
-  }
-
-  .nav-trigger {
-    border: 0;
-    background: none;
-    padding-inline: 0;
-    cursor: pointer;
-  }
-
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .nav-link:hover::after,
-  .nav-link.is-active::after {
-    transform: scaleX(1);
-  }
-
-  .nav-chevron {
-    width: 0.75rem;
-    height: 0.75rem;
-    transition: transform 0.3s ease;
-  }
-
-  .nav-group {
-    position: relative;
-    padding-block: 0.9rem;
-  }
-
-  .nav-group:hover .nav-chevron,
-  .nav-group:focus-within .nav-chevron,
-  .nav-group.is-open .nav-chevron {
-    transform: rotate(180deg);
-  }
-
-  .nav-panel {
-    position: absolute;
-    top: calc(100% - 0.15rem);
-    left: 50%;
-    width: 23.5rem;
-    transform: translate(-50%, 0.4rem);
-    border: 1px solid var(--color-line);
-    background: var(--color-paper);
-    color: var(--color-ink);
-    box-shadow: 0 28px 60px -32px rgb(8 20 15 / 45%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-      opacity 0.28s ease,
-      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-      visibility 0.28s;
-  }
-
-  .nav-panel::before {
-    content: '';
-    position: absolute;
-    top: -0.55rem;
-    left: 50%;
-    width: 0.7rem;
-    height: 0.7rem;
-    transform: translateX(-50%) rotate(45deg);
-    border-left: 1px solid var(--color-line);
-    border-top: 1px solid var(--color-line);
-    background: var(--color-paper);
-  }
-
-  .nav-group:hover .nav-panel,
-  .nav-group:focus-within .nav-panel,
-  .nav-group.is-open .nav-panel {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translate(-50%, 0);
-  }
-
-  .nav-panel__label {
-    padding: 1.15rem 1.4rem 0.7rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-forest-700);
-  }
-
-  .nav-panel ul {
-    padding-inline: 0.5rem;
-  }
-
-  .nav-panel__link {
-    display: flex;
-    gap: 0.9rem;
-    padding: 0.8rem 0.9rem;
-    transition: background-color 0.25s ease;
-  }
-
-  .nav-panel__link:hover {
-    background: color-mix(in srgb, var(--color-bone) 55%, transparent);
-  }
-
-  .nav-panel__number {
-    margin-top: 0.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    color: var(--color-forest-700);
-  }
-
-  .nav-panel__title {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    line-height: 1.2;
-  }
-
-  .nav-panel__desc {
-    display: block;
-    margin-top: 0.2rem;
-    font-size: 0.75rem;
-    line-height: 1.45;
-    color: var(--color-muted-foreground);
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.15rem;
-    flex-shrink: 0;
-  }
-
-  .header-cta {
-    display: none;
-    align-items: center;
-    gap: 0.45rem;
-    min-height: 2.5rem;
-    margin-left: 0.75rem;
-    padding: 0.6rem 1.1rem;
-    border-radius: 999px;
-    background: var(--color-forest-800);
-    color: var(--color-cream);
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
-  }
-
-  .header-cta:hover {
-    background: var(--color-apple);
-    color: var(--color-forest-900);
-  }
-
-  .header-cta svg {
-    width: 0.8rem;
-    height: 0.8rem;
-  }
-
-  .site-header.is-transparent:not(.is-scrolled) .header-cta {
-    background: var(--color-apple);
-    color: var(--color-forest-900);
-  }
-
-  @media (min-width: 1280px) {
-    .header-cta {
-      display: inline-flex;
-    }
-  }
-</style>

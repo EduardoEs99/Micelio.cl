@@ -1,0 +1,14 @@
+.product-media-guide {
+  aspect-ratio: 4 / 4.4;
+  background: radial-gradient(circle at 50% 38%, #fffdf7, #e9e4d6 78%);
+}
+
+.product-media-pack .product-image {
+  object-fit: cover;
+  filter: saturate(0.98) contrast(1.02);
+}
+
+.product-media-guide .product-image {
+  object-fit: contain;
+  filter: drop-shadow(0 22px 26px rgb(60 45 20 / 24%));
+}

@@ -1,0 +1,84 @@
+.network-home {
+  background: linear-gradient(135deg, #f1e8d9 0%, #e9dcc9 100%);
+}
+
+.network-blob {
+  border-radius: 46% 54% 58% 42% / 48% 38% 62% 52%;
+}
+
+.network-blob::before {
+  content: '';
+  position: absolute;
+  inset: 3rem;
+  border-radius: inherit;
+  border: 1px dashed color-mix(in srgb, var(--color-purple) 18%, transparent);
+}
+
+.network-stamp {
+  animation: network-spin 50s linear infinite;
+}
+
+.guide {
+  position: absolute;
+  width: clamp(8rem, 18vw, 14.5rem);
+  border: 1px solid rgb(255 255 255 / 55%);
+  box-shadow: 0 34px 60px -34px rgb(70 42 25 / 50%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.guide-main {
+  position: relative;
+  z-index: 3;
+  width: clamp(11rem, 24vw, 20rem);
+  transform: rotate(-3deg);
+}
+
+.guide-left {
+  z-index: 1;
+  left: 4%;
+  top: 12%;
+  transform: rotate(-12deg) translateX(-18%);
+}
+
+.guide-right {
+  z-index: 2;
+  right: 2%;
+  bottom: 10%;
+  transform: rotate(9deg) translateX(14%);
+}
+
+.network-art:hover .guide-main {
+  transform: rotate(0deg) translateY(-0.5rem);
+}
+
+.network-art:hover .guide-left {
+  transform: rotate(-14deg) translate(-24%, -0.4rem);
+}
+
+.network-art:hover .guide-right {
+  transform: rotate(12deg) translate(20%, -0.3rem);
+}
+
+@keyframes network-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-stamp {
+    animation: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .guide-left {
+    left: 0;
+    top: 16%;
+  }
+
+  .guide-right {
+    right: 0;
+    bottom: 12%;
+  }
+}

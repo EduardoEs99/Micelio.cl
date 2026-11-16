@@ -1,5 +1,6 @@
----
+﻿---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import '@/styles/components/NotFound.css';
 ---
 
 <BaseLayout
@@ -7,40 +8,40 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
  
  
 >
-  <section class="not-found on-dark surface-grain" aria-labelledby="not-found-title">
+  <section class="not-found on-dark surface-grain relative overflow-hidden pt-32 pb-16 text-cream lg:pt-48 lg:pb-32" aria-labelledby="not-found-title">
     <div class="not-found__spores" aria-hidden="true">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <div class="container-editorial not-found__inner">
-      <p class="not-found__code" aria-hidden="true">404</p>
+    <div class="container-editorial relative grid grid-cols-1 items-center gap-8 split:grid-cols-12 split:gap-16">
+      <p class="not-found__code absolute -top-18 right-0 font-display text-error-code font-light text-cream/6 pointer-events-none select-none" aria-hidden="true">404</p>
 
-      <div class="not-found__content">
+      <div class="relative z-1 max-w-160 split:col-span-8">
         <p class="eyebrow text-apple">Error 404 · Fuera del mapa</p>
-        <h1 id="not-found-title" class="not-found__title type-display">
+        <h1 id="not-found-title" class="type-display mt-5 text-error-title text-cream">
           Esta página<br />
-          <span class="italic">no germinó.</span>
+          <span class="italic font-light text-apple">no germinó.</span>
         </h1>
-        <p class="not-found__text">
+        <p class="mt-6 max-w-120 text-copy leading-relaxed text-cream/60">
           Puede que el enlace esté mal escrito, que la página haya cambiado de lugar o que nunca
           haya existido. El bosque sigue aquí: elige por dónde seguir.
         </p>
 
-        <div class="not-found__actions">
+        <div class="mt-7 flex flex-wrap gap-3">
           <a href="/" class="btn btn--apple">Volver al inicio</a>
           <a href="/ediciones" class="btn btn--outline">Ver ediciones</a>
         </div>
 
-        <nav class="not-found__links" aria-label="Otras secciones">
-          <a href="/new-fungi">New Fungi <span aria-hidden="true">→</span></a>
-          <a href="/fotografias">Fotografías <span aria-hidden="true">→</span></a>
-          <a href="/red-micelio">Red Micelio <span aria-hidden="true">→</span></a>
-          <a href="/#contacto">Contacto <span aria-hidden="true">→</span></a>
+        <nav class="mt-10 flex flex-wrap gap-x-6 gap-y-2.5 border-t border-cream/16 pt-5" aria-label="Otras secciones">
+          <a href="/new-fungi" class="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-widest text-cream/62 transition-colors hover:text-apple">New Fungi <span aria-hidden="true">→</span></a>
+          <a href="/fotografias" class="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-widest text-cream/62 transition-colors hover:text-apple">Fotografías <span aria-hidden="true">→</span></a>
+          <a href="/red-micelio" class="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-widest text-cream/62 transition-colors hover:text-apple">Red Micelio <span aria-hidden="true">→</span></a>
+          <a href="/#contacto" class="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-widest text-cream/62 transition-colors hover:text-apple">Contacto <span aria-hidden="true">→</span></a>
         </nav>
       </div>
 
-      <figure class="not-found__figure" aria-hidden="true">
-        <svg viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <figure class="not-found__figure opacity-92 split:col-span-4" aria-hidden="true">
+        <svg viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
           <path
             d="M110 96c-31 0-56 20-56 44 0 9 7 14 16 14h80c9 0 16-5 16-14 0-24-25-44-56-44Z"
             fill="#9ed954"
@@ -76,187 +77,3 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .not-found {
-    position: relative;
-    overflow: hidden;
-    min-height: 78vh;
-    background:
-      radial-gradient(ellipse 55% 50% at 78% 18%, rgb(31 74 56 / 55%), transparent 68%),
-      radial-gradient(ellipse 40% 40% at 8% 90%, rgb(90 50 115 / 12%), transparent 70%),
-      var(--color-forest-900);
-    color: var(--color-cream);
-    padding-top: clamp(8rem, 16vh, 12rem);
-    padding-bottom: clamp(4rem, 9vw, 8rem);
-  }
-
-  .not-found__inner {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: center;
-  }
-
-  @media (min-width: 900px) {
-    .not-found__inner {
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.55fr);
-    }
-  }
-
-  .not-found__code {
-    position: absolute;
-    top: -4.5rem;
-    right: 0;
-    font-family: var(--font-display);
-    font-size: clamp(12rem, 34vw, 30rem);
-    font-weight: 300;
-    line-height: 0.8;
-    letter-spacing: -0.06em;
-    color: rgb(243 240 230 / 6%);
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .not-found__content {
-    position: relative;
-    z-index: 1;
-    max-width: 40rem;
-  }
-
-  .not-found__title {
-    margin-top: 1.2rem;
-    font-size: clamp(3rem, 8vw, 7rem);
-    color: var(--color-cream);
-  }
-
-  .not-found__title .italic {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--color-apple);
-  }
-
-  .not-found__text {
-    max-width: 30rem;
-    margin-top: 1.4rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: rgb(243 240 230 / 60%);
-  }
-
-  .not-found__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    margin-top: 1.8rem;
-  }
-
-  .not-found__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem 1.6rem;
-    margin-top: 2.4rem;
-    border-top: 1px solid rgb(243 240 230 / 16%);
-    padding-top: 1.2rem;
-  }
-
-  .not-found__links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgb(243 240 230 / 62%);
-    transition: color 0.25s ease;
-  }
-
-  .not-found__links a:hover {
-    color: var(--color-apple);
-  }
-
-  .not-found__figure {
-    width: min(20rem, 62vw);
-    margin-inline: auto;
-    opacity: 0.92;
-    animation: not-found-float 7s ease-in-out infinite;
-  }
-
-  .not-found__figure svg {
-    width: 100%;
-    height: auto;
-  }
-
-  @keyframes not-found-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-0.7rem);
-    }
-  }
-
-  .not-found__spores span {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 999px;
-    background: var(--color-apple);
-    opacity: 0.25;
-    animation: not-found-drift 12s linear infinite;
-  }
-
-  .not-found__spores span:nth-child(1) {
-    left: 12%;
-    bottom: 10%;
-  }
-  .not-found__spores span:nth-child(2) {
-    left: 28%;
-    bottom: 4%;
-    animation-delay: -3s;
-  }
-  .not-found__spores span:nth-child(3) {
-    left: 46%;
-    bottom: 14%;
-    animation-delay: -6s;
-  }
-  .not-found__spores span:nth-child(4) {
-    left: 64%;
-    bottom: 6%;
-    animation-delay: -2s;
-  }
-  .not-found__spores span:nth-child(5) {
-    left: 78%;
-    bottom: 12%;
-    animation-delay: -8s;
-  }
-  .not-found__spores span:nth-child(6) {
-    left: 90%;
-    bottom: 3%;
-    animation-delay: -5s;
-  }
-
-  @keyframes not-found-drift {
-    0% {
-      transform: translate3d(0, 0, 0);
-      opacity: 0;
-    }
-    20% {
-      opacity: 0.3;
-    }
-    100% {
-      transform: translate3d(1.5rem, -24rem, 0);
-      opacity: 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .not-found__figure,
-    .not-found__spores span {
-      animation: none;
-    }
-  }
-</style>

@@ -58,7 +58,7 @@ export default function MobileNav({
       <SheetTrigger asChild>
         <button
           type="button"
-          className="icon-btn header-menu-trigger lg:hidden"
+          className="inline-flex min-h-10 min-w-10 items-center justify-center gap-1.5 rounded-full p-2 opacity-82 transition duration-300 hover:bg-current/8 hover:opacity-100 lg:hidden"
           aria-label="Abrir menú"
         >
           <Menu className="size-5" strokeWidth={1.6} aria-hidden="true" />

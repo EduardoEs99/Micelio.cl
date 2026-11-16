@@ -108,7 +108,7 @@ export default function SearchDialog({ items }) {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="icon-btn header-search-trigger"
+          className="inline-flex min-h-10 min-w-10 items-center justify-center gap-1.5 rounded-full p-2 opacity-82 transition duration-300 hover:bg-current/8 hover:opacity-100 xl:px-3"
           aria-label="Buscar en el sitio"
         >
           <Search className="size-4" strokeWidth={1.6} aria-hidden="true" />
