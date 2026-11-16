@@ -176,10 +176,10 @@ const inRevistaSection = revistaNav.some(
                 data-nav-panel
               >
                 <p class="px-5 pt-4.5 pb-3 font-mono text-eyebrow tracking-editorial-wider uppercase text-forest-700">La Revista</p>
-                <ul class="px-2">
+                <ul class="px-2 pb-2">
                   {revistaNav.map((item, index) => (
                     <li>
-                      <a href={item.href} class="flex gap-3.5 p-3.5 transition-colors duration-250 hover:bg-bone/55">
+                      <a href={item.href} class:list={["flex gap-3.5 p-3.5 transition-colors duration-250 hover:bg-bone/55", isActive(item.href) && "bg-bone/55"]} aria-current={isActive(item.href) ? 'page' : undefined}>
                         <span class="mt-1 font-mono text-nano tracking-widest text-forest-700">{String(index + 1).padStart(2, '0')}</span>
                         <span>
                           <span class="block font-display text-lg leading-tight">{item.label}</span>

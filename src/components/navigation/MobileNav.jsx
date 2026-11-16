@@ -53,12 +53,15 @@ export default function MobileNav({
 }) {
   const [open, setOpen] = useState(false);
 
+  const isActive = (href) =>
+    href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
           type="button"
-          className="inline-flex min-h-10 min-w-10 items-center justify-center gap-1.5 rounded-full p-2 opacity-82 transition duration-300 hover:bg-current/8 hover:opacity-100 lg:hidden"
+          className="inline-flex min-h-10 min-w-10 items-center justify-center gap-1.5 rounded-full p-2 text-ink opacity-82 transition duration-300 hover:bg-ink/8 hover:opacity-100 lg:hidden"
           aria-label="Abrir menú"
         >
           <Menu className="size-5" strokeWidth={1.6} aria-hidden="true" />
@@ -67,22 +70,22 @@ export default function MobileNav({
       <SheetContent
         side="right"
         showCloseButton={false}
-        className="w-full gap-0 border-0 bg-forest-900 p-0 text-cream sm:max-w-full"
+        className="w-full gap-0 border-0 border-l border-line bg-paper p-0 text-ink sm:max-w-full"
       >
         <div className="flex h-full min-h-dvh flex-col overflow-y-auto">
-          <div className="flex items-center justify-between border-b border-cream/15 px-5 py-5">
+          <div className="flex items-center justify-between border-b border-line px-5 py-5">
             <div>
-              <p className="font-mono text-eyebrow uppercase tracking-editorial-widest text-apple">
+              <p className="font-mono text-eyebrow uppercase tracking-editorial-widest text-forest-700">
                 Revista Micelio
               </p>
-              <p className="mt-1 text-xs text-cream/50">
+              <p className="mt-1 text-xs text-muted-foreground">
                 El universo invisible
               </p>
             </div>
             <SheetClose asChild>
               <button
                 type="button"
-                className="flex size-11 items-center justify-center rounded-full border border-cream/20 text-cream transition-colors hover:border-apple hover:text-apple"
+                className="flex size-11 items-center justify-center rounded-full border border-line text-ink transition-colors hover:border-forest-700 hover:text-forest-700"
                 aria-label="Cerrar menú"
               >
                 <X className="size-5" strokeWidth={1.5} />
@@ -96,12 +99,9 @@ export default function MobileNav({
           </SheetDescription>
 
           <nav aria-label="Navegación móvil" className="flex-1 px-5 py-6">
-            <ul className="divide-y divide-cream/10">
+            <ul className="divide-y divide-line">
               {mainLinks.map((link, index) => {
-                const active =
-                  link.href === "/"
-                    ? currentPath === "/"
-                    : currentPath.startsWith(link.href);
+                const active = isActive(link.href);
                 return (
                   <li key={link.href}>
                     <a
@@ -110,20 +110,20 @@ export default function MobileNav({
                       className="group flex items-baseline gap-4 py-4"
                       aria-current={active ? "page" : undefined}
                     >
-                      <span className="font-mono text-eyebrow tracking-editorial text-apple/70">
+                      <span className="font-mono text-eyebrow tracking-editorial text-forest-700/70">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span
                         className={`font-display text-mobile-nav leading-nav tracking-tight transition-colors ${
                           active
-                            ? "text-apple"
-                            : "text-cream group-hover:text-apple"
+                            ? "text-forest-700"
+                            : "text-ink group-hover:text-forest-700"
                         }`}
                       >
                         {link.label}
                       </span>
                       <ArrowUpRight
-                        className="ml-auto size-4 shrink-0 text-cream/30 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-apple"
+                        className="ml-auto size-4 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-forest-700"
                         strokeWidth={1.4}
                         aria-hidden="true"
                       />
@@ -133,35 +133,70 @@ export default function MobileNav({
               })}
             </ul>
 
-            <div className="mt-7 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-cream/15 pt-6">
-              {revistaLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="py-1 text-sm text-cream/70 transition-colors hover:text-apple"
-                >
-                  {link.label}
-                </a>
-              ))}
-              {secondaryLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="py-1 text-sm text-cream/70 transition-colors hover:text-apple"
-                >
-                  {link.label}
-                </a>
-              ))}
+            <div className="mt-7 border-t border-line pt-6">
+              <p className="px-1 pb-3 font-mono text-eyebrow tracking-editorial-wider uppercase text-forest-700">
+                La Revista
+              </p>
+              <ul className="flex flex-col">
+                {revistaLinks.map((link, index) => {
+                  const active = isActive(link.href);
+                  return (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={`flex gap-3.5 p-3.5 transition-colors duration-250 hover:bg-bone/55 ${
+                          active ? "bg-bone/55" : ""
+                        }`}
+                        aria-current={active ? "page" : undefined}
+                      >
+                        <span className="mt-1 font-mono text-nano tracking-widest text-forest-700">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span>
+                          <span className="block font-display text-lg leading-tight text-ink">
+                            {link.label}
+                          </span>
+                          <span className="mt-1 block text-xs leading-snug text-muted-foreground">
+                            {link.description}
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
+
+            {secondaryLinks && secondaryLinks.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 border-t border-line pt-6">
+                {secondaryLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={`py-1 text-sm transition-colors ${
+                        active
+                          ? "text-forest-700"
+                          : "text-muted-foreground hover:text-forest-700"
+                      }`}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </nav>
 
-          <div className="border-t border-cream/15 px-5 py-6">
+          <div className="border-t border-line px-5 py-6">
             <a
               href="/ediciones"
               onClick={() => setOpen(false)}
-              className="btn btn--apple w-full justify-between"
+              className="btn btn--forest w-full justify-between"
             >
               Explorar ediciones
               <ArrowUpRight
@@ -184,7 +219,7 @@ export default function MobileNav({
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="flex items-center gap-2 text-xs text-cream/60 transition-colors hover:text-apple"
+                    className="flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-forest-700"
                   >
                     <span className="size-3.5 [&_svg]:size-3.5">
                       <BrandIcon label={social.label} />
@@ -196,7 +231,7 @@ export default function MobileNav({
             </div>
             <a
               href={`mailto:${email}`}
-              className="mt-4 block font-mono text-micro tracking-wider text-cream/40 hover:text-apple"
+              className="mt-4 block font-mono text-micro tracking-wider text-muted-foreground hover:text-forest-700"
             >
               {email}
             </a>
