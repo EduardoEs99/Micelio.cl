@@ -2,35 +2,17 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { Image } from 'astro:assets';
-import dinelly from '@/assets/editorial/dinelly.jpg';
+import { Picture } from 'astro:assets';
+import dinelly from '@/assets/webp/editorial/dinelly.webp';
 import { articles } from '@/data/articles';
 
 const [featured, ...rest] = articles;
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Blog',
-  name: 'New Fungi — Revista Micelio',
-  description:
-    'Entrevistas, reportajes y artículos sobre el reino Fungi publicados por Revista Micelio.',
-  url: 'https://revistamicelio.cl/new-fungi',
-  blogPost: articles.map((article) => ({
-    '@type': 'BlogPosting',
-    headline: article.title,
-    datePublished: article.date,
-    description: article.excerpt,
-    url: article.url,
-    author: { '@type': 'Organization', name: 'Revista Micelio' },
-  })),
-};
 ---
 
 <BaseLayout
   title="New Fungi — Revista Micelio"
-  description="Entrevistas y reportajes sobre el reino Fungi: ciencia, bosque, cultura y territorio. Cada historia abre la nota original publicada por Revista Micelio."
+ 
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
 
   <PageHeader
     index="03"
@@ -65,7 +47,7 @@ const schema = {
           data-reveal-item
           aria-label={`Leer ${featured.title} en revistamicelio.cl`}
         >
-          <Image
+          <Picture fallbackFormat="jpg"
             src={featured.image}
             alt={featured.imageAlt}
             widths={[480, 760, 1080]}
@@ -114,7 +96,7 @@ const schema = {
             >
               <span class="fungi-index__number">{String(index + 2).padStart(2, '0')}</span>
               <span class="fungi-index__thumb">
-                <Image
+                <Picture fallbackFormat="jpg"
                   src={article.image}
                   alt=""
                   widths={[160, 260]}

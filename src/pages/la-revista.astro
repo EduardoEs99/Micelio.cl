@@ -2,11 +2,11 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { Image } from 'astro:assets';
-import cantillana from '@/assets/editorial/cantillana.jpg';
-import dinelly from '@/assets/editorial/dinelly.jpg';
-import kombuferia from '@/assets/editorial/kombuferia.jpg';
-import braun from '@/assets/editorial/braun.jpg';
+import { Picture } from 'astro:assets';
+import cantillana from '@/assets/webp/editorial/cantillana.webp';
+import dinelly from '@/assets/webp/editorial/dinelly.webp';
+import kombuferia from '@/assets/webp/editorial/kombuferia.webp';
+import braun from '@/assets/webp/editorial/braun.webp';
 import { site } from '@/data/site';
 
 const sections = [
@@ -49,7 +49,7 @@ const gallery = [
 
 <BaseLayout
   title="La Revista — Revista Micelio"
-  description="Revista Micelio es una publicación independiente chilena dedicada al reino Fungi: ciencia, bosque nativo, cultura y fotografía. Ediciones impresas, digitales y guías de funga."
+ 
 >
   <PageHeader
     index="01"
@@ -203,7 +203,7 @@ const gallery = [
         {gallery.map((item, index) => (
           <figure class:list={['about-archive__item', `about-archive__item--${index + 1}`]} data-reveal-item>
             <div class="about-archive__image">
-              <Image
+              <Picture fallbackFormat="jpg"
                 src={item.image}
                 alt={item.alt}
                 widths={[360, 560, 760]}

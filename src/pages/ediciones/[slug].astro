@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import AddToList from '@/components/cart/AddToList';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 import { editions, formatCLP } from '@/data/editions';
@@ -20,26 +20,6 @@ const related = [...editions]
 const previous = index > 0 ? editions[index - 1] : null;
 const next = index < editions.length - 1 ? editions[index + 1] : null;
 
-const productSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: edition.title,
-  description: edition.summary,
-  image: `https://revistamicelio.cl${edition.cover.src}`,
-  brand: { '@type': 'Brand', name: 'Revista Micelio' },
-  offers: {
-    '@type': 'Offer',
-    price: edition.price,
-    priceCurrency: 'CLP',
-    availability:
-      edition.status === 'Agotada'
-        ? 'https://schema.org/OutOfStock'
-        : edition.status === 'Preventa'
-          ? 'https://schema.org/PreOrder'
-          : 'https://schema.org/InStock',
-  },
-};
-
 const cartItem = {
   id: edition.slug,
   slug: edition.slug,
@@ -51,9 +31,8 @@ const cartItem = {
 
 <BaseLayout
   title={`${edition.title} — Revista Micelio`}
-  description={`${edition.summary} Precio: ${formatCLP(edition.price)}. Estado: ${edition.status}.`}
+ 
 >
-  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} slot="head" />
 
   <article class="edition-detail">
     <div class="edition-detail__intro">
@@ -73,7 +52,7 @@ const cartItem = {
           <div class="edition-detail__visual">
             <div class="edition-detail__plinth" aria-hidden="true"></div>
             <figure class="edition-detail__cover" data-cover-tilt data-reveal>
-              <Image
+              <Picture fallbackFormat="jpg"
                 src={edition.cover}
                 alt={edition.coverAlt}
                 widths={[520, 780, 1080]}
@@ -178,7 +157,7 @@ const cartItem = {
             <a href={`/ediciones/${item.slug}`} class="related-row">
               <span class="related-row__number">{item.number}</span>
               <span class="related-row__cover">
-                <Image
+                <Picture fallbackFormat="jpg"
                   src={item.cover}
                   alt=""
                   widths={[140, 220]}

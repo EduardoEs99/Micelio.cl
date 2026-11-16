@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { formatCLP } from '@/lib/format';
 
 interface Props {
@@ -20,7 +20,7 @@ const detailHref = `/ediciones/${edition.slug}`;
     <span class="edition-card__corner edition-card__corner--br" aria-hidden="true"></span>
     <span class="edition-card__status" data-status={edition.status}>{edition.status}</span>
     <div class="edition-card__image">
-      <Image
+      <Picture fallbackFormat="jpg"
         src={edition.cover}
         alt={edition.coverAlt}
         widths={[420, 620, 860]}

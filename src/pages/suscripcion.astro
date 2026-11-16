@@ -3,8 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import SubscribeForm from '@/components/contact/SubscribeForm';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { Image } from 'astro:assets';
-import ilu9 from '@/assets/illustrations/ilu9.png';
+import { Picture } from 'astro:assets';
+import ilu9 from '@/assets/webp/illustrations/ilu9.webp';
 import { site } from '@/data/site';
 
 const receive = [
@@ -25,7 +25,7 @@ const receive = [
 
 <BaseLayout
   title="Suscripción — Revista Micelio"
-  description="Recibe novedades de Revista Micelio: nuevas ediciones, entrevistas, reportajes y convocatorias. Registro de correo sin pagos automáticos."
+ 
 >
   <PageHeader
     index="08"
@@ -38,7 +38,7 @@ const receive = [
     watermark="⌁"
   >
     <div slot="aside" class="subscribe-art">
-      <Image
+      <Picture fallbackFormat="jpg"
         src={ilu9}
         alt="Ilustración editorial de hongos del bosque chileno"
         widths={[360, 560, 760]}

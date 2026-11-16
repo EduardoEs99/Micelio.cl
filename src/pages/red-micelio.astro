@@ -3,42 +3,19 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import ProductCard from '@/components/editorial/ProductCard.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { Image } from 'astro:assets';
-import guiaSur from '@/assets/products/guia-sur.png';
-import guiaAustral from '@/assets/products/guia-austral.png';
+import { Picture } from 'astro:assets';
+import guiaSur from '@/assets/webp/products/guia-sur.webp';
+import guiaAustral from '@/assets/webp/products/guia-austral.webp';
 import { getProducts } from '@/data/products';
 import { distributors } from '@/data/partners';
 
 const guides = getProducts('Red Micelio');
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Guías plegables de funga — Revista Micelio',
-  itemListElement: guides.map((product, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    item: {
-      '@type': 'Product',
-      name: product.title,
-      description: product.summary,
-      image: `https://revistamicelio.cl${product.image.src}`,
-      offers: {
-        '@type': 'Offer',
-        price: product.price,
-        priceCurrency: 'CLP',
-        availability: 'https://schema.org/InStock',
-      },
-    },
-  })),
-};
 ---
 
 <BaseLayout
   title="Red Micelio — Revista Micelio"
-  description="Guías plegables de funga chilena y red de distribución de Revista Micelio: puntos de venta, tiendas amigas y espacios que acercan la revista al territorio."
+ 
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
 
   <PageHeader
     index="06"
@@ -54,10 +31,10 @@ const schema = {
       <p class="eyebrow">Guías plegables</p>
       <div class="network-guides__stack">
         <figure class="network-guides__item network-guides__item--back">
-          <Image src={guiaAustral} alt="" widths={[220, 360]} sizes="150px" loading="eager" />
+          <Picture fallbackFormat="jpg" src={guiaAustral} alt="" widths={[220, 360]} sizes="150px" loading="eager" />
         </figure>
         <figure class="network-guides__item network-guides__item--front">
-          <Image src={guiaSur} alt="Guía plegable Funga del Sur" widths={[260, 460]} sizes="190px" loading="eager" />
+          <Picture fallbackFormat="jpg" src={guiaSur} alt="Guía plegable Funga del Sur" widths={[260, 460]} sizes="190px" loading="eager" />
         </figure>
       </div>
       <p class="network-guides__caption">100 especies · Costa a cordillera</p>

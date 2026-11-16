@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import juanZeta from '@/assets/illustrations/Juan-Zeta.png';
+import { Picture } from 'astro:assets';
+import juanZeta from '@/assets/webp/illustrations/Juan-Zeta.webp';
 
 interface Props {
   class?: string;
@@ -16,7 +16,7 @@ const { class: className = '', width = 180 } = Astro.props;
   style={`--mascot-width: ${width}px`}
   aria-hidden="true"
 >
-  <Image
+  <Picture fallbackFormat="jpg"
     src={juanZeta}
     alt=""
     widths={[180, 280, 380]}

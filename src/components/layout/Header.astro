@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import logoNegro from '@/assets/brand/logo-negro.png';
-import logoCrema from '@/assets/brand/logo-crema.png';
+import { Picture } from 'astro:assets';
+import logoNegro from '@/assets/webp/brand/logo-negro.webp';
+import logoCrema from '@/assets/webp/brand/logo-crema.webp';
 import CartTrigger from '@/components/cart/CartTrigger';
 import MobileNav from '@/components/navigation/MobileNav';
 import SearchDialog from '@/components/navigation/SearchDialog';
@@ -129,7 +129,7 @@ const inRevistaSection = revistaNav.some(
 >
   <div class="header-shell container-editorial">
     <a href="/" class="brand" aria-label="Revista Micelio — ir al inicio">
-      <Image
+      <Picture fallbackFormat="jpg"
         src={logoNegro}
         alt=""
         class="brand-logo brand-logo--dark"
@@ -138,7 +138,7 @@ const inRevistaSection = revistaNav.some(
         loading="eager"
         fetchpriority="high"
       />
-      <Image
+      <Picture fallbackFormat="jpg"
         src={logoCrema}
         alt=""
         class="brand-logo brand-logo--light"

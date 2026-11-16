@@ -28,7 +28,7 @@ const initialValues = {
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const fieldClass =
-  "h-12 rounded-none border-line bg-paper/80 px-4 text-[0.95rem] shadow-none placeholder:text-muted-foreground/70 focus-visible:border-forest-700 focus-visible:ring-forest-700/20 md:text-[0.95rem]";
+  "h-12 rounded-none border-line bg-paper/80 px-4 text-base shadow-none placeholder:text-muted-foreground/70 focus-visible:border-forest-700 focus-visible:ring-forest-700/20 md:text-base";
 
 export default function ContactForm() {
   const [values, setValues] = useState(initialValues);
@@ -243,7 +243,7 @@ export default function ContactForm() {
         <span className="flex size-12 items-center justify-center rounded-full bg-apple text-forest-900">
           <Check className="size-5" strokeWidth={2} aria-hidden="true" />
         </span>
-        <p className="mt-6 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-apple">
+        <p className="mt-6 font-mono text-micro uppercase tracking-editorial-wider text-apple">
           Formulario de contacto
         </p>
         <h2 className="mt-3 font-display text-3xl font-light leading-tight">
@@ -297,7 +297,7 @@ export default function ContactForm() {
               {status.fallback && (
                 <a
                   href={fallbackHref}
-                  className="mt-3 inline-flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-widest underline underline-offset-4"
+                  className="mt-3 inline-flex items-center gap-1.5 font-mono text-micro uppercase tracking-widest underline underline-offset-4"
                 >
                   Escribir a {contactEmail}
                   <ArrowUpRight
@@ -412,7 +412,7 @@ export default function ContactForm() {
                 avoidCollisions={false}
                 collisionPadding={8}
                 onOpenAutoFocus={(event) => event.preventDefault()}
-                className="z-50 max-h-[min(15rem,var(--radix-popover-content-available-height))] w-(--radix-popover-trigger-width) overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-none"
+                className="z-50 max-h-popover w-(--radix-popover-trigger-width) overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-none"
               >
                 <ul
                   id="contact-motivo-listbox"
@@ -564,7 +564,7 @@ export default function ContactForm() {
         </button>
       </div>
 
-      <p className="mt-4 max-w-lg text-[0.7rem] leading-relaxed text-muted-foreground">
+      <p className="mt-4 max-w-lg text-tiny leading-relaxed text-muted-foreground">
         El formulario envía el mensaje al correo editorial. No procesa pagos ni
         suscripciones automáticas. Si el envío automático no está configurado,
         se mostrará un aviso y el mensaje no se marcará como enviado.

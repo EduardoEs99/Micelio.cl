@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 import { homeGallery } from '@/data/gallery';
 
@@ -41,7 +41,7 @@ const positions = ['a', 'b', 'c', 'd', 'e', 'f'];
         >
           <figure>
             <div class="gallery-item__image" data-image-reveal>
-              <Image
+              <Picture fallbackFormat="jpg"
                 src={image.thumb}
                 alt={image.alt}
                 widths={[320, 520, 760]}

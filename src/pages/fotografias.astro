@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import GalleryGrid from '@/components/gallery/GalleryGrid';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { Image, getImage } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import { gallery } from '@/data/gallery';
 import { site } from '@/data/site';
 
@@ -11,17 +11,19 @@ const previews = [gallery[2], gallery[6], gallery[11]];
 
 const items = await Promise.all(
   gallery.map(async (image, index) => {
-    const thumb = await getImage({
-      src: image.thumb,
-      width: 900,
-      format: 'webp',
-      quality: 78,
-    });
+    const [thumbWebp, thumbFallback, fullWebp, fullFallback] = await Promise.all([
+      getImage({ src: image.thumb, width: 900, format: 'webp', quality: 78 }),
+      getImage({ src: image.thumbFallback, width: 900, format: 'jpg', quality: 78 }),
+      getImage({ src: image.full, width: 1600, format: 'webp', quality: 80 }),
+      getImage({ src: image.fullFallback, width: 1600, format: 'jpg', quality: 80 }),
+    ]);
 
     return {
       id: `fotografia-${String(index + 1).padStart(2, '0')}`,
-      src: image.full,
-      thumb: thumb.src,
+      srcWebp: fullWebp.src,
+      srcFallback: fullFallback.src,
+      thumbWebp: thumbWebp.src,
+      thumbFallback: thumbFallback.src,
       alt: image.alt,
       caption: image.caption,
       credit: image.credit,
@@ -32,7 +34,7 @@ const items = await Promise.all(
 
 <BaseLayout
   title="Fotografías — Revista Micelio"
-  description="Galería del reino Fungi: registros de campo, texturas y escalas del bosque chileno. Fotografías del archivo de Revista Micelio."
+ 
 >
   <PageHeader
     index="04"
@@ -49,7 +51,7 @@ const items = await Promise.all(
       <div class="photo-preview__stack">
         {previews.map((image, index) => (
           <figure class:list={['photo-preview__item', `photo-preview__item--${index + 1}`]}>
-            <Image
+            <Picture fallbackFormat="jpg"
               src={image.thumb}
               alt=""
               widths={[240, 380]}
@@ -81,7 +83,7 @@ const items = await Promise.all(
         </div>
       </div>
 
-      <GalleryGrid client:load items={items} />
+      <GalleryGrid client:visible items={items} />
 
       <div class="photo-gallery__foot">
         <p>

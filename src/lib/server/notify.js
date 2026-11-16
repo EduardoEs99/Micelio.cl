@@ -63,8 +63,6 @@ export async function sendNotification({ subject, text, replyTo }) {
   }
 }
 
-/* Simple in-memory limiter. Enough for a single Node instance; replace with a
-   shared store (Redis, KV) if the site is deployed across several processes. */
 const buckets = new Map();
 
 export function rateLimit(key, limit = 5, windowMs = 10 * 60 * 1000) {

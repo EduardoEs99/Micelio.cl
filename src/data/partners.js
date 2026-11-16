@@ -27,4 +27,3 @@ export const distributors = [
   { name: "Taller Acabose", href: "https://www.instagram.com/taller_acabose/" },
 ];
 
-// Los auspiciadores viven en src/data/sponsors.js con sus logos verificados.

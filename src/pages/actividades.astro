@@ -3,40 +3,17 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import ProductCard from '@/components/editorial/ProductCard.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import pack3 from '@/assets/covers/pack-3.png';
+import pack3 from '@/assets/webp/covers/pack-3.webp';
 import { getProducts } from '@/data/products';
 import { site } from '@/data/site';
 
 const packs = getProducts('Actividades');
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Packs de Revista Micelio',
-  itemListElement: packs.map((product, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    item: {
-      '@type': 'Product',
-      name: product.title,
-      description: product.summary,
-      image: `https://revistamicelio.cl${product.image.src}`,
-      offers: {
-        '@type': 'Offer',
-        price: product.price,
-        priceCurrency: 'CLP',
-        availability: 'https://schema.org/InStock',
-      },
-    },
-  })),
-};
 ---
 
 <BaseLayout
   title="Actividades y packs — Revista Micelio"
-  description="Packs de ediciones de Revista Micelio con precio especial. Consulta y despacho con el equipo editorial; convocatorias y encuentros en Instagram y la lista de novedades."
+ 
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
 
   <PageHeader
     index="05"

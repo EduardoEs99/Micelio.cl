@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
-import guiaAustral from '@/assets/products/guia-austral.png';
-import guiaCentral from '@/assets/products/guia-central.png';
-import guiaSur from '@/assets/products/guia-sur.png';
+import { Picture } from 'astro:assets';
+import guiaAustral from '@/assets/webp/products/guia-austral.webp';
+import guiaCentral from '@/assets/webp/products/guia-central.webp';
+import guiaSur from '@/assets/webp/products/guia-sur.webp';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 ---
 
@@ -58,13 +58,13 @@ import SectionMarker from '@/components/editorial/SectionMarker.astro';
         </div>
 
         <figure class="guide guide--left">
-          <Image src={guiaCentral} alt="" widths={[260, 420]} sizes="(max-width: 767px) 28vw, 230px" loading="lazy" />
+          <Picture fallbackFormat="jpg" src={guiaCentral} alt="" widths={[260, 420]} sizes="(max-width: 767px) 28vw, 230px" loading="lazy" />
         </figure>
         <figure class="guide guide--right">
-          <Image src={guiaAustral} alt="" widths={[260, 420]} sizes="(max-width: 767px) 28vw, 230px" loading="lazy" />
+          <Picture fallbackFormat="jpg" src={guiaAustral} alt="" widths={[260, 420]} sizes="(max-width: 767px) 28vw, 230px" loading="lazy" />
         </figure>
         <figure class="guide guide--main">
-          <Image src={guiaSur} alt="" widths={[360, 560]} sizes="(max-width: 767px) 44vw, 330px" loading="lazy" />
+          <Picture fallbackFormat="jpg" src={guiaSur} alt="" widths={[360, 560]} sizes="(max-width: 767px) 44vw, 330px" loading="lazy" />
         </figure>
         <span class="network-art__caption">Funga del Sur · Guía plegable</span>
       </div>

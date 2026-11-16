@@ -6,7 +6,6 @@ import SponsorsGrid from '@/components/sponsors/SponsorsGrid.astro';
 import { contactEmail } from '@/lib/contact';
 import { site } from '@/data/site';
 
-
 const formats = [
   {
     title: 'Página impresa',
@@ -43,20 +42,12 @@ const steps = [
 
 const mediaKitMail = `mailto:${contactEmail}?subject=${encodeURIComponent('Solicitud de media kit — Revista Micelio')}&body=${encodeURIComponent('Hola Revista Micelio,\n\nQuiero recibir la información disponible para auspiciar o colaborar con la revista.\n\nMarca / proyecto:\nTipo de colaboración:\nCiudad:\n\nGracias.')}`;
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: 'Auspicia — Revista Micelio',
-  description:
-    'Información para marcas y proyectos que quieren auspiciar o colaborar con Revista Micelio.',
-};
 ---
 
 <BaseLayout
   title="Auspicia — Revista Micelio"
-  description="Auspicia o colabora con Revista Micelio: ediciones impresas y digitales, contenido sobre el reino Fungi, red de distribución y canales en Instagram y YouTube."
+ 
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
 
   <PageHeader
     index="07"

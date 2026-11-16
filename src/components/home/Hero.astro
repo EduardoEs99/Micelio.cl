@@ -1,42 +1,48 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import Mascot from '@/components/editorial/Mascot.astro';
-import russula from '@/assets/editorial/russula.jpg';
+import russula from '@/assets/webp/editorial/russula.webp';
 import { promotions } from '@/data/promotions';
+
+const banners = await Promise.all(promotions.map(async (promo) => {
+  const webp = await getImage({ src: promo.image, width: 1600, format: 'webp', quality: 75 });
+  const fallback = await getImage({ src: promo.fallback, width: 1600, format: 'jpg', quality: 85 });
+  return { ...promo, webp: webp.src, fallback: fallback.src };
+}));
 ---
 
 <section
-  class="hero on-dark relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden text-cream"
+  class="hero on-dark relative isolate flex min-h-svh flex-col justify-center overflow-hidden text-cream"
   data-hero
   aria-labelledby="hero-title"
 >
-  <!-- CAPA 1: carrusel de imágenes promocionales (fondo) -->
+  
   <div class="absolute inset-0 z-0" aria-hidden="true">
-    {promotions.map((promo, index) => (
-      <img
-        src={promo.image.src ?? promo.image}
-        alt={promo.alt}
-        class="hero-banner-img absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1000ms] ease-in-out"
+    {banners.map((promo, index) => (
+      <picture
+        class="hero-banner-img absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out"
         data-hero-banner
         data-active={index === 0 ? 'true' : 'false'}
-        loading={index === 0 ? 'eager' : 'lazy'}
-      />
+      >
+        <source srcset={promo.webp} type="image/webp" />
+        <img src={promo.fallback} alt={promo.alt} class="h-full w-full object-cover object-center" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+      </picture>
     ))}
   </div>
 
-  <!-- CAPA 2: overlay para legibilidad -->
+  
   <div
-    class="absolute inset-0 z-0 bg-gradient-to-r from-forest-950/85 via-forest-950/55 to-forest-950/30"
+    class="absolute inset-0 z-0 bg-linear-to-r from-forest-950/85 via-forest-950/55 to-forest-950/30"
     aria-hidden="true"
   ></div>
 
-  <!-- CAPA 4: fotografía Russula con marco arqueado -->
+  
   <div class="hero-media pointer-events-none absolute right-0 bottom-0 z-10" aria-hidden="true">
     <div class="hero-mascot-anchor">
       <Mascot width={120} />
     </div>
     <figure class="hero-frame">
-      <Image
+      <Picture fallbackFormat="jpg"
         src={russula}
         alt=""
         widths={[360, 520, 720]}
@@ -49,44 +55,43 @@ import { promotions } from '@/data/promotions';
     </figure>
   </div>
 
-  <!-- CAPA 3: contenido original -->
   <div class="container-editorial hero-inner relative z-20">
-    <div class="hero-copy max-w-[42rem]">
-      <div class="hero-meta mb-[clamp(1.4rem,3vh,2.4rem)] flex flex-wrap items-center gap-x-[1.4rem] gap-y-[0.8rem]">
-        <span class="eyebrow hero-eyebrow inline-flex items-center gap-[0.7rem] text-apple">
+    <div class="hero-copy max-w-2xl">
+      <div class="hero-meta mb-hero-meta flex flex-wrap items-center gap-x-hero-meta-x gap-y-hero-meta-y">
+        <span class="eyebrow hero-eyebrow inline-flex items-center gap-hero-buttons text-apple">
           Revista Micelio · Chile
         </span>
-        <span class="hero-issue font-mono text-[0.62rem] tracking-[0.12em] text-cream/55">
+        <span class="hero-issue font-mono text-micro tracking-editorial text-cream/55">
           N.º 003 — 2026
         </span>
       </div>
 
-      <h1 id="hero-title" class="hero-title type-display text-cream" style="font-size: clamp(3.4rem, 8.8vw, 8.6rem);">
-        <span class="hero-line block leading-[0.88]">
-          <span class="hero-word-mask inline-block overflow-hidden align-bottom pb-[0.12em] mb-[-0.12em]">
+      <h1 id="hero-title" class="hero-title type-display text-hero-title text-cream">
+        <span class="hero-line block leading-display">
+          <span class="hero-word-mask inline-block overflow-hidden align-bottom pb-hero-word -mb-hero-word">
             <span class="hero-word inline-block" data-hero-word>El</span>
           </span>
-          <span class="hero-word-mask inline-block overflow-hidden align-bottom pb-[0.12em] mb-[-0.12em]">
+          <span class="hero-word-mask inline-block overflow-hidden align-bottom pb-hero-word -mb-hero-word">
             <span class="hero-word inline-block" data-hero-word>universo</span>
           </span>
         </span>
-        <span class="hero-line hero-line--accent block leading-[0.88] text-apple pl-[clamp(0rem,2vw,2rem)]">
-          <span class="hero-word-mask inline-block overflow-hidden align-bottom pb-[0.12em] mb-[-0.12em]">
+        <span class="hero-line hero-line--accent block leading-display text-apple pl-hero-accent">
+          <span class="hero-word-mask inline-block overflow-hidden align-bottom pb-hero-word -mb-hero-word">
             <span class="hero-word italic inline-block" data-hero-word>invisible</span>
           </span>
-          <span class="hero-period inline-block ml-[0.04em] text-purple" data-hero-word>.</span>
+          <span class="hero-period inline-block ml-hero-period text-purple" data-hero-word>.</span>
         </span>
       </h1>
 
-      <p class="hero-description mt-[clamp(1.2rem,3vh,2rem)] max-w-[32rem] text-[clamp(1rem,1.2vw,1.15rem)] leading-[1.6] text-cream/72" data-hero-fade>
+      <p class="hero-description mt-hero-lede max-w-hero-description text-hero-description leading-hero-description text-cream/72" data-hero-fade>
         Ciencia, bosque y cultura desde el reino Fungi. Una revista para mirar lo que ocurre
         bajo nuestros pies.
       </p>
 
-      <div class="hero-actions mt-[clamp(1.6rem,3vh,2.4rem)] flex flex-wrap gap-[0.7rem]" data-hero-fade>
+      <div class="hero-actions mt-hero-actions flex flex-wrap gap-hero-buttons" data-hero-fade>
         <a href="/ediciones" class="btn btn--apple">
           Explorar ediciones
-          <svg viewBox="0 0 16 16" aria-hidden="true" class="h-[0.9rem] w-[0.9rem]">
+          <svg viewBox="0 0 16 16" aria-hidden="true" class="size-hero-icon">
             <path d="M3 13 13 3M5 3h8v8" fill="none" stroke="currentColor" stroke-width="1.3" />
           </svg>
         </a>
@@ -210,10 +215,6 @@ import { promotions } from '@/data/promotions';
     opacity: 0.6;
   }
 
-  .hero-word-mask {
-    /* keep */
-  }
-
   @media (prefers-reduced-motion: no-preference) {
     .js .hero-word {
       transform: translateY(112%);
@@ -241,10 +242,6 @@ import { promotions } from '@/data/promotions';
 
   .hero-inner {
     padding-block: clamp(8rem, 18vh, 11rem) clamp(3rem, 8vh, 6rem);
-  }
-
-  .hero-description {
-    /* spacing handled by classes */
   }
 
   @media (max-width: 899px) {

@@ -1,21 +1,19 @@
-import ayekan from "@/assets/sponsors/ayekan.png";
-import enfungados from "@/assets/sponsors/enfungados.jpg";
-import enraizaKine from "@/assets/sponsors/enraiza-kine.png";
-import fungiPuke from "@/assets/sponsors/fungi-puke.png";
-import inky from "@/assets/sponsors/inky.jpg";
-import losVrujos from "@/assets/sponsors/los-vrujos.png";
-import micovitae from "@/assets/sponsors/micovitae.png";
-import mykosfera from "@/assets/sponsors/mykosfera.png";
-import myssMushroom from "@/assets/sponsors/myss-mushroom.png";
-import orfebreriaFungi from "@/assets/sponsors/orfebreria-fungi.png";
-import ostraki from "@/assets/sponsors/ostraki.png";
-import setasDelCampo from "@/assets/sponsors/setas-del-campo.png";
-import solSinSol from "@/assets/sponsors/sol-sin-sol.png";
-import terracell from "@/assets/sponsors/terracell.png";
-import vegFem from "@/assets/sponsors/veg-fem.png";
+import ayekan from "@/assets/webp/sponsors/ayekan.webp";
+import enfungados from "@/assets/webp/sponsors/enfungados.webp";
+import enraizaKine from "@/assets/webp/sponsors/enraiza-kine.webp";
+import fungiPuke from "@/assets/webp/sponsors/fungi-puke.webp";
+import inky from "@/assets/webp/sponsors/inky.webp";
+import losVrujos from "@/assets/webp/sponsors/los-vrujos.webp";
+import micovitae from "@/assets/webp/sponsors/micovitae.webp";
+import mykosfera from "@/assets/webp/sponsors/mykosfera.webp";
+import myssMushroom from "@/assets/webp/sponsors/myss-mushroom.webp";
+import orfebreriaFungi from "@/assets/webp/sponsors/orfebreria-fungi.webp";
+import ostraki from "@/assets/webp/sponsors/ostraki.webp";
+import setasDelCampo from "@/assets/webp/sponsors/setas-del-campo.webp";
+import solSinSol from "@/assets/webp/sponsors/sol-sin-sol.webp";
+import terracell from "@/assets/webp/sponsors/terracell.webp";
+import vegFem from "@/assets/webp/sponsors/veg-fem.webp";
 
-// Auspiciadores verificados en revistamicelio.cl (marzo 2026).
-// Logos y nombres provienen del carrusel oficial de auspiciadores.
 export const sponsors = [
   {
     name: "Inky Vegan",

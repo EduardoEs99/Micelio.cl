@@ -1,9 +1,9 @@
-import braun from "@/assets/editorial/braun.jpg";
-import cantillana from "@/assets/editorial/cantillana.jpg";
-import dinelly from "@/assets/editorial/dinelly.jpg";
-import kombuferia from "@/assets/editorial/kombuferia.jpg";
-import russula from "@/assets/editorial/russula.jpg";
-import yerko from "@/assets/editorial/yerko.jpg";
+import braun from "@/assets/webp/editorial/braun.webp";
+import cantillana from "@/assets/webp/editorial/cantillana.webp";
+import dinelly from "@/assets/webp/editorial/dinelly.webp";
+import kombuferia from "@/assets/webp/editorial/kombuferia.webp";
+import russula from "@/assets/webp/editorial/russula.webp";
+import yerko from "@/assets/webp/editorial/yerko.webp";
 
 export const articles = [
   {

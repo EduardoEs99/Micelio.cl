@@ -3,9 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHeader from '@/components/editorial/PageHeader.astro';
 import EditionCard from '@/components/editorial/EditionCard.astro';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
-import { Image } from 'astro:assets';
-import ed003Impreso from '@/assets/covers/ed003-impresa.png';
-import ed003Online from '@/assets/covers/ed003-online.png';
+import { Picture } from 'astro:assets';
+import ed003Impreso from '@/assets/webp/covers/ed003-impresa.webp';
+import ed003Online from '@/assets/webp/covers/ed003-online.webp';
 import { editions } from '@/data/editions';
 
 const numbers = ['003', '002', '001'];
@@ -16,39 +16,12 @@ const groups = numbers
   }))
   .filter((group) => group.items.length > 0);
 
-const listSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Ediciones de Revista Micelio',
-  itemListElement: editions.map((edition, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    item: {
-      '@type': 'Product',
-      name: edition.title,
-      description: edition.summary,
-      url: `https://revistamicelio.cl/ediciones/${edition.slug}`,
-      offers: {
-        '@type': 'Offer',
-        price: edition.price,
-        priceCurrency: 'CLP',
-        availability:
-          edition.status === 'Agotada'
-            ? 'https://schema.org/OutOfStock'
-            : edition.status === 'Preventa'
-              ? 'https://schema.org/PreOrder'
-              : 'https://schema.org/InStock',
-      },
-    },
-  })),
-};
 ---
 
 <BaseLayout
   title="Ediciones — Revista Micelio"
-  description="Ediciones impresas y digitales de Revista Micelio: números 001, 002 y 003, con precios, disponibilidad y enlaces de consulta."
+ 
 >
-  <script type="application/ld+json" set:html={JSON.stringify(listSchema)} slot="head" />
 
   <PageHeader
     index="02"
@@ -62,7 +35,7 @@ const listSchema = {
   >
     <div slot="aside" class="editions-stack">
       <figure class="editions-stack__item editions-stack__item--back">
-        <Image
+        <Picture fallbackFormat="jpg"
           src={ed003Online}
           alt="Edición 003 de Revista Micelio en formato digital"
           widths={[360, 560]}
@@ -71,7 +44,7 @@ const listSchema = {
         />
       </figure>
       <figure class="editions-stack__item editions-stack__item--front">
-        <Image
+        <Picture fallbackFormat="jpg"
           src={ed003Impreso}
           alt="Portada de la edición 003 impresa de Revista Micelio"
           widths={[420, 680]}

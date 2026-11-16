@@ -59,12 +59,12 @@ export default function CartTrigger() {
           aria-label="Abrir lista de interés"
         >
           <ShoppingBag
-            className="size-[1.05rem]"
+            className="size-4"
             strokeWidth={1.6}
             aria-hidden="true"
           />
           {items.length > 0 && (
-            <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-purple font-mono text-[0.55rem] font-medium text-paper">
+            <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-purple font-mono text-nano font-medium text-paper">
               {items.length}
             </span>
           )}
@@ -129,7 +129,7 @@ export default function CartTrigger() {
                     <p className="font-display text-xl leading-tight">
                       {item.title}
                     </p>
-                    <p className="mt-1 font-mono text-[0.62rem] uppercase tracking-widest text-muted-foreground">
+                    <p className="mt-1 font-mono text-micro uppercase tracking-widest text-muted-foreground">
                       {item.format}
                     </p>
                     <p className="mt-2 text-sm font-medium">
@@ -137,7 +137,7 @@ export default function CartTrigger() {
                     </p>
                     <a
                       href="/#contacto"
-                      className="mt-2 inline-flex items-center gap-1 font-mono text-[0.6rem] uppercase tracking-widest text-forest-700 underline underline-offset-2"
+                      className="mt-2 inline-flex items-center gap-1 font-mono text-eyebrow uppercase tracking-widest text-forest-700 underline underline-offset-2"
                     >
                       Consultar disponibilidad
                       <ArrowUpRight
@@ -164,7 +164,7 @@ export default function CartTrigger() {
         {items.length > 0 && (
           <SheetFooter className="mt-0 gap-3 border-t border-line bg-bone/50 p-6">
             <div className="flex items-baseline justify-between gap-4">
-              <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted-foreground">
+              <span className="font-mono text-tiny uppercase tracking-editorial text-muted-foreground">
                 Total referencial
               </span>
               <span className="font-display text-2xl">{formatCLP(total)}</span>
@@ -183,12 +183,12 @@ export default function CartTrigger() {
               <button
                 type="button"
                 onClick={() => interestList.clear()}
-                className="font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground hover:text-destructive"
+                className="font-mono text-eyebrow uppercase tracking-widest text-muted-foreground hover:text-destructive"
               >
                 Vaciar
               </button>
             </div>
-            <p className="text-[0.68rem] leading-relaxed text-muted-foreground">
+            <p className="text-tiny leading-relaxed text-muted-foreground">
               Este sitio no procesa pagos. La compra se confirma por correo con
               el equipo editorial.
             </p>

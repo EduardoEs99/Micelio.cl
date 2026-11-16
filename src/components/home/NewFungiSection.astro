@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 import { articles } from '@/data/articles';
 
@@ -47,7 +47,7 @@ const secondary = rest.slice(0, 3);
         data-reveal-item
         aria-label={`Leer ${featured.title} en revistamicelio.cl`}
       >
-        <Image
+        <Picture fallbackFormat="jpg"
           src={featured.image}
           alt={featured.imageAlt}
           widths={[480, 800, 1100]}
@@ -102,7 +102,7 @@ const secondary = rest.slice(0, 3);
           <span class="fungi-row__date">{article.displayDate}</span>
           <span class="fungi-row__title">{article.title}</span>
           <span class="fungi-row__thumb">
-            <Image
+            <Picture fallbackFormat="jpg"
               src={article.image}
               alt=""
               widths={[160, 240]}

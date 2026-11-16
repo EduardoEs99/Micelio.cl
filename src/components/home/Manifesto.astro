@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import niscalo from '@/assets/illustrations/niscalo.png';
+import { Picture } from 'astro:assets';
+import niscalo from '@/assets/webp/illustrations/niscalo.webp';
 import SectionMarker from '@/components/editorial/SectionMarker.astro';
 
 const pillars = [
@@ -31,7 +31,7 @@ const pillars = [
       <div class="manifesto-art" data-reveal>
         <span class="manifesto-art__index" aria-hidden="true">F/01</span>
         <div class="manifesto-art__frame">
-          <Image
+          <Picture fallbackFormat="jpg"
             src={niscalo}
             alt="Ilustración editorial de un hongo anaranjado"
             widths={[320, 520, 760]}

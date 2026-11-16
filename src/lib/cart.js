@@ -48,7 +48,6 @@ const commit = (items) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
-      // Storage can be unavailable in private mode; the list still works in memory.
     }
   }
   emit();

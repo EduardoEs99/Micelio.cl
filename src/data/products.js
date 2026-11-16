@@ -1,11 +1,11 @@
-import guiaAustral from "@/assets/products/guia-austral.png";
-import guiaCentral from "@/assets/products/guia-central.png";
-import guiaDesertica from "@/assets/products/guia-desertica.png";
-import guiaSur from "@/assets/products/guia-sur.png";
-import guiaToxica from "@/assets/products/guia-toxica.png";
-import packGuia from "@/assets/products/pack-guia.png";
-import pack2 from "@/assets/covers/pack-2.png";
-import pack3 from "@/assets/covers/pack-3.png";
+import guiaAustral from "@/assets/webp/products/guia-austral.webp";
+import guiaCentral from "@/assets/webp/products/guia-central.webp";
+import guiaDesertica from "@/assets/webp/products/guia-desertica.webp";
+import guiaSur from "@/assets/webp/products/guia-sur.webp";
+import guiaToxica from "@/assets/webp/products/guia-toxica.webp";
+import packGuia from "@/assets/webp/products/pack-guia.webp";
+import pack2 from "@/assets/webp/covers/pack-2.webp";
+import pack3 from "@/assets/webp/covers/pack-3.webp";
 
 export const products = [
   {

@@ -111,14 +111,14 @@ export default function SearchDialog({ items }) {
           className="icon-btn header-search-trigger"
           aria-label="Buscar en el sitio"
         >
-          <Search className="size-[1.05rem]" strokeWidth={1.6} aria-hidden="true" />
-          <span className="hidden text-[0.6875rem] font-medium uppercase tracking-[0.12em] lg:inline">
+          <Search className="size-4" strokeWidth={1.6} aria-hidden="true" />
+          <span className="hidden text-tiny font-medium uppercase tracking-editorial lg:inline">
             Buscar
           </span>
         </button>
       </DialogTrigger>
       <DialogContent
-        className="top-[10%] max-h-[82vh] w-[calc(100%-1.5rem)] max-w-3xl translate-y-0 gap-0 overflow-hidden rounded-lg border border-line bg-paper p-0 text-ink shadow-2xl sm:max-w-3xl"
+        className="top-1/12 max-h-gallery w-11/12 max-w-3xl translate-y-0 gap-0 overflow-hidden rounded-lg border border-line bg-paper p-0 text-ink shadow-2xl sm:max-w-3xl"
         onOpenAutoFocus={(event) => {
           event.preventDefault();
           inputRef.current?.focus();
@@ -157,12 +157,12 @@ export default function SearchDialog({ items }) {
         </div>
 
         <div
-          className="max-h-[48vh] overflow-y-auto p-2 sm:p-3"
+          className="max-h-mobile-dialog overflow-y-auto p-2 sm:p-3"
           aria-label="Resultados"
         >
           {isIdle && (
             <div className="px-3 py-4 sm:px-4">
-              <p className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
+              <p className="font-mono text-eyebrow uppercase tracking-editorial-wide text-muted-foreground">
                 Búsquedas recomendadas
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -185,7 +185,7 @@ export default function SearchDialog({ items }) {
 
           {isSuggesting && (
             <div className="px-3 py-4 sm:px-4">
-              <p className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
+              <p className="font-mono text-eyebrow uppercase tracking-editorial-wide text-muted-foreground">
                 Sugerencias
               </p>
               {suggestions.length === 0 ? (
@@ -229,11 +229,11 @@ export default function SearchDialog({ items }) {
                   index === activeIndex ? 'bg-bone/80' : 'hover:bg-bone/50'
                 }`}
               >
-                <span className="mt-1 hidden shrink-0 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-forest-700 sm:block">
+                <span className="mt-1 hidden shrink-0 font-mono text-eyebrow uppercase tracking-editorial text-forest-700 sm:block">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="mb-1 block font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
+                  <span className="mb-1 block font-mono text-eyebrow uppercase tracking-editorial-wide text-muted-foreground">
                     {item.group}
                   </span>
                   <span className="block font-display text-lg leading-tight">{item.title}</span>
@@ -256,7 +256,7 @@ export default function SearchDialog({ items }) {
           )}
         </div>
 
-        <div className="flex items-center justify-between border-t border-line px-5 py-3 font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground">
+        <div className="flex items-center justify-between border-t border-line px-5 py-3 font-mono text-eyebrow uppercase tracking-widest text-muted-foreground">
           <span>↑ ↓ para navegar · Enter para abrir</span>
           <span>Esc para cerrar</span>
         </div>

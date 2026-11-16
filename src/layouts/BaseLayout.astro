@@ -7,9 +7,6 @@ import { site } from '@/data/site';
 
 interface Props {
   title?: string;
-  description?: string;
-  image?: string;
-  noindex?: boolean;
   transparentHeader?: boolean;
   headerTheme?: 'light' | 'dark';
   bodyClass?: string;
@@ -17,28 +14,12 @@ interface Props {
 
 const {
   title = site.title,
-  description = site.description,
-  image = '/og-micelio.jpg',
-  noindex = false,
   transparentHeader = false,
   headerTheme = 'light',
   bodyClass = '',
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://revistamicelio.cl');
-const ogImage = new URL(image, Astro.site ?? 'https://revistamicelio.cl');
 const fullTitle = title.includes('Revista Micelio') ? title : `${title} — Revista Micelio`;
-
-const organization = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Revista Micelio',
-  alternateName: 'Micelio',
-  url: 'https://revistamicelio.cl',
-  logo: 'https://revistamicelio.cl/favicon.svg',
-  email: 'editorial@revistamicelio.cl',
-  sameAs: [site.instagram, site.youtube],
-};
 ---
 
 <!doctype html>
@@ -50,30 +31,11 @@ const organization = {
       document.documentElement.classList.add('js');
     </script>
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
     <meta name="theme-color" content="#153226" />
     <meta name="color-scheme" content="light" />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="alternate" hreflang="es-CL" href={canonical} />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Revista Micelio" />
-    <meta property="og:locale" content="es_CL" />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content="Revista Micelio — el universo invisible" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-
-    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
-    <slot name="head" />
   </head>
   <body class:list={[bodyClass, transparentHeader && 'has-transparent-header']}>
     <a
@@ -193,7 +155,6 @@ const organization = {
         document.documentElement.classList.remove('js');
       }
 
-      // Safety net: editorial content must never stay hidden if motion setup fails.
       window.setTimeout(() => {
         document.querySelectorAll<HTMLElement>('[data-reveal], [data-reveal-item]').forEach((element) => {
           if (getComputedStyle(element).opacity === '0') {

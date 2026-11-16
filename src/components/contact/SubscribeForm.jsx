@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { contactEmail, mailtoFor } from "@/lib/contact";
 
 const fieldClass =
-  "h-12 rounded-none border-line bg-paper/80 px-4 text-[0.95rem] shadow-none placeholder:text-muted-foreground/70 focus-visible:border-forest-700 focus-visible:ring-forest-700/20 md:text-[0.95rem]";
+  "h-12 rounded-none border-line bg-paper/80 px-4 text-base shadow-none placeholder:text-muted-foreground/70 focus-visible:border-forest-700 focus-visible:ring-forest-700/20 md:text-base";
 
 export default function SubscribeForm({ context = "novedades" }) {
   const [nombre, setNombre] = useState("");
@@ -120,7 +120,7 @@ export default function SubscribeForm({ context = "novedades" }) {
         <button
           type="button"
           onClick={() => setStatus({ state: "idle" })}
-          className="mt-5 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-apple underline underline-offset-4"
+          className="mt-5 font-mono text-eyebrow uppercase tracking-editorial text-apple underline underline-offset-4"
         >
           Suscribir otro correo
         </button>
@@ -151,7 +151,7 @@ export default function SubscribeForm({ context = "novedades" }) {
               {status.fallback && (
                 <a
                   href={fallbackHref}
-                  className="mt-2 inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-widest underline underline-offset-4"
+                  className="mt-2 inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-widest underline underline-offset-4"
                 >
                   Escribir a {contactEmail}
                   <ArrowUpRight
@@ -205,7 +205,7 @@ export default function SubscribeForm({ context = "novedades" }) {
         )}
       </div>
 
-      <label className="flex items-start gap-3 text-[0.78rem] leading-relaxed text-muted-foreground">
+      <label className="flex items-start gap-3 text-xs leading-relaxed text-muted-foreground">
         <input
           type="checkbox"
           checked={consent}
@@ -255,7 +255,7 @@ export default function SubscribeForm({ context = "novedades" }) {
         )}
       </button>
 
-      <p className="text-[0.68rem] leading-relaxed text-muted-foreground">
+      <p className="text-tiny leading-relaxed text-muted-foreground">
         Sin envíos automáticos si la integración no está configurada: en ese
         caso verás un aviso y podrás escribir al correo editorial.
       </p>

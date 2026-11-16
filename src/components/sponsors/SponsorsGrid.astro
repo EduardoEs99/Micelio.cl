@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { sponsors } from '@/data/sponsors';
 ---
 
@@ -24,7 +24,7 @@ import { sponsors } from '@/data/sponsors';
               rel="noopener noreferrer"
               aria-label={sponsor.name}
             >
-              <Image
+              <Picture fallbackFormat="jpg"
                 src={sponsor.logo}
                 alt={sponsor.name}
                 widths={[120, 180]}
@@ -35,7 +35,7 @@ import { sponsors } from '@/data/sponsors';
             </a>
           ) : (
             <div class="sponsors-grid__card sponsors-grid__card--static" aria-label={sponsor.name}>
-              <Image
+              <Picture fallbackFormat="jpg"
                 src={sponsor.logo}
                 alt={sponsor.name}
                 widths={[120, 180]}

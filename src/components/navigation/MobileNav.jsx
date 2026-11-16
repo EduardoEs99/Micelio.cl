@@ -72,7 +72,7 @@ export default function MobileNav({
         <div className="flex h-full min-h-dvh flex-col overflow-y-auto">
           <div className="flex items-center justify-between border-b border-cream/15 px-5 py-5">
             <div>
-              <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-apple">
+              <p className="font-mono text-eyebrow uppercase tracking-editorial-widest text-apple">
                 Revista Micelio
               </p>
               <p className="mt-1 text-xs text-cream/50">
@@ -110,11 +110,11 @@ export default function MobileNav({
                       className="group flex items-baseline gap-4 py-4"
                       aria-current={active ? "page" : undefined}
                     >
-                      <span className="font-mono text-[0.6rem] tracking-[0.12em] text-apple/70">
+                      <span className="font-mono text-eyebrow tracking-editorial text-apple/70">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span
-                        className={`font-display text-[clamp(2rem,8vw,3.2rem)] leading-[0.95] tracking-[-0.02em] transition-colors ${
+                        className={`font-display text-mobile-nav leading-nav tracking-tight transition-colors ${
                           active
                             ? "text-apple"
                             : "text-cream group-hover:text-apple"
@@ -196,7 +196,7 @@ export default function MobileNav({
             </div>
             <a
               href={`mailto:${email}`}
-              className="mt-4 block font-mono text-[0.62rem] tracking-[0.06em] text-cream/40 hover:text-apple"
+              className="mt-4 block font-mono text-micro tracking-wider text-cream/40 hover:text-apple"
             >
               {email}
             </a>

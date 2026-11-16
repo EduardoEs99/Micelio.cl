@@ -29,6 +29,46 @@
   --color-bone: #ede8da;
   --color-ink: #171a17;
   --color-line: #d9d3c4;
+
+  --container-hero-description: 32rem;
+  --spacing-hero-word: 0.12em;
+  --spacing-hero-meta: clamp(1.4rem, 3vh, 2.4rem);
+  --spacing-hero-lede: clamp(1.2rem, 3vh, 2rem);
+  --spacing-hero-actions: clamp(1.6rem, 3vh, 2.4rem);
+  --spacing-hero-accent: clamp(0rem, 2vw, 2rem);
+  --spacing-hero-meta-x: 1.4rem;
+  --spacing-hero-meta-y: 0.8rem;
+  --spacing-hero-buttons: 0.7rem;
+  --spacing-hero-period: 0.04em;
+  --spacing-hero-icon: 0.9rem;
+  --text-nano: 0.55rem;
+  --text-eyebrow: 0.6rem;
+  --text-micro: 0.62rem;
+  --text-tiny: 0.68rem;
+  --text-hero-description: clamp(1rem, 1.2vw, 1.15rem);
+  --text-hero-title: clamp(3.4rem, 8.8vw, 8.6rem);
+  --text-footer-lead: clamp(1.35rem, 2.2vw, 2rem);
+  --text-mobile-nav: clamp(2rem, 8vw, 3.2rem);
+  --tracking-editorial: 0.12em;
+  --tracking-editorial-wide: 0.14em;
+  --tracking-editorial-wider: 0.16em;
+  --tracking-editorial-widest: 0.18em;
+  --leading-display: 0.88;
+  --leading-hero-description: 1.6;
+  --leading-nav: 0.95;
+  --font-weight-editorial: 330;
+}
+
+@utility max-h-popover {
+  max-height: min(15rem, var(--radix-popover-content-available-height));
+}
+
+@utility max-h-gallery {
+  max-height: 82vh;
+}
+
+@utility max-h-mobile-dialog {
+  max-height: 48vh;
 }
 
 @theme inline {
@@ -80,6 +120,10 @@
 }
 
 @layer base {
+  picture:not([class]) {
+    display: contents;
+  }
+
   * {
     @apply border-border;
     min-width: 0;
@@ -136,10 +180,6 @@
     cursor: pointer;
   }
 }
-
-/* ------------------------------------------------------------------ */
-/* Editorial primitives                                               */
-/* ------------------------------------------------------------------ */
 
 @layer components {
   .container-editorial {
@@ -342,10 +382,6 @@
   }
 }
 
-/* ------------------------------------------------------------------ */
-/* Motion scaffolding                                                 */
-/* ------------------------------------------------------------------ */
-
 .js [data-reveal] {
   opacity: 0;
 }
@@ -405,7 +441,7 @@
     }
   }
 
-  /* Form primitives shared by the contact and subscription islands. */
+  
   .field {
     display: flex;
     flex-direction: column;

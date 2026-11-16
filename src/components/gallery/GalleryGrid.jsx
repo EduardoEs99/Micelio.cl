@@ -61,7 +61,6 @@ export default function GalleryGrid({ items }) {
         step(-1);
       }
       if (event.key === "Tab") {
-        // Keep focus inside the dialog. Only a few controls exist, so a simple trap is enough.
         const dialog = document.getElementById("gallery-lightbox");
         if (!dialog) return;
         const focusable = dialog.querySelectorAll("button, [href]");
@@ -111,15 +110,19 @@ export default function GalleryGrid({ items }) {
               className="relative block w-full cursor-zoom-in overflow-hidden border border-cream/15 bg-forest-950"
               aria-label={`Ampliar fotografía: ${item.alt}`}
             >
-              <img
-                src={item.thumb}
-                alt={item.alt}
-                loading={index < 3 ? "eager" : "lazy"}
-                className={cn(
-                  "block w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105",
-                  index === 0 ? "aspect-16/8" : "aspect-4/3",
-                )}
-              />
+              <picture>
+                <source srcSet={item.thumbWebp} type="image/webp" />
+                <img
+                  src={item.thumbFallback}
+                  alt={item.alt}
+                  loading={index < 3 ? "eager" : "lazy"}
+                  decoding="async"
+                  className={cn(
+                    "block w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105",
+                    index === 0 ? "aspect-16/8" : "aspect-4/3",
+                  )}
+                />
+              </picture>
               <span
                 className="absolute inset-0 bg-linear-to-t from-forest-950/55 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
                 aria-hidden="true"
@@ -131,13 +134,13 @@ export default function GalleryGrid({ items }) {
                 <Maximize2 className="size-4" strokeWidth={1.4} />
               </span>
               <span
-                className="absolute top-3 left-3 z-10 font-mono text-[0.55rem] tracking-widest text-cream/60"
+                className="absolute top-3 left-3 z-10 font-mono text-nano tracking-widest text-cream/60"
                 aria-hidden="true"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
             </button>
-            <figcaption className="flex flex-col gap-0.5 pt-2 font-mono text-[0.54rem] tracking-wider uppercase md:flex-row md:items-baseline md:justify-between md:gap-4">
+            <figcaption className="flex flex-col gap-0.5 pt-2 font-mono text-nano tracking-wider uppercase md:flex-row md:items-baseline md:justify-between md:gap-4">
               <span className="text-cream">{item.caption}</span>
               <span className="text-cream/40 md:text-right">{item.credit}</span>
             </figcaption>
@@ -157,7 +160,7 @@ export default function GalleryGrid({ items }) {
           }}
         >
           <div className="flex shrink-0 items-center justify-between gap-4">
-            <span className="font-mono text-[0.62rem] tracking-widest text-apple">
+            <span className="font-mono text-micro tracking-widest text-apple">
               {String(openIndex + 1).padStart(2, "0")} /{" "}
               {String(items.length).padStart(2, "0")}
             </span>
@@ -183,12 +186,16 @@ export default function GalleryGrid({ items }) {
             </button>
 
             <figure className="flex h-full min-h-0 w-full flex-col items-center justify-center gap-3">
-              <img
-                src={current.src}
-                alt={current.alt}
-                className="max-h-full max-w-full border border-cream/15 object-contain"
-              />
-              <figcaption className="flex w-full max-w-5xl flex-wrap justify-between gap-x-8 gap-y-1 font-mono text-[0.56rem] tracking-wider uppercase">
+              <picture className="flex min-h-0 flex-1 items-center justify-center">
+                <source srcSet={current.srcWebp} type="image/webp" />
+                <img
+                  src={current.srcFallback}
+                  alt={current.alt}
+                  decoding="async"
+                  className="max-h-full max-w-full border border-cream/15 object-contain"
+                />
+              </picture>
+              <figcaption className="flex w-full max-w-5xl flex-wrap justify-between gap-x-8 gap-y-1 font-mono text-nano tracking-wider uppercase">
                 <span>{current.caption}</span>
                 <span className="text-cream/40">{current.credit}</span>
               </figcaption>
@@ -204,7 +211,7 @@ export default function GalleryGrid({ items }) {
             </button>
           </div>
 
-          <p className="hidden shrink-0 text-center font-mono text-[0.54rem] tracking-wider text-cream/30 uppercase md:block">
+          <p className="hidden shrink-0 text-center font-mono text-nano tracking-wider text-cream/30 uppercase md:block">
             Usa las flechas ← → para recorrer · Esc para cerrar
           </p>
         </div>

@@ -1,9 +1,9 @@
-import ed001Impreso from "@/assets/covers/ed001-impresa.png";
-import ed001Online from "@/assets/covers/ed001-online.png";
-import ed002Impreso from "@/assets/covers/ed002-impresa.png";
-import ed002Online from "@/assets/covers/ed002-online.png";
-import ed003Impreso from "@/assets/covers/ed003-impresa.png";
-import ed003Online from "@/assets/covers/ed003-online.png";
+import ed001Impreso from "@/assets/webp/covers/ed001-impresa.webp";
+import ed001Online from "@/assets/webp/covers/ed001-online.webp";
+import ed002Impreso from "@/assets/webp/covers/ed002-impresa.webp";
+import ed002Online from "@/assets/webp/covers/ed002-online.webp";
+import ed003Impreso from "@/assets/webp/covers/ed003-impresa.webp";
+import ed003Online from "@/assets/webp/covers/ed003-online.webp";
 
 export const editions = [
   {
