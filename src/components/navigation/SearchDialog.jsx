@@ -23,7 +23,6 @@ export default function SearchDialog({ items }) {
 
   const term = normalize(query);
 
-  // Corpus de sugerencias de texto (autocompletado), no enlaces.
   const suggestionCorpus = useMemo(() => {
     const set = new Set();
     recommended.forEach((value) => set.add(value));
@@ -59,21 +58,19 @@ export default function SearchDialog({ items }) {
   const isNoResults = !!submitted && results.length === 0;
 
   useEffect(() => {
-    if (!open) return;
+    setActiveIndex(0);
+  }, [query, submitted]);
+
+  useEffect(() => {
+    if (!open) {
+      setQuery('');
+      setSubmitted('');
+      setActiveIndex(0);
+      return;
+    }
     const timer = window.setTimeout(() => inputRef.current?.focus(), 50);
     return () => window.clearTimeout(timer);
   }, [open]);
-
-  useEffect(() => {
-    if (open) return;
-    setQuery('');
-    setSubmitted('');
-    setActiveIndex(0);
-  }, [open]);
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [query, submitted]);
 
   const runSearch = (value) => {
     const next = (value ?? query).trim();
@@ -111,75 +108,90 @@ export default function SearchDialog({ items }) {
       <DialogTrigger asChild>
         <button
           type="button"
+          className="icon-btn header-search-trigger"
           aria-label="Buscar en el sitio"
-          className="header-search-trigger"
         >
-          <Search className="size-4" aria-hidden="true" />
+          <Search className="size-[1.05rem]" strokeWidth={1.6} aria-hidden="true" />
+          <span className="hidden text-[0.6875rem] font-medium uppercase tracking-[0.12em] lg:inline">
+            Buscar
+          </span>
         </button>
       </DialogTrigger>
-      <DialogContent className="max-w-3xl gap-0 overflow-hidden p-0">
-        <DialogHeader className="sr-only">
-          <DialogTitle>Buscar en el sitio</DialogTitle>
-          <DialogDescription>Busca páginas, ediciones y artículos de Revista Micelio.</DialogDescription>
+      <DialogContent
+        className="top-[10%] max-h-[82vh] w-[calc(100%-1.5rem)] max-w-3xl translate-y-0 gap-0 overflow-hidden rounded-lg border border-line bg-paper p-0 text-ink shadow-2xl sm:max-w-3xl"
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+          inputRef.current?.focus();
+        }}
+      >
+        <DialogHeader className="gap-2 border-b border-line px-5 pb-4 pt-5 sm:px-7">
+          <p className="eyebrow text-forest-700">Buscar en Micelio</p>
+          <DialogTitle className="type-display text-3xl sm:text-4xl">
+            ¿Qué quieres descubrir?
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            Busca ediciones, artículos, guías y páginas de Revista Micelio.
+          </DialogDescription>
         </DialogHeader>
 
-        <div className="flex items-center gap-3 border-b border-line px-4 py-3">
-          <Search className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-          <Input
-            ref={inputRef}
-            value={query}
-            onChange={(event) => {
-              setQuery(event.target.value);
-              setSubmitted('');
-            }}
-            onKeyDown={handleKeyDown}
-            placeholder="Buscar..."
-            aria-label="Término de búsqueda"
-            className="h-9 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
-          />
-          <button
-            type="button"
-            onClick={() => runSearch()}
-            className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Buscar
-          </button>
+        <div className="border-b border-line px-4 py-3 sm:px-6">
+          <div className="relative">
+            <Search
+              className="pointer-events-none absolute left-0 top-1/2 size-5 -translate-y-1/2 text-forest-700"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
+            <Input
+              ref={inputRef}
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setSubmitted('');
+              }}
+              onKeyDown={handleKeyDown}
+              placeholder="Busca ediciones, funga, entrevistas…"
+              aria-label="Término de búsqueda"
+              className="h-12 rounded-none border-0 bg-transparent pl-8 text-base shadow-none focus-visible:ring-0 dark:bg-transparent"
+            />
+          </div>
         </div>
 
-        <div className="max-h-[60vh] overflow-y-auto px-2 py-3">
+        <div
+          className="max-h-[48vh] overflow-y-auto p-2 sm:p-3"
+          aria-label="Resultados"
+        >
           {isIdle && (
-            <div>
-              <p className="px-2 pb-2 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="px-3 py-4 sm:px-4">
+              <p className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
                 Búsquedas recomendadas
               </p>
-              <ul className="flex flex-wrap gap-2 px-2">
+              <div className="mt-3 flex flex-wrap gap-2">
                 {recommended.map((value) => (
-                  <li key={value}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setQuery(value);
-                        setSubmitted(value);
-                      }}
-                      className="rounded-full border border-line px-3 py-1.5 text-sm text-foreground transition-colors hover:border-forest-700 hover:text-forest-700"
-                    >
-                      {value}
-                    </button>
-                  </li>
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => {
+                      setQuery(value);
+                      setSubmitted(value);
+                    }}
+                    className="rounded-full border border-line px-3 py-1.5 text-sm text-forest-800 transition-colors hover:border-forest-700 hover:bg-bone/60"
+                  >
+                    {value}
+                  </button>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
 
           {isSuggesting && (
-            <div>
-              <p className="px-2 pb-2 font-mono text-[0.55rem] uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="px-3 py-4 sm:px-4">
+              <p className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
                 Sugerencias
               </p>
               {suggestions.length === 0 ? (
-                <p className="px-2 py-4 text-sm text-muted-foreground">Sin sugerencias.</p>
+                <p className="mt-3 text-sm text-muted-foreground">Sin sugerencias.</p>
               ) : (
-                <ul>
+                <ul className="mt-2">
                   {suggestions.map((value, index) => (
                     <li key={value}>
                       <button
@@ -190,10 +202,10 @@ export default function SearchDialog({ items }) {
                           inputRef.current?.focus();
                         }}
                         className={`flex w-full items-center gap-3 rounded-md px-2 py-2 text-left text-sm transition-colors ${
-                          index === activeIndex ? 'bg-muted text-foreground' : 'text-foreground hover:bg-muted/60'
+                          index === activeIndex ? 'bg-bone/80 text-ink' : 'text-ink hover:bg-bone/50'
                         }`}
                       >
-                        <Search className="size-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                        <Search className="size-3.5 shrink-0 text-forest-700" aria-hidden="true" />
                         <span>{value}</span>
                       </button>
                     </li>
@@ -203,38 +215,50 @@ export default function SearchDialog({ items }) {
             </div>
           )}
 
-          {isResults && (
-            <ul>
-              {results.map((item, index) => (
-                <li key={`${item.href}-${index}`}>
-                  <a
-                    href={item.href}
-                    target={item.external ? '_blank' : undefined}
-                    rel={item.external ? 'noopener noreferrer' : undefined}
-                    className={`flex items-start gap-3 rounded-md px-2 py-3 transition-colors ${
-                      index === activeIndex ? 'bg-muted' : 'hover:bg-muted/60'
-                    }`}
-                    onClick={() => setOpen(false)}
-                  >
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-foreground">{item.title}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{item.description}</p>
-                    </div>
-                    <span className="mt-0.5 font-mono text-[0.55rem] uppercase tracking-[0.12em] text-muted-foreground">
-                      {item.group}
-                    </span>
-                    <ArrowUpRight className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+          {isResults &&
+            results.map((item, index) => (
+              <a
+                key={`${item.group}-${item.title}`}
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                onClick={() => setOpen(false)}
+                onMouseEnter={() => setActiveIndex(index)}
+                aria-current={index === activeIndex ? 'true' : undefined}
+                className={`group flex items-start gap-4 rounded-md px-3 py-3 transition-colors sm:px-4 ${
+                  index === activeIndex ? 'bg-bone/80' : 'hover:bg-bone/50'
+                }`}
+              >
+                <span className="mt-1 hidden shrink-0 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-forest-700 sm:block">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="mb-1 block font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    {item.group}
+                  </span>
+                  <span className="block font-display text-lg leading-tight">{item.title}</span>
+                  <span className="mt-1 line-clamp-1 block text-xs text-muted-foreground">
+                    {item.description}
+                  </span>
+                </span>
+                <ArrowUpRight
+                  className="mt-1 size-4 shrink-0 text-forest-700 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+              </a>
+            ))}
 
           {isNoResults && (
-            <p className="px-2 py-6 text-center text-sm text-muted-foreground">
+            <p className="px-4 py-10 text-center font-display text-xl">
               No encontramos resultados para esta búsqueda.
             </p>
           )}
+        </div>
+
+        <div className="flex items-center justify-between border-t border-line px-5 py-3 font-mono text-[0.6rem] uppercase tracking-widest text-muted-foreground">
+          <span>↑ ↓ para navegar · Enter para abrir</span>
+          <span>Esc para cerrar</span>
         </div>
       </DialogContent>
     </Dialog>

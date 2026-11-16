@@ -32,7 +32,9 @@ import { promotions } from '@/data/promotions';
 
   <!-- CAPA 4: fotografía Russula con marco arqueado -->
   <div class="hero-media pointer-events-none absolute right-0 bottom-0 z-10" aria-hidden="true">
-    <Mascot width={120} class="hero-mascot" />
+    <div class="hero-mascot-anchor">
+      <Mascot width={120} />
+    </div>
     <figure class="hero-frame">
       <Image
         src={russula}
@@ -158,12 +160,12 @@ import { promotions } from '@/data/promotions';
     height: min(52vh, 540px);
   }
 
-  .hero-mascot {
+  .hero-mascot-anchor {
     position: absolute;
-    left: -3.2rem;
-    bottom: 0.5rem;
-    z-index: 0;
-    opacity: 0.9;
+    left: -6.75rem;
+    bottom: clamp(1rem, 5%, 2.5rem);
+    z-index: 2;
+    pointer-events: none;
   }
 
   .hero-frame {
@@ -253,12 +255,19 @@ import { promotions } from '@/data/promotions';
       opacity: 0.55;
     }
 
-    .hero-mascot {
-      display: none;
+    .hero-mascot-anchor {
+      transform: scale(0.82);
+      transform-origin: bottom right;
     }
 
     .hero-frame {
       border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-mascot-anchor {
+      display: none;
     }
   }
 

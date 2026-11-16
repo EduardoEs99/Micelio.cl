@@ -3,20 +3,14 @@ import {
   AlertTriangle,
   ArrowUpRight,
   Check,
+  ChevronDown,
   Loader2,
-  Mail,
   Send,
 } from "lucide-react";
+import { Popover as PopoverPrimitive } from "radix-ui";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { contactEmail, contactReasons, mailtoFor } from "@/lib/contact";
@@ -40,7 +34,88 @@ export default function ContactForm() {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ state: "idle" });
+  const [motivoOpen, setMotivoOpen] = useState(false);
+  const [motivoActive, setMotivoActive] = useState(0);
   const formRef = useRef(null);
+  const motivoTriggerRef = useRef(null);
+
+  const motivoIndex = Math.max(0, contactReasons.indexOf(values.motivo));
+
+  useEffect(() => {
+    if (!motivoOpen) return;
+    setMotivoActive(motivoIndex);
+  }, [motivoOpen, motivoIndex]);
+
+  const selectMotivo = (reason) => {
+    setField("motivo", reason);
+    setMotivoOpen(false);
+    motivoTriggerRef.current?.focus();
+  };
+
+  const moveMotivo = (step) => {
+    setMotivoActive((current) => {
+      const next = current + step;
+      if (next < 0) return contactReasons.length - 1;
+      if (next >= contactReasons.length) return 0;
+      return next;
+    });
+  };
+
+  const handleMotivoKeyDown = (event) => {
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        if (!motivoOpen) {
+          setMotivoOpen(true);
+          setMotivoActive(motivoIndex);
+        } else {
+          moveMotivo(1);
+        }
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        if (!motivoOpen) {
+          setMotivoOpen(true);
+          setMotivoActive(motivoIndex);
+        } else {
+          moveMotivo(-1);
+        }
+        break;
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        if (!motivoOpen) {
+          setMotivoOpen(true);
+          setMotivoActive(motivoIndex);
+        } else {
+          selectMotivo(contactReasons[motivoActive] ?? values.motivo);
+        }
+        break;
+      case "Home":
+        if (motivoOpen) {
+          event.preventDefault();
+          setMotivoActive(0);
+        }
+        break;
+      case "End":
+        if (motivoOpen) {
+          event.preventDefault();
+          setMotivoActive(contactReasons.length - 1);
+        }
+        break;
+      case "Escape":
+        if (motivoOpen) {
+          event.preventDefault();
+          setMotivoOpen(false);
+        }
+        break;
+      case "Tab":
+        setMotivoOpen(false);
+        break;
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     const requested = new URLSearchParams(window.location.search).get("motivo");
@@ -288,27 +363,98 @@ export default function ContactForm() {
           <Label htmlFor="contact-motivo" className="field-label">
             Motivo <span aria-hidden="true">*</span>
           </Label>
-          <div className="relative">
-            <Select
-              value={values.motivo}
-              onValueChange={(value) => setField("motivo", value)}
-            >
-              <SelectTrigger
+          <PopoverPrimitive.Root
+            open={motivoOpen}
+            onOpenChange={setMotivoOpen}
+            modal={false}
+          >
+            <PopoverPrimitive.Trigger asChild>
+              <button
+                ref={motivoTriggerRef}
+                type="button"
                 id="contact-motivo"
+                role="combobox"
                 aria-label="Motivo"
-                className={cn(fieldClass, "w-full justify-between data-[size=default]:h-12")}
+                aria-haspopup="listbox"
+                aria-expanded={motivoOpen}
+                aria-required="true"
+                aria-controls={motivoOpen ? "contact-motivo-listbox" : undefined}
+                aria-activedescendant={
+                  motivoOpen
+                    ? `contact-motivo-option-${motivoActive}`
+                    : undefined
+                }
+                onKeyDown={handleMotivoKeyDown}
+                className={cn(
+                  fieldClass,
+                  "flex w-full items-center justify-between gap-1.5 border py-1 text-left transition-colors",
+                  "focus:border-forest-700 focus:ring-3 focus:ring-forest-700/20",
+                  "data-[state=open]:border-forest-700 data-[state=open]:ring-3 data-[state=open]:ring-forest-700/20",
+                  "hover:border-forest-700/50"
+                )}
               >
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {contactReasons.map((reason) => (
-                  <SelectItem key={reason} value={reason}>
-                    {reason}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+                <span className="line-clamp-1">{values.motivo}</span>
+                <ChevronDown
+                  className={cn(
+                    "size-4 shrink-0 text-muted-foreground transition-transform",
+                    motivoOpen && "rotate-180"
+                  )}
+                  strokeWidth={1.6}
+                  aria-hidden="true"
+                />
+              </button>
+            </PopoverPrimitive.Trigger>
+            <PopoverPrimitive.Portal>
+              <PopoverPrimitive.Content
+                side="bottom"
+                align="start"
+                sideOffset={4}
+                avoidCollisions={false}
+                collisionPadding={8}
+                onOpenAutoFocus={(event) => event.preventDefault()}
+                className="z-50 max-h-[min(15rem,var(--radix-popover-content-available-height))] w-(--radix-popover-trigger-width) overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-none"
+              >
+                <ul
+                  id="contact-motivo-listbox"
+                  role="listbox"
+                  aria-label="Motivo"
+                >
+                  {contactReasons.map((reason, index) => {
+                    const selected = values.motivo === reason;
+                    const active = index === motivoActive;
+                    return (
+                      <li
+                        key={reason}
+                        id={`contact-motivo-option-${index}`}
+                        role="option"
+                        aria-selected={selected}
+                        onMouseDown={(event) => event.preventDefault()}
+                        onMouseEnter={() => setMotivoActive(index)}
+                        onClick={() => selectMotivo(reason)}
+                        className={cn(
+                          "relative flex w-full cursor-pointer items-center gap-1.5 rounded-md py-1.5 pr-8 pl-2 text-sm outline-none select-none",
+                          active
+                            ? "bg-accent text-accent-foreground"
+                            : "hover:bg-bone/60",
+                        )}
+                      >
+                        <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center">
+                          {selected && (
+                            <Check
+                              className="size-4"
+                              strokeWidth={1.8}
+                              aria-hidden="true"
+                            />
+                          )}
+                        </span>
+                        <span>{reason}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </PopoverPrimitive.Content>
+            </PopoverPrimitive.Portal>
+          </PopoverPrimitive.Root>
         </div>
 
         <div className="field">
@@ -412,17 +558,10 @@ export default function ContactForm() {
           ) : (
             <>
               <Send className="size-4" strokeWidth={1.7} aria-hidden="true" />
-              Enviar mensaje
+              Enviar
             </>
           )}
         </button>
-        <a
-          href={fallbackHref}
-          className="inline-flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-widest text-forest-700 underline underline-offset-4 hover:text-forest-800"
-        >
-          <Mail className="size-3.5" strokeWidth={1.6} aria-hidden="true" />
-          Prefiero correo directo
-        </a>
       </div>
 
       <p className="mt-4 max-w-lg text-[0.7rem] leading-relaxed text-muted-foreground">
